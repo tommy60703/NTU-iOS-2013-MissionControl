@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface MCRootViewController : UIViewController
+@property (strong, nonatomic) IBOutlet UILabel *welcomeText;
 
 @end
