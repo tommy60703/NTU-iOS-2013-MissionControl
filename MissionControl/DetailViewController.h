@@ -14,3 +14,5 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
 @end
+
+//1242ersgvrawbtaz
