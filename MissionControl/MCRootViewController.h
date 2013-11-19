@@ -1,5 +1,5 @@
 //
-//  MasterViewController.h
+//  MCRootViewController.h
 //  MissionControl
 //
 //  Created by Tommy Lin on 2013/11/19.
@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MasterViewController : UITableViewController
+@interface MCRootViewController : UIViewController
 
 @end
-//hekk

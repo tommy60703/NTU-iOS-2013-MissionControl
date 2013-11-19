@@ -14,14 +14,13 @@
 		658B34E1183AF007009C09EB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 658B34E0183AF007009C09EB /* main.m */; };
 		658B34E5183AF007009C09EB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 658B34E4183AF007009C09EB /* AppDelegate.m */; };
 		658B34E8183AF007009C09EB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 658B34E6183AF007009C09EB /* Main.storyboard */; };
-		658B34EB183AF007009C09EB /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 658B34EA183AF007009C09EB /* MasterViewController.m */; };
-		658B34EE183AF007009C09EB /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 658B34ED183AF007009C09EB /* DetailViewController.m */; };
 		658B34F0183AF007009C09EB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 658B34EF183AF007009C09EB /* Images.xcassets */; };
 		658B34F7183AF007009C09EB /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658B34F6183AF007009C09EB /* XCTest.framework */; };
 		658B34F8183AF007009C09EB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658B34D4183AF007009C09EB /* Foundation.framework */; };
 		658B34F9183AF007009C09EB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658B34D8183AF007009C09EB /* UIKit.framework */; };
 		658B3501183AF007009C09EB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 658B34FF183AF007009C09EB /* InfoPlist.strings */; };
 		658B3503183AF007009C09EB /* MissionControlTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 658B3502183AF007009C09EB /* MissionControlTests.m */; };
+		658F4F2C183B046100DADFE6 /* MCRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 658F4F2B183B046100DADFE6 /* MCRootViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,16 +45,14 @@
 		658B34E3183AF007009C09EB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		658B34E4183AF007009C09EB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		658B34E7183AF007009C09EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		658B34E9183AF007009C09EB /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
-		658B34EA183AF007009C09EB /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
-		658B34EC183AF007009C09EB /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
-		658B34ED183AF007009C09EB /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		658B34EF183AF007009C09EB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		658B34F5183AF007009C09EB /* MissionControlTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MissionControlTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		658B34F6183AF007009C09EB /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		658B34FE183AF007009C09EB /* MissionControlTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MissionControlTests-Info.plist"; sourceTree = "<group>"; };
 		658B3500183AF007009C09EB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		658B3502183AF007009C09EB /* MissionControlTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MissionControlTests.m; sourceTree = "<group>"; };
+		658F4F2A183B046100DADFE6 /* MCRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCRootViewController.h; sourceTree = "<group>"; };
+		658F4F2B183B046100DADFE6 /* MCRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCRootViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,10 +115,8 @@
 				658B34E3183AF007009C09EB /* AppDelegate.h */,
 				658B34E4183AF007009C09EB /* AppDelegate.m */,
 				658B34E6183AF007009C09EB /* Main.storyboard */,
-				658B34E9183AF007009C09EB /* MasterViewController.h */,
-				658B34EA183AF007009C09EB /* MasterViewController.m */,
-				658B34EC183AF007009C09EB /* DetailViewController.h */,
-				658B34ED183AF007009C09EB /* DetailViewController.m */,
+				658F4F2A183B046100DADFE6 /* MCRootViewController.h */,
+				658F4F2B183B046100DADFE6 /* MCRootViewController.m */,
 				658B34EF183AF007009C09EB /* Images.xcassets */,
 				658B34DB183AF007009C09EB /* Supporting Files */,
 			);
@@ -254,10 +249,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				658F4F2C183B046100DADFE6 /* MCRootViewController.m in Sources */,
 				658B34E5183AF007009C09EB /* AppDelegate.m in Sources */,
-				658B34EB183AF007009C09EB /* MasterViewController.m in Sources */,
 				658B34E1183AF007009C09EB /* main.m in Sources */,
-				658B34EE183AF007009C09EB /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,6 +460,7 @@
 				658B3508183AF007009C09EB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		658B3509183AF007009C09EB /* Build configuration list for PBXNativeTarget "MissionControlTests" */ = {
 			isa = XCConfigurationList;
@@ -474,6 +469,7 @@
 				658B350B183AF007009C09EB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
