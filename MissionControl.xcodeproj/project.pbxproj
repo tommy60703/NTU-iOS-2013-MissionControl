@@ -12,8 +12,8 @@
 		6514E2B51840D79100468A8A /* MCRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6514E2B41840D79100468A8A /* MCRootViewController.m */; };
 		6514E2BA1840E6DC00468A8A /* NSArray+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 6514E2B91840E6DC00468A8A /* NSArray+JSON.m */; };
 		6514E2BD1840E78800468A8A /* MCProjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 6514E2BC1840E78800468A8A /* MCProjects.m */; };
-		6514E2C11840E9A500468A8A /* test-projects.json in Resources */ = {isa = PBXBuildFile; fileRef = 6514E2C01840E9A500468A8A /* test-projects.json */; };
 		6514E2C41840F56700468A8A /* MCProjectContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6514E2C31840F56700468A8A /* MCProjectContentViewController.m */; };
+		6514E2C81840FAAA00468A8A /* test-projects.json in Resources */ = {isa = PBXBuildFile; fileRef = 6514E2C71840FAAA00468A8A /* test-projects.json */; };
 		658B34D5183AF007009C09EB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658B34D4183AF007009C09EB /* Foundation.framework */; };
 		658B34D7183AF007009C09EB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658B34D6183AF007009C09EB /* CoreGraphics.framework */; };
 		658B34D9183AF007009C09EB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658B34D8183AF007009C09EB /* UIKit.framework */; };
@@ -113,9 +113,9 @@
 		6514E2B91840E6DC00468A8A /* NSArray+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+JSON.m"; sourceTree = "<group>"; };
 		6514E2BB1840E78800468A8A /* MCProjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCProjects.h; sourceTree = "<group>"; };
 		6514E2BC1840E78800468A8A /* MCProjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCProjects.m; sourceTree = "<group>"; };
-		6514E2C01840E9A500468A8A /* test-projects.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "test-projects.json"; path = "../../../Desktop/test-projects.json"; sourceTree = "<group>"; };
 		6514E2C21840F56700468A8A /* MCProjectContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCProjectContentViewController.h; sourceTree = "<group>"; };
 		6514E2C31840F56700468A8A /* MCProjectContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCProjectContentViewController.m; sourceTree = "<group>"; };
+		6514E2C71840FAAA00468A8A /* test-projects.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "test-projects.json"; sourceTree = "<group>"; };
 		65778B89183CD49900C4F02B /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		65778B8A183CD49900C4F02B /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		65778B8B183CD49900C4F02B /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
@@ -870,12 +870,12 @@
 		658B34DA183AF007009C09EB /* MissionControl */ = {
 			isa = PBXGroup;
 			children = (
+				6514E2C71840FAAA00468A8A /* test-projects.json */,
 				6514E2B81840E6DC00468A8A /* NSArray+JSON.h */,
 				6514E2B91840E6DC00468A8A /* NSArray+JSON.m */,
 				658B34E3183AF007009C09EB /* AppDelegate.h */,
 				658B34E4183AF007009C09EB /* AppDelegate.m */,
 				658B34E6183AF007009C09EB /* Main.storyboard */,
-				6514E2C01840E9A500468A8A /* test-projects.json */,
 				6514E2BB1840E78800468A8A /* MCProjects.h */,
 				6514E2BC1840E78800468A8A /* MCProjects.m */,
 				6514E2B31840D79100468A8A /* MCRootViewController.h */,
@@ -1104,7 +1104,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				658B34F0183AF007009C09EB /* Images.xcassets in Resources */,
-				6514E2C11840E9A500468A8A /* test-projects.json in Resources */,
+				6514E2C81840FAAA00468A8A /* test-projects.json in Resources */,
 				658B34DF183AF007009C09EB /* InfoPlist.strings in Resources */,
 				658B34E8183AF007009C09EB /* Main.storyboard in Resources */,
 			);
