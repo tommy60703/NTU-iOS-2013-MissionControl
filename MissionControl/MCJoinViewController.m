@@ -7,27 +7,44 @@
 //
 
 #import "MCJoinViewController.h"
+#import "MCProjects.h"
 
-@interface MCJoinViewController ()
+@interface MCJoinViewController () {
+    MCProjects *projects;
+}
 
 @end
 
 @implementation MCJoinViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)viewWillAppear:(BOOL)animated {
+    self.projectName.text = @"";
+    self.projectCreator.text = @"";
+    projects = [MCProjects shareData];
+    [self.textField performSelector:@selector(becomeFirstResponder) withObject:nil afterDelay:0.0f];
 }
-
 
 - (IBAction)cancelButtonClicked:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (IBAction)jionButtonClicked:()sender {
+    if ([self.textField.text isEqualToString:@""]) {
+        NSLog(@"Funny. Haha...");
+    } else {
+        NSLog(@"Join %@", self.textField.text);
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
 - (IBAction)textChanged:(UITextField*)sender {
     if ([sender.text isEqualToString:@""]) {
-        self.navigationItem.title = @"Join Project";
+        self.projectName.text = @"";
+        self.projectCreator.text = @"";
     } else {
-        self.navigationItem.title = sender.text;
+        NSDictionary *queryProject = [projects projectForCode:[sender.text integerValue]];
+        self.projectName.text = queryProject[MCProjectNameKey];
+        self.projectCreator.text = queryProject[MCProjectCreatorKey];
     }
 }
 

@@ -1,5 +1,5 @@
 //
-//  MCJoinViewController.h
+//  MCProjectContentViewController.h
 //  MissionControl
 //
 //  Created by Tommy Lin on 2013/11/23.
@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MCJoinViewController : UIViewController
-@property (strong, nonatomic) IBOutlet UITextField *textField;
+@interface MCProjectContentViewController : UIViewController
+
+@property (strong, nonatomic) NSDictionary *project;
 @property (strong, nonatomic) IBOutlet UILabel *projectName;
 @property (strong, nonatomic) IBOutlet UILabel *projectCreator;
 

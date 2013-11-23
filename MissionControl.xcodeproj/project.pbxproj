@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		6514E2AC1840CA3D00468A8A /* MCJoinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6514E2AB1840CA3D00468A8A /* MCJoinViewController.m */; };
 		6514E2AF1840CA5500468A8A /* MCCreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6514E2AE1840CA5500468A8A /* MCCreateViewController.m */; };
+		6514E2B51840D79100468A8A /* MCRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6514E2B41840D79100468A8A /* MCRootViewController.m */; };
+		6514E2BA1840E6DC00468A8A /* NSArray+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 6514E2B91840E6DC00468A8A /* NSArray+JSON.m */; };
+		6514E2BD1840E78800468A8A /* MCProjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 6514E2BC1840E78800468A8A /* MCProjects.m */; };
+		6514E2C11840E9A500468A8A /* test-projects.json in Resources */ = {isa = PBXBuildFile; fileRef = 6514E2C01840E9A500468A8A /* test-projects.json */; };
+		6514E2C41840F56700468A8A /* MCProjectContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6514E2C31840F56700468A8A /* MCProjectContentViewController.m */; };
 		658B34D5183AF007009C09EB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658B34D4183AF007009C09EB /* Foundation.framework */; };
 		658B34D7183AF007009C09EB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658B34D6183AF007009C09EB /* CoreGraphics.framework */; };
 		658B34D9183AF007009C09EB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658B34D8183AF007009C09EB /* UIKit.framework */; };
@@ -22,7 +27,6 @@
 		658B34F9183AF007009C09EB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658B34D8183AF007009C09EB /* UIKit.framework */; };
 		658B3501183AF007009C09EB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 658B34FF183AF007009C09EB /* InfoPlist.strings */; };
 		658B3503183AF007009C09EB /* MissionControlTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 658B3502183AF007009C09EB /* MissionControlTests.m */; };
-		658F4F2C183B046100DADFE6 /* MCRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 658F4F2B183B046100DADFE6 /* MCRootViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +107,15 @@
 		6514E2AB1840CA3D00468A8A /* MCJoinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCJoinViewController.m; sourceTree = "<group>"; };
 		6514E2AD1840CA5500468A8A /* MCCreateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCreateViewController.h; sourceTree = "<group>"; };
 		6514E2AE1840CA5500468A8A /* MCCreateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCreateViewController.m; sourceTree = "<group>"; };
+		6514E2B31840D79100468A8A /* MCRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCRootViewController.h; sourceTree = "<group>"; };
+		6514E2B41840D79100468A8A /* MCRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCRootViewController.m; sourceTree = "<group>"; };
+		6514E2B81840E6DC00468A8A /* NSArray+JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+JSON.h"; sourceTree = "<group>"; };
+		6514E2B91840E6DC00468A8A /* NSArray+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+JSON.m"; sourceTree = "<group>"; };
+		6514E2BB1840E78800468A8A /* MCProjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCProjects.h; sourceTree = "<group>"; };
+		6514E2BC1840E78800468A8A /* MCProjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCProjects.m; sourceTree = "<group>"; };
+		6514E2C01840E9A500468A8A /* test-projects.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "test-projects.json"; path = "../../../Desktop/test-projects.json"; sourceTree = "<group>"; };
+		6514E2C21840F56700468A8A /* MCProjectContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCProjectContentViewController.h; sourceTree = "<group>"; };
+		6514E2C31840F56700468A8A /* MCProjectContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCProjectContentViewController.m; sourceTree = "<group>"; };
 		65778B89183CD49900C4F02B /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		65778B8A183CD49900C4F02B /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		65778B8B183CD49900C4F02B /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
@@ -339,8 +352,6 @@
 		658B34FE183AF007009C09EB /* MissionControlTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MissionControlTests-Info.plist"; sourceTree = "<group>"; };
 		658B3500183AF007009C09EB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		658B3502183AF007009C09EB /* MissionControlTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MissionControlTests.m; sourceTree = "<group>"; };
-		658F4F2A183B046100DADFE6 /* MCRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCRootViewController.h; sourceTree = "<group>"; };
-		658F4F2B183B046100DADFE6 /* MCRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCRootViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -859,15 +870,22 @@
 		658B34DA183AF007009C09EB /* MissionControl */ = {
 			isa = PBXGroup;
 			children = (
+				6514E2B81840E6DC00468A8A /* NSArray+JSON.h */,
+				6514E2B91840E6DC00468A8A /* NSArray+JSON.m */,
 				658B34E3183AF007009C09EB /* AppDelegate.h */,
 				658B34E4183AF007009C09EB /* AppDelegate.m */,
 				658B34E6183AF007009C09EB /* Main.storyboard */,
+				6514E2C01840E9A500468A8A /* test-projects.json */,
+				6514E2BB1840E78800468A8A /* MCProjects.h */,
+				6514E2BC1840E78800468A8A /* MCProjects.m */,
+				6514E2B31840D79100468A8A /* MCRootViewController.h */,
+				6514E2B41840D79100468A8A /* MCRootViewController.m */,
 				6514E2AD1840CA5500468A8A /* MCCreateViewController.h */,
 				6514E2AE1840CA5500468A8A /* MCCreateViewController.m */,
 				6514E2AA1840CA3D00468A8A /* MCJoinViewController.h */,
 				6514E2AB1840CA3D00468A8A /* MCJoinViewController.m */,
-				658F4F2A183B046100DADFE6 /* MCRootViewController.h */,
-				658F4F2B183B046100DADFE6 /* MCRootViewController.m */,
+				6514E2C21840F56700468A8A /* MCProjectContentViewController.h */,
+				6514E2C31840F56700468A8A /* MCProjectContentViewController.m */,
 				658B34EF183AF007009C09EB /* Images.xcassets */,
 				658B34DB183AF007009C09EB /* Supporting Files */,
 			);
@@ -1086,6 +1104,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				658B34F0183AF007009C09EB /* Images.xcassets in Resources */,
+				6514E2C11840E9A500468A8A /* test-projects.json in Resources */,
 				658B34DF183AF007009C09EB /* InfoPlist.strings in Resources */,
 				658B34E8183AF007009C09EB /* Main.storyboard in Resources */,
 			);
@@ -1106,10 +1125,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6514E2C41840F56700468A8A /* MCProjectContentViewController.m in Sources */,
+				6514E2B51840D79100468A8A /* MCRootViewController.m in Sources */,
+				6514E2BD1840E78800468A8A /* MCProjects.m in Sources */,
 				6514E2AC1840CA3D00468A8A /* MCJoinViewController.m in Sources */,
-				658F4F2C183B046100DADFE6 /* MCRootViewController.m in Sources */,
 				6514E2AF1840CA5500468A8A /* MCCreateViewController.m in Sources */,
 				658B34E5183AF007009C09EB /* AppDelegate.m in Sources */,
+				6514E2BA1840E6DC00468A8A /* NSArray+JSON.m in Sources */,
 				658B34E1183AF007009C09EB /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

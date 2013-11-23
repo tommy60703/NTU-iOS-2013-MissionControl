@@ -4,31 +4,31 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
-        <!--Table View Controller - Projects-->
+        <!--Root View Controller - My Projects-->
         <scene sceneID="8HB-Y3-hj5">
             <objects>
-                <tableViewController id="IFK-eF-3FG" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="mFh-e6-HwK">
+                <tableViewController id="IFK-eF-3FG" customClass="MCRootViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" id="mFh-e6-HwK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="SnY-CA-ghw" detailTextLabel="n33-xQ-T6B" style="IBUITableViewCellStyleSubtitle" id="v4F-0b-cCO">
-                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="SnY-CA-ghw" detailTextLabel="n33-xQ-T6B" rowHeight="60" style="IBUITableViewCellStyleSubtitle" id="v4F-0b-cCO">
+                                <rect key="frame" x="0.0" y="86" width="320" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="v4F-0b-cCO" id="yp0-IW-ZUs">
-                                    <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="59"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Project 1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SnY-CA-ghw">
-                                            <rect key="frame" x="15" y="3" width="72" height="22"/>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="1101" contentMode="left" text="Project 1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SnY-CA-ghw">
+                                            <rect key="frame" x="15" y="11" width="72" height="22"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="n33-xQ-T6B">
-                                            <rect key="frame" x="15" y="25" width="32" height="15"/>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="1102" contentMode="left" text="Detail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="n33-xQ-T6B">
+                                            <rect key="frame" x="15" y="33" width="32" height="15"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -36,11 +36,14 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="a0e-lW-Qi4" kind="push" identifier="ShowProjectContent" id="qtM-CN-u0W"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Projects" id="BwR-CM-7yh">
+                    <navigationItem key="navigationItem" title="My Projects" id="BwR-CM-7yh">
                         <barButtonItem key="leftBarButtonItem" title="Join" id="POt-VC-FZB">
                             <connections>
                                 <segue destination="IWS-ZF-DA3" kind="modal" id="BtO-Z7-QXB"/>
@@ -56,6 +59,57 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XrQ-BJ-P8A" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-43" y="-307"/>
+        </scene>
+        <!--Project Content View Controller - Mission Control-->
+        <scene sceneID="dwN-f0-fKN">
+            <objects>
+                <viewController id="a0e-lW-Qi4" customClass="MCProjectContentViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="SNF-vq-dQ0"/>
+                        <viewControllerLayoutGuide type="bottom" id="skR-vT-eqi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="MOX-4U-VsL">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Project Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5dj-C7-AI2">
+                                <rect key="frame" x="22" y="84" width="105" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Mission Control" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Po-Xo-WqD">
+                                <rect key="frame" x="22" y="113" width="278" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Creator" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="azq-d2-KaA">
+                                <rect key="frame" x="22" y="151" width="58" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tommy Lin" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ig4-OA-wLr">
+                                <rect key="frame" x="20" y="180" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Mission Control" id="tUM-Ub-zDh"/>
+                    <connections>
+                        <outlet property="projectCreator" destination="Ig4-OA-wLr" id="HFN-KR-Jp6"/>
+                        <outlet property="projectName" destination="5Po-Xo-WqD" id="LAM-18-7aS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4O4-cd-Gi3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="515" y="420"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="KQT-IB-VBI">
@@ -136,9 +190,15 @@
                                 <action selector="cancelButtonClicked:" destination="EIn-f8-PCl" id="EbL-n2-Chz"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Join" id="S5Y-ga-mB8"/>
+                        <barButtonItem key="rightBarButtonItem" title="Join" id="S5Y-ga-mB8">
+                            <connections>
+                                <action selector="jionButtonClicked:" destination="EIn-f8-PCl" id="bfb-R7-kCG"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="projectCreator" destination="IDn-iG-7xq" id="wsw-VX-fqW"/>
+                        <outlet property="projectName" destination="GMB-cK-qF8" id="092-w2-yHc"/>
                         <outlet property="textField" destination="h18-FK-C8o" id="Nmx-GO-Jih"/>
                     </connections>
                 </viewController>
@@ -180,7 +240,11 @@
                                 <action selector="cancelButtonClicked:" destination="khG-ss-kZH" id="duS-Ya-Iih"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Done" id="ulT-aA-W92"/>
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="ulT-aA-W92">
+                            <connections>
+                                <action selector="doneButtonClicked:" destination="khG-ss-kZH" id="P7j-GX-pI1"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e6V-VC-9Lx" userLabel="First Responder" sceneMemberID="firstResponder"/>
