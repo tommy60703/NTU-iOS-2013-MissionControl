@@ -19,6 +19,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    
     self.navigationItem.title = self.project[MCProjectNameKey];
     self.projectName.text = self.project[MCProjectNameKey];
     self.projectCreator.text = self.project[MCProjectCreatorKey];
