@@ -969,8 +969,8 @@
 			buildConfigurationList = 658B3506183AF007009C09EB /* Build configuration list for PBXNativeTarget "MissionControl" */;
 			buildPhases = (
 				658B34CD183AF007009C09EB /* Sources */,
-				658B34CE183AF007009C09EB /* Frameworks */,
 				658B34CF183AF007009C09EB /* Resources */,
+				658B34CE183AF007009C09EB /* Frameworks */,
 			);
 			buildRules = (
 			);
