@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Hys-J2-PjA">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
         <!--Root View Controller - My Projects-->
@@ -37,7 +37,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="a0e-lW-Qi4" kind="push" identifier="ShowProjectContent" id="qtM-CN-u0W"/>
+                                    <segue destination="Sdy-Gl-7Cl" kind="push" identifier="ShowProjectContent" id="WCx-uI-D8t"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -109,7 +109,36 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4O4-cd-Gi3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="515" y="420"/>
+            <point key="canvasLocation" x="74" y="382"/>
+        </scene>
+        <!--Project Content Table View Controller-->
+        <scene sceneID="bfO-ba-frh">
+            <objects>
+                <tableViewController id="Sdy-Gl-7Cl" customClass="MCProjectContentTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="g6B-Wn-lC2">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="iWo-6T-cZN" customClass="MCTimestampCell">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iWo-6T-cZN" id="JTx-le-mfD">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Sdy-Gl-7Cl" id="VNg-5S-LQg"/>
+                            <outlet property="delegate" destination="Sdy-Gl-7Cl" id="ft6-Fa-Swg"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="bqZ-lf-8Ir"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W8Y-LV-wnX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="515" y="382"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="KQT-IB-VBI">
