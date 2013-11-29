@@ -379,7 +379,7 @@
 		65C024F418484E7C000CC42B /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = ../../Desktop/Parse.framework; sourceTree = "<group>"; };
 		65C024F618484F51000CC42B /* MCProjectContentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCProjectContentTableViewController.h; sourceTree = "<group>"; };
 		65C024F718484F51000CC42B /* MCProjectContentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCProjectContentTableViewController.m; sourceTree = "<group>"; };
-		65C024F91848546D000CC42B /* projectContent.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = projectContent.plist; sourceTree = "<group>"; };
+		65C024F91848546D000CC42B /* projectContent.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = projectContent.plist; path = ../projectContent.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -877,7 +877,6 @@
 		658B34C8183AF007009C09EB = {
 			isa = PBXGroup;
 			children = (
-				65C024F91848546D000CC42B /* projectContent.plist */,
 				658B34DA183AF007009C09EB /* MissionControl */,
 				658B34FC183AF007009C09EB /* MissionControlTests */,
 				658B34D3183AF007009C09EB /* Frameworks */,
@@ -919,26 +918,13 @@
 		658B34DA183AF007009C09EB /* MissionControl */ = {
 			isa = PBXGroup;
 			children = (
-				6514E2C71840FAAA00468A8A /* test-projects.json */,
-				6514E2B81840E6DC00468A8A /* NSArray+JSON.h */,
-				6514E2B91840E6DC00468A8A /* NSArray+JSON.m */,
 				658B34E3183AF007009C09EB /* AppDelegate.h */,
 				658B34E4183AF007009C09EB /* AppDelegate.m */,
 				658B34E6183AF007009C09EB /* Main.storyboard */,
-				6514E2BB1840E78800468A8A /* MCProjects.h */,
-				6514E2BC1840E78800468A8A /* MCProjects.m */,
-				6514E2B31840D79100468A8A /* MCRootViewController.h */,
-				6514E2B41840D79100468A8A /* MCRootViewController.m */,
-				6514E2AD1840CA5500468A8A /* MCCreateViewController.h */,
-				6514E2AE1840CA5500468A8A /* MCCreateViewController.m */,
-				6514E2AA1840CA3D00468A8A /* MCJoinViewController.h */,
-				6514E2AB1840CA3D00468A8A /* MCJoinViewController.m */,
-				6514E2C21840F56700468A8A /* MCProjectContentViewController.h */,
-				6514E2C31840F56700468A8A /* MCProjectContentViewController.m */,
-				65C024E818484DFF000CC42B /* MCTimestampCell.h */,
-				65C024E918484DFF000CC42B /* MCTimestampCell.m */,
-				65C024F618484F51000CC42B /* MCProjectContentTableViewController.h */,
-				65C024F718484F51000CC42B /* MCProjectContentTableViewController.m */,
+				65C0254318485E60000CC42B /* MCBrain */,
+				65C0254218485E40000CC42B /* RootViews */,
+				65C0254118485E34000CC42B /* NoUse */,
+				65C0253718485E1E000CC42B /* ProjectContent */,
 				658B34EF183AF007009C09EB /* Images.xcassets */,
 				658B34DB183AF007009C09EB /* Supporting Files */,
 			);
@@ -948,6 +934,8 @@
 		658B34DB183AF007009C09EB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				65C024F91848546D000CC42B /* projectContent.plist */,
+				6514E2C71840FAAA00468A8A /* test-projects.json */,
 				658B34DC183AF007009C09EB /* MissionControl-Info.plist */,
 				658B34DD183AF007009C09EB /* InfoPlist.strings */,
 				658B34E0183AF007009C09EB /* main.m */,
@@ -972,6 +960,50 @@
 				658B34FF183AF007009C09EB /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		65C0253718485E1E000CC42B /* ProjectContent */ = {
+			isa = PBXGroup;
+			children = (
+				65C024E818484DFF000CC42B /* MCTimestampCell.h */,
+				65C024E918484DFF000CC42B /* MCTimestampCell.m */,
+				65C024F618484F51000CC42B /* MCProjectContentTableViewController.h */,
+				65C024F718484F51000CC42B /* MCProjectContentTableViewController.m */,
+			);
+			name = ProjectContent;
+			sourceTree = "<group>";
+		};
+		65C0254118485E34000CC42B /* NoUse */ = {
+			isa = PBXGroup;
+			children = (
+				6514E2C21840F56700468A8A /* MCProjectContentViewController.h */,
+				6514E2C31840F56700468A8A /* MCProjectContentViewController.m */,
+			);
+			name = NoUse;
+			sourceTree = "<group>";
+		};
+		65C0254218485E40000CC42B /* RootViews */ = {
+			isa = PBXGroup;
+			children = (
+				6514E2B31840D79100468A8A /* MCRootViewController.h */,
+				6514E2B41840D79100468A8A /* MCRootViewController.m */,
+				6514E2AD1840CA5500468A8A /* MCCreateViewController.h */,
+				6514E2AE1840CA5500468A8A /* MCCreateViewController.m */,
+				6514E2AA1840CA3D00468A8A /* MCJoinViewController.h */,
+				6514E2AB1840CA3D00468A8A /* MCJoinViewController.m */,
+			);
+			name = RootViews;
+			sourceTree = "<group>";
+		};
+		65C0254318485E60000CC42B /* MCBrain */ = {
+			isa = PBXGroup;
+			children = (
+				6514E2B81840E6DC00468A8A /* NSArray+JSON.h */,
+				6514E2B91840E6DC00468A8A /* NSArray+JSON.m */,
+				6514E2BB1840E78800468A8A /* MCProjects.h */,
+				6514E2BC1840E78800468A8A /* MCProjects.m */,
+			);
+			name = MCBrain;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
