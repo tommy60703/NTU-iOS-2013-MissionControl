@@ -7,8 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
+@interface MCProjectContentTableViewController : UITableViewController{
+    NSArray *workerlist;
+    
+}
 
-@interface MCProjectContentTableViewController : UITableViewController
+@property NSDictionary *project;
 
 
 

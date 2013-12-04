@@ -9,7 +9,7 @@
 #import "MCRootViewController.h"
 #import "MCProjectContentViewController.h"
 #import "MCProjects.h"
-
+#import <Parse/Parse.h>
 @interface MCRootViewController ()
 
 @end
@@ -17,6 +17,19 @@
 @implementation MCRootViewController
 
 #pragma mark - Table view data source
+
+- (void)updateProject{
+    //pull data form parse
+    
+    NSString *udid = [UIDevice currentDevice].identifierForVendor.UUIDString;
+    PFQuery *query = [PFQuery queryWithClassName:@"projectParticipate"];
+    [query whereKey:@"user" equalTo:udid];
+    allProject = [query findObjects];
+    NSLog(@"%@", allProject);
+    
+    [self.tableView reloadData];
+
+}
 
 - (void)viewDidLoad {
     NSString *destPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
@@ -30,6 +43,11 @@
         NSString *sourcePath = [[NSBundle mainBundle] pathForResource:@"projectContent" ofType:@"plist"];
         [fileManager copyItemAtPath:sourcePath toPath:destPath error:nil];
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateProject) name:@"DoUpdateProject" object:nil];
+    
+    [self updateProject];
+    
     [self addToMyPlist];
 }
 
@@ -67,7 +85,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[MCProjects shareData] count];
+    return [allProject count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -75,12 +93,12 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    NSDictionary *projectForThisCell = [[MCProjects shareData] projectAtIndexPath:indexPath];
+    NSDictionary *projectForThisCell = [allProject objectAtIndex:indexPath.row];
     
     UILabel *projectName = (UILabel *)[cell viewWithTag:1101];
-    UILabel *projectCreator = (UILabel *)[cell viewWithTag:1102];
-    projectName.text = projectForThisCell[MCProjectNameKey];
-    projectCreator.text = projectForThisCell[MCProjectCreatorKey];
+    //UILabel *projectCreator = (UILabel *)[cell viewWithTag:1102];
+    projectName.text = projectForThisCell[@"projectName"];
+    //projectCreator.text = projectForThisCell[MCProjectCreatorKey];
     
     return cell;
 }
@@ -98,8 +116,10 @@
     if ([segue.identifier isEqualToString:@"ShowProjectContent"]) {
         UITableViewCell *cell = (UITableViewCell *)sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-//        MCProjectContentViewController *destinationViewController = segue.destinationViewController;
-//        destinationViewController.project = [[MCProjects shareData] projectAtIndexPath:indexPath];
+        MCProjectContentViewController *destinationViewController = segue.destinationViewController;
+//        NSDictionary *project = [allProject objectAtIndex:indexPath.row];
+//        NSLog(@"%@", project);
+        destinationViewController.project = [allProject objectAtIndex:indexPath.row];
     }
 }
 

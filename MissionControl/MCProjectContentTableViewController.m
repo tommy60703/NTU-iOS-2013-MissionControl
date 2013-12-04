@@ -26,7 +26,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    PFObject *projectContent = [PFObject objectWithClassName:[self.project[@"projectName"] stringByAppendingString:[self.project[@"projectPasscode"] stringValue]]];
+    projectContent[@"task"] = @"initial";
+    projectContent[@"worker"] = self.project[@"user"] ;
+    projectContent[@"seq"] = @0;
+    projectContent[@"branch"] = @0;
+    projectContent[@"state"] = @0;
+    [projectContent saveInBackground];
+    
+   // NSLog(@"%@",project);
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  

@@ -10,4 +10,7 @@
 
 @interface MCCreateViewController : UIViewController
 
+@property (strong, nonatomic) IBOutlet UITextField *projectName;
+
+@property (strong, nonatomic) IBOutlet UITextField *projectPassword;
 @end
