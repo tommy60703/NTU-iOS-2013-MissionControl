@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		441D3DFC184F72200097EF26 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65C024F418484E7C000CC42B /* Parse.framework */; };
+		441D3DFE184F7E890097EF26 /* MCTimeTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 441D3DFD184F7E890097EF26 /* MCTimeTableCell.xib */; };
+		446FF1901851DF4F003B2081 /* MCTimeTableCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 446FF18F1851DF4F003B2081 /* MCTimeTableCell2.xib */; };
+		446FF1941851E1DC003B2081 /* MCTimeTableCell3.xib in Resources */ = {isa = PBXBuildFile; fileRef = 446FF1931851E1DC003B2081 /* MCTimeTableCell3.xib */; };
+		446FF1961851E2C5003B2081 /* MCTimeTableCell4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 446FF1951851E2C5003B2081 /* MCTimeTableCell4.xib */; };
 		5E1224971846EC01009072EA /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E1224961846EC01009072EA /* AudioToolbox.framework */; };
 		5E1224991846EC0F009072EA /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E1224981846EC0F009072EA /* CFNetwork.framework */; };
 		5E12249B1846EC23009072EA /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E12249A1846EC23009072EA /* CoreLocation.framework */; };
@@ -37,7 +42,6 @@
 		658B3501183AF007009C09EB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 658B34FF183AF007009C09EB /* InfoPlist.strings */; };
 		658B3503183AF007009C09EB /* MissionControlTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 658B3502183AF007009C09EB /* MissionControlTests.m */; };
 		65C024EA18484DFF000CC42B /* MCTimestampCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C024E918484DFF000CC42B /* MCTimestampCell.m */; };
-		65C024F518484E7C000CC42B /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65C024F418484E7C000CC42B /* Parse.framework */; };
 		65C024F818484F51000CC42B /* MCProjectContentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C024F718484F51000CC42B /* MCProjectContentTableViewController.m */; };
 		65C024FA1848546D000CC42B /* projectContent.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65C024F91848546D000CC42B /* projectContent.plist */; };
 /* End PBXBuildFile section */
@@ -116,6 +120,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		441D3DFD184F7E890097EF26 /* MCTimeTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCTimeTableCell.xib; sourceTree = "<group>"; };
+		446FF18F1851DF4F003B2081 /* MCTimeTableCell2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCTimeTableCell2.xib; sourceTree = "<group>"; };
+		446FF1931851E1DC003B2081 /* MCTimeTableCell3.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCTimeTableCell3.xib; sourceTree = "<group>"; };
+		446FF1951851E2C5003B2081 /* MCTimeTableCell4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCTimeTableCell4.xib; sourceTree = "<group>"; };
 		5E1224961846EC01009072EA /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		5E1224981846EC0F009072EA /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		5E12249A1846EC23009072EA /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -387,6 +395,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				441D3DFC184F72200097EF26 /* Parse.framework in Frameworks */,
 				5E1224A71846EC53009072EA /* SystemConfiguration.framework in Frameworks */,
 				5E1224A51846EC4B009072EA /* StoreKit.framework in Frameworks */,
 				5E1224A31846EC44009072EA /* Security.framework in Frameworks */,
@@ -397,7 +406,6 @@
 				658B34D7183AF007009C09EB /* CoreGraphics.framework in Frameworks */,
 				5E1224991846EC0F009072EA /* CFNetwork.framework in Frameworks */,
 				5E1224971846EC01009072EA /* AudioToolbox.framework in Frameworks */,
-				65C024F518484E7C000CC42B /* Parse.framework in Frameworks */,
 				658B34D9183AF007009C09EB /* UIKit.framework in Frameworks */,
 				658B34D5183AF007009C09EB /* Foundation.framework in Frameworks */,
 			);
@@ -967,6 +975,10 @@
 			children = (
 				65C024E818484DFF000CC42B /* MCTimestampCell.h */,
 				65C024E918484DFF000CC42B /* MCTimestampCell.m */,
+				441D3DFD184F7E890097EF26 /* MCTimeTableCell.xib */,
+				446FF18F1851DF4F003B2081 /* MCTimeTableCell2.xib */,
+				446FF1931851E1DC003B2081 /* MCTimeTableCell3.xib */,
+				446FF1951851E2C5003B2081 /* MCTimeTableCell4.xib */,
 				65C024F618484F51000CC42B /* MCProjectContentTableViewController.h */,
 				65C024F718484F51000CC42B /* MCProjectContentTableViewController.m */,
 			);
@@ -1189,10 +1201,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				658B34F0183AF007009C09EB /* Images.xcassets in Resources */,
+				446FF1901851DF4F003B2081 /* MCTimeTableCell2.xib in Resources */,
 				65C024FA1848546D000CC42B /* projectContent.plist in Resources */,
 				6514E2C81840FAAA00468A8A /* test-projects.json in Resources */,
 				658B34DF183AF007009C09EB /* InfoPlist.strings in Resources */,
 				658B34E8183AF007009C09EB /* Main.storyboard in Resources */,
+				446FF1961851E2C5003B2081 /* MCTimeTableCell4.xib in Resources */,
+				441D3DFE184F7E890097EF26 /* MCTimeTableCell.xib in Resources */,
+				446FF1941851E1DC003B2081 /* MCTimeTableCell3.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1569,6 +1585,7 @@
 					/Users/tommy/Documents/FacebookSDK,
 					"/Users/George/Desktop/手機應用程式設計/NTU-iOS-2013-MissionControl",
 					/Users/tommy/Desktop,
+					/Users/paiyuxuan/Desktop,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MissionControl/MissionControl-Prefix.pch";
@@ -1588,6 +1605,7 @@
 					/Users/tommy/Documents/FacebookSDK,
 					"/Users/George/Desktop/手機應用程式設計/NTU-iOS-2013-MissionControl",
 					/Users/tommy/Desktop,
+					/Users/paiyuxuan/Desktop,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MissionControl/MissionControl-Prefix.pch";
