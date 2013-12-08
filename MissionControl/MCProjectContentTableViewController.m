@@ -24,6 +24,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.tableView registerNib:[UINib nibWithNibName:@"MCTimeTableCell3" bundle:nil]
+         forCellReuseIdentifier:@"Cell3"]; // "MyCell" for MyCell.xib
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,7 +41,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
