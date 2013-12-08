@@ -12,6 +12,10 @@
 		446FF1901851DF4F003B2081 /* MCTimeTableCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 446FF18F1851DF4F003B2081 /* MCTimeTableCell2.xib */; };
 		446FF1941851E1DC003B2081 /* MCTimeTableCell3.xib in Resources */ = {isa = PBXBuildFile; fileRef = 446FF1931851E1DC003B2081 /* MCTimeTableCell3.xib */; };
 		446FF1961851E2C5003B2081 /* MCTimeTableCell4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 446FF1951851E2C5003B2081 /* MCTimeTableCell4.xib */; };
+		44C58D9118541755007B743E /* MCTimeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C58D9018541755007B743E /* MCTimeTableCell.m */; };
+		44C58D94185417D2007B743E /* MCTimeTableCell2.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C58D93185417D2007B743E /* MCTimeTableCell2.m */; };
+		44C58D9718541851007B743E /* MCTimeTableCell3.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C58D9618541851007B743E /* MCTimeTableCell3.m */; };
+		44C58D9A185418ED007B743E /* MCTimeTableCell4.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C58D99185418ED007B743E /* MCTimeTableCell4.m */; };
 		5E1224971846EC01009072EA /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E1224961846EC01009072EA /* AudioToolbox.framework */; };
 		5E1224991846EC0F009072EA /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E1224981846EC0F009072EA /* CFNetwork.framework */; };
 		5E12249B1846EC23009072EA /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E12249A1846EC23009072EA /* CoreLocation.framework */; };
@@ -41,7 +45,6 @@
 		658B34F9183AF007009C09EB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658B34D8183AF007009C09EB /* UIKit.framework */; };
 		658B3501183AF007009C09EB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 658B34FF183AF007009C09EB /* InfoPlist.strings */; };
 		658B3503183AF007009C09EB /* MissionControlTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 658B3502183AF007009C09EB /* MissionControlTests.m */; };
-		65C024EA18484DFF000CC42B /* MCTimestampCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C024E918484DFF000CC42B /* MCTimestampCell.m */; };
 		65C024F818484F51000CC42B /* MCProjectContentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C024F718484F51000CC42B /* MCProjectContentTableViewController.m */; };
 		65C024FA1848546D000CC42B /* projectContent.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65C024F91848546D000CC42B /* projectContent.plist */; };
 /* End PBXBuildFile section */
@@ -124,6 +127,14 @@
 		446FF18F1851DF4F003B2081 /* MCTimeTableCell2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCTimeTableCell2.xib; sourceTree = "<group>"; };
 		446FF1931851E1DC003B2081 /* MCTimeTableCell3.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCTimeTableCell3.xib; sourceTree = "<group>"; };
 		446FF1951851E2C5003B2081 /* MCTimeTableCell4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCTimeTableCell4.xib; sourceTree = "<group>"; };
+		44C58D8F18541755007B743E /* MCTimeTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTimeTableCell.h; sourceTree = "<group>"; };
+		44C58D9018541755007B743E /* MCTimeTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTimeTableCell.m; sourceTree = "<group>"; };
+		44C58D92185417D2007B743E /* MCTimeTableCell2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTimeTableCell2.h; sourceTree = "<group>"; };
+		44C58D93185417D2007B743E /* MCTimeTableCell2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTimeTableCell2.m; sourceTree = "<group>"; };
+		44C58D9518541851007B743E /* MCTimeTableCell3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTimeTableCell3.h; sourceTree = "<group>"; };
+		44C58D9618541851007B743E /* MCTimeTableCell3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTimeTableCell3.m; sourceTree = "<group>"; };
+		44C58D98185418ED007B743E /* MCTimeTableCell4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTimeTableCell4.h; sourceTree = "<group>"; };
+		44C58D99185418ED007B743E /* MCTimeTableCell4.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTimeTableCell4.m; sourceTree = "<group>"; };
 		5E1224961846EC01009072EA /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		5E1224981846EC0F009072EA /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		5E12249A1846EC23009072EA /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -382,8 +393,6 @@
 		658B34FE183AF007009C09EB /* MissionControlTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MissionControlTests-Info.plist"; sourceTree = "<group>"; };
 		658B3500183AF007009C09EB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		658B3502183AF007009C09EB /* MissionControlTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MissionControlTests.m; sourceTree = "<group>"; };
-		65C024E818484DFF000CC42B /* MCTimestampCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTimestampCell.h; sourceTree = "<group>"; };
-		65C024E918484DFF000CC42B /* MCTimestampCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTimestampCell.m; sourceTree = "<group>"; };
 		65C024F418484E7C000CC42B /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = ../../Desktop/Parse.framework; sourceTree = "<group>"; };
 		65C024F618484F51000CC42B /* MCProjectContentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCProjectContentTableViewController.h; sourceTree = "<group>"; };
 		65C024F718484F51000CC42B /* MCProjectContentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCProjectContentTableViewController.m; sourceTree = "<group>"; };
@@ -973,12 +982,18 @@
 		65C0253718485E1E000CC42B /* ProjectContent */ = {
 			isa = PBXGroup;
 			children = (
-				65C024E818484DFF000CC42B /* MCTimestampCell.h */,
-				65C024E918484DFF000CC42B /* MCTimestampCell.m */,
 				441D3DFD184F7E890097EF26 /* MCTimeTableCell.xib */,
+				44C58D8F18541755007B743E /* MCTimeTableCell.h */,
+				44C58D9018541755007B743E /* MCTimeTableCell.m */,
 				446FF18F1851DF4F003B2081 /* MCTimeTableCell2.xib */,
+				44C58D92185417D2007B743E /* MCTimeTableCell2.h */,
+				44C58D93185417D2007B743E /* MCTimeTableCell2.m */,
 				446FF1931851E1DC003B2081 /* MCTimeTableCell3.xib */,
+				44C58D9518541851007B743E /* MCTimeTableCell3.h */,
+				44C58D9618541851007B743E /* MCTimeTableCell3.m */,
 				446FF1951851E2C5003B2081 /* MCTimeTableCell4.xib */,
+				44C58D98185418ED007B743E /* MCTimeTableCell4.h */,
+				44C58D99185418ED007B743E /* MCTimeTableCell4.m */,
 				65C024F618484F51000CC42B /* MCProjectContentTableViewController.h */,
 				65C024F718484F51000CC42B /* MCProjectContentTableViewController.m */,
 			);
@@ -1234,8 +1249,11 @@
 				6514E2AF1840CA5500468A8A /* MCCreateViewController.m in Sources */,
 				658B34E5183AF007009C09EB /* AppDelegate.m in Sources */,
 				6514E2BA1840E6DC00468A8A /* NSArray+JSON.m in Sources */,
+				44C58D9718541851007B743E /* MCTimeTableCell3.m in Sources */,
+				44C58D94185417D2007B743E /* MCTimeTableCell2.m in Sources */,
+				44C58D9118541755007B743E /* MCTimeTableCell.m in Sources */,
+				44C58D9A185418ED007B743E /* MCTimeTableCell4.m in Sources */,
 				65C024F818484F51000CC42B /* MCProjectContentTableViewController.m in Sources */,
-				65C024EA18484DFF000CC42B /* MCTimestampCell.m in Sources */,
 				658B34E1183AF007009C09EB /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

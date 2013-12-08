@@ -1,14 +1,14 @@
 //
-//  MCTimestampCell.m
+//  MCTimeTableCell4.m
 //  MissionControl
 //
-//  Created by Tommy Lin on 2013/11/29.
-//  Copyright (c) 2013年 Tommy Lin. All rights reserved.
+//  Created by Pai YuXuan on 12/8/13.
+//  Copyright (c) 2013 Tommy Lin. All rights reserved.
 //
 
-#import "MCTimestampCell.h"
+#import "MCTimeTableCell4.h"
 
-@implementation MCTimestampCell
+@implementation MCTimeTableCell4
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

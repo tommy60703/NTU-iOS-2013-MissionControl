@@ -6,7 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell3" id="UnM-v6-zkO">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell3" id="UnM-v6-zkO" customClass="MCTimeTableCell3">
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UnM-v6-zkO" id="U3t-Qn-1yt">
@@ -45,6 +45,14 @@
                     </label>
                 </subviews>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="background1" destination="MOy-PV-Mmc" id="Lrg-Lc-hE7"/>
+                <outlet property="background2" destination="RaM-N2-tdf" id="aHs-on-eWZ"/>
+                <outlet property="background3" destination="ev3-Mu-PwB" id="7YO-JE-YSw"/>
+                <outlet property="taskName1" destination="smo-z4-3yo" id="l8e-Bp-QUS"/>
+                <outlet property="taskName2" destination="e6q-mM-EIJ" id="3f9-5J-Nfa"/>
+                <outlet property="taskName3" destination="DiN-H9-qEF" id="Se0-PJ-T0X"/>
+            </connections>
         </tableViewCell>
     </objects>
 </document>
