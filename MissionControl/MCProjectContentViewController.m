@@ -2,27 +2,41 @@
 //  MCProjectContentViewController.m
 //  MissionControl
 //
-//  Created by Tommy Lin on 2013/11/23.
+//  Created by 楊順堯 on 2013/12/12.
 //  Copyright (c) 2013年 Tommy Lin. All rights reserved.
 //
 
 #import "MCProjectContentViewController.h"
-#import "MCProjects.h"
-
+#import "MCWorkNode.h"
 @interface MCProjectContentViewController ()
 
 @end
 
-
 @implementation MCProjectContentViewController
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    
-    self.navigationItem.title = self.project[MCProjectNameKey];
-    self.projectName.text = self.project[MCProjectNameKey];
-    self.projectCreator.text = self.project[MCProjectCreatorKey];
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
 }
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+	// Do any additional setup after loading the view.
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)addWorkNode:(id)sender {
+    MCWorkNode *theNode = [[MCWorkNode alloc] initWithPoint:self.view.center];
+    [self.view addSubview:theNode];
+}
 @end

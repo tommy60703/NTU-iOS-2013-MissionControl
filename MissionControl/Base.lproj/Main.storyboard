@@ -37,7 +37,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="Sdy-Gl-7Cl" kind="push" identifier="ShowProjectContent" id="WCx-uI-D8t"/>
+                                    <segue destination="1JJ-IX-JEX" kind="push" identifier="ShowProjectContent" id="Iwj-5z-mfH"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -111,34 +111,36 @@
             </objects>
             <point key="canvasLocation" x="74" y="382"/>
         </scene>
-        <!--Project Content Table View Controller-->
-        <scene sceneID="bfO-ba-frh">
+        <!--Project Content View Controller-->
+        <scene sceneID="gdp-iI-2Dt">
             <objects>
-                <tableViewController id="Sdy-Gl-7Cl" customClass="MCProjectContentTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="g6B-Wn-lC2">
+                <viewController id="1JJ-IX-JEX" customClass="MCProjectContentViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Mzl-aj-5tf"/>
+                        <viewControllerLayoutGuide type="bottom" id="2Km-Pw-QkY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="WbS-3p-p2i">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="iWo-6T-cZN" customClass="MCTimestampCell">
-                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iWo-6T-cZN" id="JTx-le-mfD">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="Sdy-Gl-7Cl" id="VNg-5S-LQg"/>
-                            <outlet property="delegate" destination="Sdy-Gl-7Cl" id="ft6-Fa-Swg"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="bqZ-lf-8Ir"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="W8Y-LV-wnX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CsH-Gt-RlC">
+                                <rect key="frame" x="31" y="101" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addWorkNode:" destination="1JJ-IX-JEX" eventType="touchUpInside" id="31s-yk-Piv"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="WOG-Iz-bTu"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gfo-vA-zRJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="515" y="382"/>
+            <point key="canvasLocation" x="524" y="387"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="KQT-IB-VBI">

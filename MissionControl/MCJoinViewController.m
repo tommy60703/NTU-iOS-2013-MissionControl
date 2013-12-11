@@ -20,13 +20,15 @@
 - (void)viewWillAppear:(BOOL)animated {
     self.projectName.text = @"";
     self.projectCreator.text = @"";
+    
+}
+- (void) viewDidAppear:(BOOL)animated{
     projects = [MCProjects shareData];
     PFQuery *query = [PFQuery queryWithClassName:@"project"];
     allProject = [query findObjects];
-
+    
     [self.textField performSelector:@selector(becomeFirstResponder) withObject:nil afterDelay:0.0f];
 }
-
 - (IBAction)cancelButtonClicked:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -58,6 +60,8 @@
             [projectParticipate saveInBackground];
             NSLog(@"successed!");
         }
+        sleep(1);
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"DoUpdateProject" object:nil userInfo:nil];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
