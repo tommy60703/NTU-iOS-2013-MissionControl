@@ -18,7 +18,7 @@
         CGSize imageSize = dotImageView.frame.size;
         
         //將畫面大小設成與圖片大小相同
-        dotImageView.frame = CGRectMake(0, 0, 10, 10);
+        //dotImageView.frame = CGRectMake(0, 0, 10, 10);
         [self setFrame:CGRectMake(point.x, point.y, imageSize.width, imageSize.height)];
         [self addSubview:dotImageView];
         

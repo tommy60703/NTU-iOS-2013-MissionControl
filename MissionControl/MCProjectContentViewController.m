@@ -8,6 +8,7 @@
 
 #import "MCProjectContentViewController.h"
 #import "MCWorkNode.h"
+
 @interface MCProjectContentViewController ()
 
 @end
@@ -38,5 +39,12 @@
 - (IBAction)addWorkNode:(id)sender {
     MCWorkNode *theNode = [[MCWorkNode alloc] initWithPoint:self.view.center];
     [self.view addSubview:theNode];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Title" message:@"Message 1......\nMessage 2......" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [alert show];
+    
+    
 }
+
 @end
