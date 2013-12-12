@@ -8,7 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MCProjectContentViewController : UIViewController
+@protocol MCAddNodeDelegate <NSObject>
+
+@optional
+- (void)addNodeTask:(NSString *)task Worker:(NSString*)worker Previous:(NSString*)previous;
+
+@end
+
+
+@interface MCProjectContentViewController : UIViewController <MCAddNodeDelegate>
 - (IBAction)addWorkNode:(id)sender;
 @property NSDictionary *project;
 @end

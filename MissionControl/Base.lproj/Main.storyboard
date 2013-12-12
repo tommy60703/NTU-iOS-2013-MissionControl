@@ -131,6 +131,7 @@
                                 </state>
                                 <connections>
                                     <action selector="addWorkNode:" destination="1JJ-IX-JEX" eventType="touchUpInside" id="31s-yk-Piv"/>
+                                    <segue destination="30F-Jb-oAt" kind="modal" identifier="addNode" id="AYJ-XG-iiy"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -141,6 +142,61 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gfo-vA-zRJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="524" y="387"/>
+        </scene>
+        <!--Node Input View Controller-->
+        <scene sceneID="KbD-bd-9em">
+            <objects>
+                <viewController id="Q3L-Vh-xdd" customClass="MCNodeInputViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cWN-DO-0cP"/>
+                        <viewControllerLayoutGuide type="bottom" id="xIm-4C-blC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5tq-rU-aSv">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Task" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qss-sU-fl2">
+                                <rect key="frame" x="20" y="116" width="174" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Worker" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HP8-jt-guV">
+                                <rect key="frame" x="20" y="154" width="174" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Previous" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N0K-ri-g8W">
+                                <rect key="frame" x="20" y="192" width="174" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="alK-AP-pkv">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="OIn-iM-UKg">
+                            <connections>
+                                <action selector="cancelButtonClick:" destination="Q3L-Vh-xdd" id="CNs-WZ-88L"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="Zuj-B3-5Jq">
+                            <connections>
+                                <action selector="doneButtonClick:" destination="Q3L-Vh-xdd" id="n30-yW-L9H"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="previousInput" destination="N0K-ri-g8W" id="lXn-hY-FSZ"/>
+                        <outlet property="taskInput" destination="Qss-sU-fl2" id="ZjA-PY-Lrx"/>
+                        <outlet property="workerInput" destination="HP8-jt-guV" id="XKc-la-W3C"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="y9a-ad-fdk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1444" y="387"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="KQT-IB-VBI">
@@ -339,6 +395,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vmQ-gk-L3c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-503" y="-307"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Cvk-bx-A4C">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="30F-Jb-oAt" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="VRO-Y5-nW2">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Q3L-Vh-xdd" kind="relationship" relationship="rootViewController" id="gVX-Wd-3yq"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="shd-wR-5iK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="979" y="387"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

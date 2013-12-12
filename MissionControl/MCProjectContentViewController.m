@@ -8,7 +8,7 @@
 
 #import "MCProjectContentViewController.h"
 #import "MCWorkNode.h"
-
+#import "MCNodeInputViewController.h"
 @interface MCProjectContentViewController ()
 
 @end
@@ -36,15 +36,36 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    
+    if ([segue.identifier isEqualToString:@"addNode"]) {
+        
+        UINavigationController *destinationViewController = segue.destinationViewController;
+        MCNodeInputViewController *destination = [destinationViewController viewControllers][0];
+        destination.delegate = self;
+        
+        
+//        MCNodeInputViewController *destinationViewController = segue.destinationViewController;
+//        destinationViewController.delegate = self;
+    }
+
+    
+}
 - (IBAction)addWorkNode:(id)sender {
     MCWorkNode *theNode = [[MCWorkNode alloc] initWithPoint:self.view.center];
     [self.view addSubview:theNode];
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Title" message:@"Message 1......\nMessage 2......" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-    [alert show];
+    //UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Title" message:@"Message 1......\nMessage 2......" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    //alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    //[alert show];
     
     
 }
 
+
+- (void)addNodeTask:(NSString *)task Worker:(NSString*)worker Previous:(NSString*)previous {
+    NSLog(@"%@", task);
+    NSLog(@"%@", worker);
+    NSLog(@"%@", previous);
+}
 @end
