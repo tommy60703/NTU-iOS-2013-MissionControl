@@ -51,13 +51,15 @@
     [super viewDidLoad];
     [self pullFromServerProject];
     
+    
     CGSize size = self.view.frame.size;
+    
     self.myScrollView.contentSize = CGSizeMake(size.width, size.height*2);
     
 //    for (MCWorkNode *node in self.view.subviews) {
 //        [self.view bringSubviewToFront:node];
 //    }
-//    
+//
     if(self->seq == 0){
         [self addNodeTask:@"init" Worker:@"me" Previous:@"none"];
     }
@@ -183,8 +185,8 @@
             [subview removeFromSuperview];
         }
     }
-    
-    self.drawLine = [[MCDrawLine alloc] initWithFrame:CGRectMake(0, 0, 640 , 480)];
+    CGSize size = self.myScrollView.frame.size;
+    self.drawLine = [[MCDrawLine alloc] initWithFrame:CGRectMake(0, 0, size.width , size.height)];
     [self.drawLine setBackgroundColor:[UIColor whiteColor]];
     [self.drawLine addPoints:self.WorkNodes];
     self.drawLine.tag = -1;
