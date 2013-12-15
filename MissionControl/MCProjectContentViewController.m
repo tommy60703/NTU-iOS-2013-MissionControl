@@ -174,12 +174,17 @@
 
 - (void)drawAllLines{
     NSLog(@"draw");
-    int count = 0;
+    for (UIView *subview in self.view.subviews) {
+        if (subview.tag == -1) {
+            [subview removeFromSuperview];
+        }
+    }
+    
     self.drawLine = [[MCDrawLine alloc] initWithFrame:CGRectMake(0, 0, 640 , 480)];
     [self.drawLine setBackgroundColor:[UIColor whiteColor]];
     [self.drawLine addPoints:self.WorkNodes];
-    [self.view insertSubview:self.drawLine atIndex:count];
-    count++;
+    self.drawLine.tag = -1;
+    [self.view insertSubview:self.drawLine atIndex:0];
     
 }
 
