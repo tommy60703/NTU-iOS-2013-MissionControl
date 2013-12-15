@@ -77,12 +77,13 @@
     frame.origin.x += point.x - location.x;
     frame.origin.y += point.y - location.y;
     [self setFrame:frame];
+     [[NSNotificationCenter defaultCenter] postNotificationName:@"moveWorkNodes" object:nil userInfo:nil];
     
 //    xLabel.text = [NSString stringWithFormat:@"%.f", frame.origin.x];
 //    yLabel.text = [NSString stringWithFormat:@"%.f", frame.origin.y];
 }
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"moveWorkNodes" object:nil userInfo:nil];
+   
 }
 /*
 // Only override drawRect: if you perform custom drawing.
