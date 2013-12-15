@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Hys-J2-PjA">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
     </dependencies>
     <scenes>
         <!--Root View Controller - My Projects-->
@@ -133,8 +133,7 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="addWorkNode:" destination="1JJ-IX-JEX" eventType="touchUpInside" id="31s-yk-Piv"/>
-                                <segue destination="30F-Jb-oAt" kind="modal" identifier="addNode" id="AYJ-XG-iiy"/>
+                                <segue destination="30F-Jb-oAt" kind="modal" identifier="addNode" id="szR-Fs-6gV"/>
                             </connections>
                         </button>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="7xI-Wc-uf0">
