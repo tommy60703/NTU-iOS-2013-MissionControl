@@ -31,8 +31,8 @@
     for (PFObject *point1 in self.points) {
         for (PFObject *point2 in self.points) {
             if ([[point1 objectForKey:@"previous"] isEqualToString:[point2 objectForKey:@"task"]]) {
-                CGContextMoveToPoint(context, [[point1 objectForKey:@"location_x"] floatValue]+22, [[point1 objectForKey:@"location_y"] floatValue]+22);
-                CGContextAddLineToPoint(context,[[point2 objectForKey:@"location_x"] floatValue]+22, [[point2 objectForKey:@"location_y"] floatValue]+22);
+                CGContextMoveToPoint(context, [[point1 objectForKey:@"location_x"] floatValue]+30, [[point1 objectForKey:@"location_y"] floatValue]+30);
+                CGContextAddLineToPoint(context,[[point2 objectForKey:@"location_x"] floatValue]+30, [[point2 objectForKey:@"location_y"] floatValue]+30);
                 
                 CGContextStrokePath(context);
             }
