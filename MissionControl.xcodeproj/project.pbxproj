@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		44BF9B1B185DC6F600C49253 /* done@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44BF9B19185DC6F600C49253 /* done@2x.png */; };
-		44BF9B1C185DC6F600C49253 /* undo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44BF9B1A185DC6F600C49253 /* undo@2x.png */; };
 		44BF9B1D185DC71800C49253 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E81E884184C6E5300B4EBD7 /* Parse.framework */; };
+		5E067055185DEFEE00FC8445 /* done@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E067053185DEFEE00FC8445 /* done@2x.png */; };
+		5E067056185DEFEE00FC8445 /* undo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E067054185DEFEE00FC8445 /* undo@2x.png */; };
 		5E1224971846EC01009072EA /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E1224961846EC01009072EA /* AudioToolbox.framework */; };
 		5E1224991846EC0F009072EA /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E1224981846EC0F009072EA /* CFNetwork.framework */; };
 		5E12249B1846EC23009072EA /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E12249A1846EC23009072EA /* CoreLocation.framework */; };
@@ -119,9 +119,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		44BF9B19185DC6F600C49253 /* done@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "done@2x.png"; path = "../../done@2x.png"; sourceTree = "<group>"; };
-		44BF9B1A185DC6F600C49253 /* undo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "undo@2x.png"; path = "../../undo@2x.png"; sourceTree = "<group>"; };
 		5E067040185DBC9300FC8445 /* MCNodeDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCNodeDelegate.h; sourceTree = "<group>"; };
+		5E067053185DEFEE00FC8445 /* done@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "done@2x.png"; sourceTree = "<group>"; };
+		5E067054185DEFEE00FC8445 /* undo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "undo@2x.png"; sourceTree = "<group>"; };
 		5E1224961846EC01009072EA /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		5E1224981846EC0F009072EA /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		5E12249A1846EC23009072EA /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -387,7 +387,6 @@
 		658B34FE183AF007009C09EB /* MissionControlTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MissionControlTests-Info.plist"; sourceTree = "<group>"; };
 		658B3500183AF007009C09EB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		658B3502183AF007009C09EB /* MissionControlTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MissionControlTests.m; sourceTree = "<group>"; };
-		65C024E818484DFF000CC42B /* MCTimestampCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTimestampCell.h; sourceTree = "<group>"; };
 		65C024F91848546D000CC42B /* projectContent.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = projectContent.plist; path = ../projectContent.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -973,8 +972,8 @@
 		65C0253718485E1E000CC42B /* ProjectContent */ = {
 			isa = PBXGroup;
 			children = (
-				44BF9B19185DC6F600C49253 /* done@2x.png */,
-				44BF9B1A185DC6F600C49253 /* undo@2x.png */,
+				5E067053185DEFEE00FC8445 /* done@2x.png */,
+				5E067054185DEFEE00FC8445 /* undo@2x.png */,
 				5E80818A1858E38E004D9343 /* MCWorkNode.h */,
 				5E80818B1858E38E004D9343 /* MCWorkNode.m */,
 				5E067040185DBC9300FC8445 /* MCNodeDelegate.h */,
@@ -982,7 +981,6 @@
 				5E8081B3185D7781004D9343 /* MCDrawLine.m */,
 				5E8081871858E33E004D9343 /* MCProjectContentViewController.h */,
 				5E8081881858E33F004D9343 /* MCProjectContentViewController.m */,
-				65C024E818484DFF000CC42B /* MCTimestampCell.h */,
 				5E80819D18596782004D9343 /* MCNodeInputViewController.h */,
 				5E80819E18596782004D9343 /* MCNodeInputViewController.m */,
 			);
@@ -1196,12 +1194,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				658B34F0183AF007009C09EB /* Images.xcassets in Resources */,
-				44BF9B1C185DC6F600C49253 /* undo@2x.png in Resources */,
 				65C024FA1848546D000CC42B /* projectContent.plist in Resources */,
 				6514E2C81840FAAA00468A8A /* test-projects.json in Resources */,
 				658B34DF183AF007009C09EB /* InfoPlist.strings in Resources */,
-				44BF9B1B185DC6F600C49253 /* done@2x.png in Resources */,
+				5E067055185DEFEE00FC8445 /* done@2x.png in Resources */,
 				658B34E8183AF007009C09EB /* Main.storyboard in Resources */,
+				5E067056185DEFEE00FC8445 /* undo@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

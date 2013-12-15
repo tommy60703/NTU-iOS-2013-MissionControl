@@ -41,8 +41,8 @@
    
 }
 
-- (void)addPoints:(NSArray *)allpoints{
-    NSLog(@"%@",allpoints);
+- (void)addPoints:(NSMutableArray *)allpoints{
+    //NSLog(@"%@",allpoints);
     self.points = allpoints;
 }
 

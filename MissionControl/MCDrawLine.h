@@ -15,6 +15,6 @@
 @property CGPoint endPoint;
 @property NSArray *points;
 
-- (void)addPoints:(NSArray *)allpoints;
+- (void)addPoints:(NSMutableArray *)allpoints;
 
 @end

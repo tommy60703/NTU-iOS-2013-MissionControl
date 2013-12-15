@@ -26,20 +26,20 @@
     return self;
 }
 - (void)moveWorkNodes{
-    NSLog(@"moveWorkNodes");
+    //NSLog(@"moveWorkNodes");
     for (PFObject *node in self.WorkNodes) {
         for (UIView *subview in self.myScrollView.subviews) {
             if([subview isKindOfClass:[MCWorkNode class]]){
                 if ([[node objectForKey:@"seq"] integerValue] == subview.tag ) {
                     MCWorkNode *finder = subview;
-                    NSLog(@"%@ %@",node[@"location_x"], node[@"location_y"]);
-                    NSLog(@"%@ %@",[NSNumber numberWithDouble:finder.frame.origin.x], [NSNumber numberWithDouble:finder.frame.origin.y]);
+//                    NSLog(@"%@ %@",node[@"location_x"], node[@"location_y"]);
+//                    NSLog(@"%@ %@",[NSNumber numberWithDouble:finder.frame.origin.x], [NSNumber numberWithDouble:finder.frame.origin.y]);
                     
                     node[@"location_x"] = [NSNumber numberWithDouble:finder.frame.origin.x];
                     node[@"location_y"] = [NSNumber numberWithDouble:finder.frame.origin.y];
-                    NSLog(@"new : %@ %@",node[@"location_x"], node[@"location_y"]);
-
-                    NSLog(@"%d", subview.tag);
+//                    NSLog(@"new : %@ %@",node[@"location_x"], node[@"location_y"]);
+//
+//                    NSLog(@"%d", subview.tag);
                 }
             }
         }
@@ -114,10 +114,27 @@
     MCWorkNode *theNode = [[MCWorkNode alloc] initWithPoint:self.view.center Seq:seq Task:task Worker:worker Prev:previous Delegate:self];
     //[self.view isKindOfClass:[UIImageView class]];
     
-    NSLog(@"%d", self->seq);
+    NSMutableArray *tempWorkNodes = [[NSMutableArray alloc] init];
+    for (PFObject *node in self.WorkNodes) {
+        [tempWorkNodes addObject:node];
+    }
+    PFObject *projectContent = [PFObject objectWithClassName:[self.project[@"projectName"]stringByAppendingString:[self.project[@"projectPasscode"] stringValue]]];
+    projectContent[@"task"] = task;
+    projectContent[@"worker"] = worker;
+    projectContent[@"previous"] = previous;
+    projectContent[@"seq"] = [NSNumber numberWithInt:self->seq];
+    projectContent[@"state"] = [NSNumber numberWithBool:false];
+    projectContent[@"location_x"] = [NSNumber numberWithDouble:theNode.frame.origin.x];
+    projectContent[@"location_y"] = [NSNumber numberWithDouble:theNode.frame.origin.y];
+    [tempWorkNodes addObject:projectContent];
+    //NSLog(@"%@", tempWorkNodes);
+    self.WorkNodes = tempWorkNodes;
+//    NSLog(@"%@", self.WorkNodes);
+//    NSLog(@"%d", self->seq);
     self->seq++;
     
     [self.myScrollView addSubview:theNode];
+    [self drawAllLines];
 }
 
 - (void)pushToServerTask:(NSString *)task Worker:(NSString *)worker Prev:(NSString *)previous Tag:(int)tag Status:(bool)status Location:(CGPoint)point{
@@ -179,7 +196,7 @@
 }
 
 - (void)drawAllLines{
-    NSLog(@"draw");
+    //NSLog(@"draw");
     for (UIView *subview in self.myScrollView.subviews) {
         if (subview.tag == -1) {
             [subview removeFromSuperview];
