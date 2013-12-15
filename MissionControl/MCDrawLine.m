@@ -7,7 +7,7 @@
 //
 
 #import "MCDrawLine.h"
-
+#import <Parse/Parse.h>
 @implementation MCDrawLine
 @synthesize beginPoint;
 @synthesize endPoint;
@@ -21,26 +21,36 @@
     return self;
 }
 
-- (void)drawLine:(CGContextRef)context Begin:(CGPoint)begin End:(CGPoint)end{
-    NSLog(@"x:(%f, %f)", begin.x, begin.y);
-    NSLog(@"x:(%f, %f)", end.x, end.y);
+- (void)drawLine:(CGContextRef)context{
+    
+    
+    
+    
     CGContextSetLineWidth(context, 2.0);
     CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
-    
-    CGContextMoveToPoint(context, begin.x, begin.y);
-    CGContextAddLineToPoint(context, end.x , end.y);
-    
-    CGContextStrokePath(context);
+    for (PFObject *point1 in self.points) {
+        for (PFObject *point2 in self.points) {
+            if ([[point1 objectForKey:@"previous"] isEqualToString:[point2 objectForKey:@"task"]]) {
+                CGContextMoveToPoint(context, [[point1 objectForKey:@"location_x"] floatValue]+22, [[point1 objectForKey:@"location_y"] floatValue]+22);
+                CGContextAddLineToPoint(context,[[point2 objectForKey:@"location_x"] floatValue]+22, [[point2 objectForKey:@"location_y"] floatValue]+22);
+                
+                CGContextStrokePath(context);
+            }
+        }
+    }
+   
+}
 
+- (void)addPoints:(NSArray *)allpoints{
+    NSLog(@"%@",allpoints);
+    self.points = allpoints;
 }
 
 - (void)drawRect:(CGRect)rect
 {
     CGContextRef context = UIGraphicsGetCurrentContext();
-    self.beginPoint = CGPointMake(100, 100);
-    self.endPoint = CGPointMake(200, 200);
     
-    [self drawLine:context Begin:self.beginPoint End:self.endPoint];
+    [self drawLine:context];
 }
 
 

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		442D0578185D8BF90065D60B /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E81E884184C6E5300B4EBD7 /* Parse.framework */; };
+		5E06703E185DA52500FC8445 /* done@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E06703C185DA52500FC8445 /* done@2x.png */; };
+		5E06703F185DA52500FC8445 /* undo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E06703D185DA52500FC8445 /* undo@2x.png */; };
 		5E1224971846EC01009072EA /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E1224961846EC01009072EA /* AudioToolbox.framework */; };
 		5E1224991846EC0F009072EA /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E1224981846EC0F009072EA /* CFNetwork.framework */; };
 		5E12249B1846EC23009072EA /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E12249A1846EC23009072EA /* CoreLocation.framework */; };
@@ -19,8 +21,6 @@
 		5E1224A71846EC53009072EA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E1224A61846EC53009072EA /* SystemConfiguration.framework */; };
 		5E8081891858E33F004D9343 /* MCProjectContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E8081881858E33F004D9343 /* MCProjectContentViewController.m */; };
 		5E80818C1858E38E004D9343 /* MCWorkNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E80818B1858E38E004D9343 /* MCWorkNode.m */; };
-		5E80818F1858E446004D9343 /* lg-failed-flat.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E80818D1858E446004D9343 /* lg-failed-flat.png */; };
-		5E8081901858E446004D9343 /* lg-success-flat.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E80818E1858E446004D9343 /* lg-success-flat.png */; };
 		5E80819F18596782004D9343 /* MCNodeInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E80819E18596782004D9343 /* MCNodeInputViewController.m */; };
 		5E8081B4185D7781004D9343 /* MCDrawLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E8081B3185D7781004D9343 /* MCDrawLine.m */; };
 		6514E2AC1840CA3D00468A8A /* MCJoinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6514E2AB1840CA3D00468A8A /* MCJoinViewController.m */; };
@@ -121,6 +121,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5E06703C185DA52500FC8445 /* done@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "done@2x.png"; sourceTree = "<group>"; };
+		5E06703D185DA52500FC8445 /* undo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "undo@2x.png"; sourceTree = "<group>"; };
 		5E1224961846EC01009072EA /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		5E1224981846EC0F009072EA /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		5E12249A1846EC23009072EA /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -134,8 +136,6 @@
 		5E8081881858E33F004D9343 /* MCProjectContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCProjectContentViewController.m; sourceTree = "<group>"; };
 		5E80818A1858E38E004D9343 /* MCWorkNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCWorkNode.h; sourceTree = "<group>"; };
 		5E80818B1858E38E004D9343 /* MCWorkNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCWorkNode.m; sourceTree = "<group>"; };
-		5E80818D1858E446004D9343 /* lg-failed-flat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lg-failed-flat.png"; sourceTree = "<group>"; };
-		5E80818E1858E446004D9343 /* lg-success-flat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lg-success-flat.png"; sourceTree = "<group>"; };
 		5E80819D18596782004D9343 /* MCNodeInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCNodeInputViewController.h; sourceTree = "<group>"; };
 		5E80819E18596782004D9343 /* MCNodeInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCNodeInputViewController.m; sourceTree = "<group>"; };
 		5E8081B2185D7781004D9343 /* MCDrawLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCDrawLine.h; sourceTree = "<group>"; };
@@ -1004,8 +1004,8 @@
 		65C0254218485E40000CC42B /* RootViews */ = {
 			isa = PBXGroup;
 			children = (
-				5E80818D1858E446004D9343 /* lg-failed-flat.png */,
-				5E80818E1858E446004D9343 /* lg-success-flat.png */,
+				5E06703C185DA52500FC8445 /* done@2x.png */,
+				5E06703D185DA52500FC8445 /* undo@2x.png */,
 				6514E2B31840D79100468A8A /* MCRootViewController.h */,
 				6514E2B41840D79100468A8A /* MCRootViewController.m */,
 				6514E2AD1840CA5500468A8A /* MCCreateViewController.h */,
@@ -1210,12 +1210,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				658B34F0183AF007009C09EB /* Images.xcassets in Resources */,
-				5E8081901858E446004D9343 /* lg-success-flat.png in Resources */,
+				5E06703E185DA52500FC8445 /* done@2x.png in Resources */,
 				65C024FA1848546D000CC42B /* projectContent.plist in Resources */,
-				5E80818F1858E446004D9343 /* lg-failed-flat.png in Resources */,
 				6514E2C81840FAAA00468A8A /* test-projects.json in Resources */,
 				658B34DF183AF007009C09EB /* InfoPlist.strings in Resources */,
 				658B34E8183AF007009C09EB /* Main.storyboard in Resources */,
+				5E06703F185DA52500FC8445 /* undo@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,5 +13,8 @@
 
 @property CGPoint beginPoint;
 @property CGPoint endPoint;
+@property NSArray *points;
+
+- (void)addPoints:(NSArray *)allpoints;
 
 @end

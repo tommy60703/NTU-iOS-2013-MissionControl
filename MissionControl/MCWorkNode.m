@@ -14,7 +14,7 @@
     self = [super init];
     
     if (self) {
-        UIImageView *dotImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"lg-failed-flat.png"]];
+        UIImageView *dotImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"undo.png"]];
         CGSize imageSize = dotImageView.frame.size;
         self.tag= seq;
         //將畫面大小設成與圖片大小相同
@@ -80,6 +80,9 @@
     
 //    xLabel.text = [NSString stringWithFormat:@"%.f", frame.origin.x];
 //    yLabel.text = [NSString stringWithFormat:@"%.f", frame.origin.y];
+}
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"moveWorkNodes" object:nil userInfo:nil];
 }
 /*
 // Only override drawRect: if you perform custom drawing.

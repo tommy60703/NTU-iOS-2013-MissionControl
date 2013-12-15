@@ -119,7 +119,7 @@
                         <viewControllerLayoutGuide type="top" id="Mzl-aj-5tf"/>
                         <viewControllerLayoutGuide type="bottom" id="2Km-Pw-QkY"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="WbS-3p-p2i" customClass="MCDrawLine">
+                    <view key="view" contentMode="scaleToFill" id="WbS-3p-p2i">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

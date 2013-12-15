@@ -21,7 +21,7 @@
     int seq;
 }
 - (IBAction)saveWorkFlow:(id)sender;
-- (IBAction)addWorkNode:(id)sender;
+
 - (void) pushToServerTask:(NSString *)task Worker:(NSString *)worker Prev:(NSString *)previous Tag:(int)tag Status:(bool)status Location:(CGPoint) point;
 - (void) pullFromServerProject;
 @property (strong, nonatomic) MCDrawLine *drawLine;

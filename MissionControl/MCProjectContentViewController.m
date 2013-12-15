@@ -9,6 +9,7 @@
 #import "MCProjectContentViewController.h"
 #import "MCWorkNode.h"
 #import "MCNodeInputViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface MCProjectContentViewController ()
 
@@ -24,12 +25,42 @@
     }
     return self;
 }
+- (void)moveWorkNodes{
+    NSLog(@"moveWorkNodes");
+    for (PFObject *node in self.WorkNodes) {
+        for (UIView *subview in self.view.subviews) {
+            if([subview isKindOfClass:[MCWorkNode class]]){
+                if ([[node objectForKey:@"seq"] integerValue] == subview.tag ) {
+                    MCWorkNode *finder = subview;
+                    NSLog(@"%@ %@",node[@"location_x"], node[@"location_y"]);
+                    NSLog(@"%@ %@",[NSNumber numberWithDouble:finder.frame.origin.x], [NSNumber numberWithDouble:finder.frame.origin.y]);
+                    
+                    node[@"location_x"] = [NSNumber numberWithDouble:finder.frame.origin.x];
+                    node[@"location_y"] = [NSNumber numberWithDouble:finder.frame.origin.y];
+                    NSLog(@"new : %@ %@",node[@"location_x"], node[@"location_y"]);
 
+                    NSLog(@"%d", subview.tag);
+                }
+            }
+        }
+    }
+    [self drawAllLines];
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self pullFromServerProject];
-    //self->seq = 0;
+//    for (MCWorkNode *node in self.view.subviews) {
+//        [self.view bringSubviewToFront:node];
+//    }
+//    
+    if(self->seq == 0){
+        [self addNodeTask:@"init" Worker:@"me" Previous:@"none"];
+    }
+    else
+        self->seq++;
+    [self drawAllLines];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moveWorkNodes) name:@"moveWorkNodes" object:nil];
 	// Do any additional setup after loading the view.
 }
 
@@ -68,12 +99,6 @@
 
 }
 
-- (IBAction)addWorkNode:(id)sender {
-    
-    
-    
-    
-}
 
 
 - (void)addNodeTask:(NSString *)task Worker:(NSString*)worker Previous:(NSString*)previous {
@@ -119,9 +144,7 @@
 }
 
 - (void)pullFromServerProject{
-    self.drawLine = [[MCDrawLine alloc] initWithFrame:CGRectMake(0, 0, 400, 400)];
-    [self.drawLine setBackgroundColor:[UIColor whiteColor]];
-    [self.view addSubview:self.drawLine];
+   
     
     PFQuery *query = [PFQuery queryWithClassName:[self.project[@"projectName"] stringByAppendingString:[self.project[@"projectPasscode"] stringValue]]];
     [query orderByAscending:@"seq"];
@@ -145,9 +168,19 @@
         [self.view addSubview:theNode];
         
     }
-    self -> seq = ++maxSeq;
+    self -> seq = maxSeq;
     NSLog(@"%d", self -> seq);
 }
 
+- (void)drawAllLines{
+    NSLog(@"draw");
+    int count = 0;
+    self.drawLine = [[MCDrawLine alloc] initWithFrame:CGRectMake(0, 0, 640 , 480)];
+    [self.drawLine setBackgroundColor:[UIColor whiteColor]];
+    [self.drawLine addPoints:self.WorkNodes];
+    [self.view insertSubview:self.drawLine atIndex:count];
+    count++;
+    
+}
 
 @end
