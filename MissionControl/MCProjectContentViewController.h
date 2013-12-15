@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <Parse/Parse.h>
 @protocol MCAddNodeDelegate <NSObject>
 
 @optional
@@ -16,7 +16,14 @@
 @end
 
 
-@interface MCProjectContentViewController : UIViewController <MCAddNodeDelegate>
+@interface MCProjectContentViewController : UIViewController <MCAddNodeDelegate>{
+    int seq;
+}
+- (IBAction)saveWorkFlow:(id)sender;
 - (IBAction)addWorkNode:(id)sender;
+- (void) pushToServerTask:(NSString *)task Worker:(NSString *)worker Prev:(NSString *)previous Tag:(int)tag Status:(bool)status Location:(CGPoint) point;
+- (void) pullFromServerProject;
+
 @property NSDictionary *project;
+@property NSArray *WorkNodes;
 @end

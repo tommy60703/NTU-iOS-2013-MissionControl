@@ -10,15 +10,16 @@
 
 @implementation MCWorkNode
 @synthesize xLabel, yLabel;
--(MCWorkNode *)initWithPoint:(CGPoint)point{
+-(MCWorkNode *)initWithPoint:(CGPoint)point Seq:(int)seq Task:(NSString *)task Worker:(NSString *)worker Prev:(NSString *)previous{
     self = [super init];
     
     if (self) {
         UIImageView *dotImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"lg-failed-flat.png"]];
         CGSize imageSize = dotImageView.frame.size;
-        
+        self.tag= seq;
         //將畫面大小設成與圖片大小相同
         //dotImageView.frame = CGRectMake(0, 0, 10, 10);
+        //NSLog(@"%d",dotImageView.tag);
         [self setFrame:CGRectMake(point.x, point.y, imageSize.width, imageSize.height)];
         [self addSubview:dotImageView];
         
@@ -30,9 +31,13 @@
         [xLabel setFont:font];
         [yLabel setFont:font];
         
-        xLabel.text = [NSString stringWithFormat:@"%.f", point.x];
-        yLabel.text = [NSString stringWithFormat:@"%.f", point.y];
-        
+//        xLabel.text = [NSString stringWithFormat:@"%.f", point.x];
+//        yLabel.text = [NSString stringWithFormat:@"%.f", point.y];
+        xLabel.text = task;
+        yLabel.text = worker;
+        self.task = task;
+        self.worker = worker;
+        self.previous = previous;
         [xLabel setBackgroundColor:[UIColor clearColor]];
         [yLabel setBackgroundColor:[UIColor clearColor]];
         
@@ -73,8 +78,8 @@
     frame.origin.y += point.y - location.y;
     [self setFrame:frame];
     
-    xLabel.text = [NSString stringWithFormat:@"%.f", frame.origin.x];
-    yLabel.text = [NSString stringWithFormat:@"%.f", frame.origin.y];
+//    xLabel.text = [NSString stringWithFormat:@"%.f", frame.origin.x];
+//    yLabel.text = [NSString stringWithFormat:@"%.f", frame.origin.y];
 }
 /*
 // Only override drawRect: if you perform custom drawing.

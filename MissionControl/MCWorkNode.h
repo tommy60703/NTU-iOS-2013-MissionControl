@@ -14,7 +14,10 @@
 
 @property (strong)UILabel *xLabel;
 @property (strong)UILabel *yLabel;
+@property (strong)NSString *task;
+@property (strong)NSString *worker;
+@property (strong)NSString *previous;
 
--(MCWorkNode *)initWithPoint:(CGPoint)point;
+-(MCWorkNode *)initWithPoint:(CGPoint)point Seq:(int)seq Task:(NSString*)task Worker:(NSString*)worker Prev:(NSString*)previous;
 
 @end

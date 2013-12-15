@@ -104,18 +104,11 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    if ([segue.identifier isEqualToString:@"ShowCityDetail"]) {
-//        UITableViewCell *cell = (UITableViewCell *)sender;
-//        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-//        NSDictionary *city = [[CLDataSource sharedDataSource] dictionaryWithCityAtIndexPath:indexPath];
-//        
-//        CLCityViewController *detailViewController = segue.destinationViewController;
-//        detailViewController.city = city;
-//        NSLog(@"%@", city);
-//    }
+
     if ([segue.identifier isEqualToString:@"ShowProjectContent"]) {
         UITableViewCell *cell = (UITableViewCell *)sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        
         MCProjectContentViewController *destinationViewController = segue.destinationViewController;
 //        NSDictionary *project = [allProject objectAtIndex:indexPath.row];
 //        NSLog(@"%@", project);

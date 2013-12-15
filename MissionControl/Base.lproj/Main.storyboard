@@ -137,7 +137,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="WOG-Iz-bTu"/>
+                    <navigationItem key="navigationItem" id="WOG-Iz-bTu">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="7xI-Wc-uf0">
+                            <connections>
+                                <action selector="saveWorkFlow:" destination="1JJ-IX-JEX" id="fgm-v3-xWB"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gfo-vA-zRJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
