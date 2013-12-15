@@ -28,7 +28,7 @@
 - (void)moveWorkNodes{
     NSLog(@"moveWorkNodes");
     for (PFObject *node in self.WorkNodes) {
-        for (UIView *subview in self.view.subviews) {
+        for (UIView *subview in self.myScrollView.subviews) {
             if([subview isKindOfClass:[MCWorkNode class]]){
                 if ([[node objectForKey:@"seq"] integerValue] == subview.tag ) {
                     MCWorkNode *finder = subview;
@@ -50,6 +50,10 @@
 {
     [super viewDidLoad];
     [self pullFromServerProject];
+    
+    CGSize size = self.view.frame.size;
+    self.myScrollView.contentSize = CGSizeMake(size.width, size.height*2);
+    
 //    for (MCWorkNode *node in self.view.subviews) {
 //        [self.view bringSubviewToFront:node];
 //    }
@@ -87,7 +91,7 @@
 }
 - (IBAction)saveWorkFlow:(id)sender {
     
-    for (UIView *subview in self.view.subviews) {
+    for (UIView *subview in self.myScrollView.subviews) {
         if([subview isKindOfClass:[MCWorkNode class]]){
             MCWorkNode *finder = subview;
             NSLog(@"%d",finder.tag);
@@ -105,13 +109,13 @@
 //    NSLog(@"%@", task);
 //    NSLog(@"%@", worker);
 //    NSLog(@"%@", previous);
-    MCWorkNode *theNode = [[MCWorkNode alloc] initWithPoint:self.view.center Seq:seq Task:task Worker:worker Prev:previous];
+    MCWorkNode *theNode = [[MCWorkNode alloc] initWithPoint:self.view.center Seq:seq Task:task Worker:worker Prev:previous Delegate:self];
     //[self.view isKindOfClass:[UIImageView class]];
     
     NSLog(@"%d", self->seq);
     self->seq++;
     
-    [self.view addSubview:theNode];
+    [self.myScrollView addSubview:theNode];
 }
 
 - (void)pushToServerTask:(NSString *)task Worker:(NSString *)worker Prev:(NSString *)previous Tag:(int)tag Status:(bool)status Location:(CGPoint)point{
@@ -164,8 +168,8 @@
         NSString *worker = node[@"worker"];
         NSString *previous = node[@"previous"];
 
-        MCWorkNode *theNode = [[MCWorkNode alloc] initWithPoint:position Seq:theSeq Task:task Worker:worker Prev:previous];
-        [self.view addSubview:theNode];
+        MCWorkNode *theNode = [[MCWorkNode alloc] initWithPoint:position Seq:theSeq Task:task Worker:worker Prev:previous Delegate:self];
+        [self.myScrollView addSubview:theNode];
         
     }
     self -> seq = maxSeq;
@@ -174,7 +178,7 @@
 
 - (void)drawAllLines{
     NSLog(@"draw");
-    for (UIView *subview in self.view.subviews) {
+    for (UIView *subview in self.myScrollView.subviews) {
         if (subview.tag == -1) {
             [subview removeFromSuperview];
         }
@@ -184,8 +188,16 @@
     [self.drawLine setBackgroundColor:[UIColor whiteColor]];
     [self.drawLine addPoints:self.WorkNodes];
     self.drawLine.tag = -1;
-    [self.view insertSubview:self.drawLine atIndex:0];
+    [self.myScrollView insertSubview:self.drawLine atIndex:0];
     
+}
+
+- (void)disableScroll {
+    self.myScrollView.scrollEnabled = NO;
+}
+
+- (void)enableScroll {
+    self.myScrollView.scrollEnabled = YES;
 }
 
 @end

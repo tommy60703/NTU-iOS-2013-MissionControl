@@ -123,6 +123,7 @@
 /* Begin PBXFileReference section */
 		5E06703C185DA52500FC8445 /* done@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "done@2x.png"; sourceTree = "<group>"; };
 		5E06703D185DA52500FC8445 /* undo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "undo@2x.png"; sourceTree = "<group>"; };
+		5E067040185DBC9300FC8445 /* MCNodeDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCNodeDelegate.h; sourceTree = "<group>"; };
 		5E1224961846EC01009072EA /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		5E1224981846EC0F009072EA /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		5E12249A1846EC23009072EA /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -980,6 +981,7 @@
 			children = (
 				5E80818A1858E38E004D9343 /* MCWorkNode.h */,
 				5E80818B1858E38E004D9343 /* MCWorkNode.m */,
+				5E067040185DBC9300FC8445 /* MCNodeDelegate.h */,
 				5E8081B2185D7781004D9343 /* MCDrawLine.h */,
 				5E8081B3185D7781004D9343 /* MCDrawLine.m */,
 				5E8081871858E33E004D9343 /* MCProjectContentViewController.h */,

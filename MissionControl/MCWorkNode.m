@@ -10,7 +10,7 @@
 
 @implementation MCWorkNode
 @synthesize xLabel, yLabel;
--(MCWorkNode *)initWithPoint:(CGPoint)point Seq:(int)seq Task:(NSString *)task Worker:(NSString *)worker Prev:(NSString *)previous{
+-(MCWorkNode *)initWithPoint:(CGPoint)point Seq:(int)seq Task:(NSString *)task Worker:(NSString *)worker Prev:(NSString *)previous Delegate:(id<MCNodeDelegate>)delegate{
     self = [super init];
     
     if (self) {
@@ -46,6 +46,7 @@
         
         //不切除超過邊界的畫面
         [self setClipsToBounds:NO];
+        self.delegate = delegate;
     }
     
     return self;
@@ -61,6 +62,8 @@
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.delegate disableScroll];
+    
     
     //將被觸碰到鍵移動到所有畫面的最上層
     [[self superview] bringSubviewToFront:self];
@@ -83,7 +86,7 @@
 //    yLabel.text = [NSString stringWithFormat:@"%.f", frame.origin.y];
 }
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
-   
+    [self.delegate enableScroll];
 }
 /*
 // Only override drawRect: if you perform custom drawing.

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 #import "MCDrawLine.h"
+#import "MCNodeDelegate.h"
 @protocol MCAddNodeDelegate <NSObject>
 
 @optional
@@ -17,9 +18,10 @@
 @end
 
 
-@interface MCProjectContentViewController : UIViewController <MCAddNodeDelegate>{
+@interface MCProjectContentViewController : UIViewController <MCAddNodeDelegate, MCNodeDelegate>{
     int seq;
 }
+@property (strong, nonatomic) IBOutlet UIScrollView *myScrollView;
 - (IBAction)saveWorkFlow:(id)sender;
 
 - (void) pushToServerTask:(NSString *)task Worker:(NSString *)worker Prev:(NSString *)previous Tag:(int)tag Status:(bool)status Location:(CGPoint) point;
