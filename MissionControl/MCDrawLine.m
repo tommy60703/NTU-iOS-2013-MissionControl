@@ -25,15 +25,12 @@
     NSLog(@"x:(%f, %f)", begin.x, begin.y);
     NSLog(@"x:(%f, %f)", end.x, end.y);
     CGContextSetLineWidth(context, 2.0);
-    CGContextSetStrokeColorWithColor(context, [UIColor orangeColor].CGColor);
+    CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
     
     CGContextMoveToPoint(context, begin.x, begin.y);
     CGContextAddLineToPoint(context, end.x , end.y);
     
     CGContextStrokePath(context);
-    
-    
-    
 
 }
 

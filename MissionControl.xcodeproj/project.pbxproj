@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		442D0578185D8BF90065D60B /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E81E884184C6E5300B4EBD7 /* Parse.framework */; };
 		5E1224971846EC01009072EA /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E1224961846EC01009072EA /* AudioToolbox.framework */; };
 		5E1224991846EC0F009072EA /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E1224981846EC0F009072EA /* CFNetwork.framework */; };
 		5E12249B1846EC23009072EA /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E12249A1846EC23009072EA /* CoreLocation.framework */; };
@@ -22,7 +23,6 @@
 		5E8081901858E446004D9343 /* lg-success-flat.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E80818E1858E446004D9343 /* lg-success-flat.png */; };
 		5E80819F18596782004D9343 /* MCNodeInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E80819E18596782004D9343 /* MCNodeInputViewController.m */; };
 		5E8081B4185D7781004D9343 /* MCDrawLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E8081B3185D7781004D9343 /* MCDrawLine.m */; };
-		5E81E885184C6E5300B4EBD7 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E81E884184C6E5300B4EBD7 /* Parse.framework */; };
 		6514E2AC1840CA3D00468A8A /* MCJoinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6514E2AB1840CA3D00468A8A /* MCJoinViewController.m */; };
 		6514E2AF1840CA5500468A8A /* MCCreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6514E2AE1840CA5500468A8A /* MCCreateViewController.m */; };
 		6514E2B51840D79100468A8A /* MCRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6514E2B41840D79100468A8A /* MCRootViewController.m */; };
@@ -400,13 +400,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				442D0578185D8BF90065D60B /* Parse.framework in Frameworks */,
 				5E1224A71846EC53009072EA /* SystemConfiguration.framework in Frameworks */,
 				5E1224A51846EC4B009072EA /* StoreKit.framework in Frameworks */,
 				5E1224A31846EC44009072EA /* Security.framework in Frameworks */,
 				5E1224A11846EC3C009072EA /* QuartzCore.framework in Frameworks */,
 				5E12249F1846EC34009072EA /* MobileCoreServices.framework in Frameworks */,
 				5E12249D1846EC2C009072EA /* libz.1.1.3.dylib in Frameworks */,
-				5E81E885184C6E5300B4EBD7 /* Parse.framework in Frameworks */,
 				5E12249B1846EC23009072EA /* CoreLocation.framework in Frameworks */,
 				658B34D7183AF007009C09EB /* CoreGraphics.framework in Frameworks */,
 				5E1224991846EC0F009072EA /* CFNetwork.framework in Frameworks */,
@@ -1595,6 +1595,7 @@
 					/Users/tommy/Documents/FacebookSDK,
 					"/Users/George/Desktop/手機應用程式設計/NTU-iOS-2013-MissionControl",
 					/Users/tommy/Desktop,
+					"/Users/paiyuxuan/Desktop/NTU-iOS-2013-MissionControl",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MissionControl/MissionControl-Prefix.pch";
@@ -1614,6 +1615,7 @@
 					/Users/tommy/Documents/FacebookSDK,
 					"/Users/George/Desktop/手機應用程式設計/NTU-iOS-2013-MissionControl",
 					/Users/tommy/Desktop,
+					"/Users/paiyuxuan/Desktop/NTU-iOS-2013-MissionControl",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MissionControl/MissionControl-Prefix.pch";
