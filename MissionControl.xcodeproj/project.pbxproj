@@ -21,6 +21,7 @@
 		5E80818F1858E446004D9343 /* lg-failed-flat.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E80818D1858E446004D9343 /* lg-failed-flat.png */; };
 		5E8081901858E446004D9343 /* lg-success-flat.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E80818E1858E446004D9343 /* lg-success-flat.png */; };
 		5E80819F18596782004D9343 /* MCNodeInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E80819E18596782004D9343 /* MCNodeInputViewController.m */; };
+		5E8081B4185D7781004D9343 /* MCDrawLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E8081B3185D7781004D9343 /* MCDrawLine.m */; };
 		5E81E885184C6E5300B4EBD7 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E81E884184C6E5300B4EBD7 /* Parse.framework */; };
 		6514E2AC1840CA3D00468A8A /* MCJoinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6514E2AB1840CA3D00468A8A /* MCJoinViewController.m */; };
 		6514E2AF1840CA5500468A8A /* MCCreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6514E2AE1840CA5500468A8A /* MCCreateViewController.m */; };
@@ -137,6 +138,8 @@
 		5E80818E1858E446004D9343 /* lg-success-flat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lg-success-flat.png"; sourceTree = "<group>"; };
 		5E80819D18596782004D9343 /* MCNodeInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCNodeInputViewController.h; sourceTree = "<group>"; };
 		5E80819E18596782004D9343 /* MCNodeInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCNodeInputViewController.m; sourceTree = "<group>"; };
+		5E8081B2185D7781004D9343 /* MCDrawLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCDrawLine.h; sourceTree = "<group>"; };
+		5E8081B3185D7781004D9343 /* MCDrawLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCDrawLine.m; sourceTree = "<group>"; };
 		5E81E884184C6E5300B4EBD7 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		6514E2AA1840CA3D00468A8A /* MCJoinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCJoinViewController.h; sourceTree = "<group>"; };
 		6514E2AB1840CA3D00468A8A /* MCJoinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCJoinViewController.m; sourceTree = "<group>"; };
@@ -977,6 +980,8 @@
 			children = (
 				5E80818A1858E38E004D9343 /* MCWorkNode.h */,
 				5E80818B1858E38E004D9343 /* MCWorkNode.m */,
+				5E8081B2185D7781004D9343 /* MCDrawLine.h */,
+				5E8081B3185D7781004D9343 /* MCDrawLine.m */,
 				5E8081871858E33E004D9343 /* MCProjectContentViewController.h */,
 				5E8081881858E33F004D9343 /* MCProjectContentViewController.m */,
 				65C024E818484DFF000CC42B /* MCTimestampCell.h */,
@@ -1232,6 +1237,7 @@
 				6514E2B51840D79100468A8A /* MCRootViewController.m in Sources */,
 				6514E2BD1840E78800468A8A /* MCProjects.m in Sources */,
 				6514E2AC1840CA3D00468A8A /* MCJoinViewController.m in Sources */,
+				5E8081B4185D7781004D9343 /* MCDrawLine.m in Sources */,
 				6514E2AF1840CA5500468A8A /* MCCreateViewController.m in Sources */,
 				5E8081891858E33F004D9343 /* MCProjectContentViewController.m in Sources */,
 				5E80818C1858E38E004D9343 /* MCWorkNode.m in Sources */,

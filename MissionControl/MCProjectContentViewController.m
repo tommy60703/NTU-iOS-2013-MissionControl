@@ -119,6 +119,9 @@
 }
 
 - (void)pullFromServerProject{
+    self.drawLine = [[MCDrawLine alloc] initWithFrame:CGRectMake(0, 0, 400, 400)];
+    [self.drawLine setBackgroundColor:[UIColor yellowColor]];
+    [self.view addSubview:self.drawLine];
     
     PFQuery *query = [PFQuery queryWithClassName:[self.project[@"projectName"] stringByAppendingString:[self.project[@"projectPasscode"] stringValue]]];
     [query orderByAscending:@"seq"];
@@ -133,6 +136,7 @@
         if(theSeq > maxSeq){
             maxSeq = theSeq;
         }
+        
         NSString *task = node[@"task"];
         NSString *worker = node[@"worker"];
         NSString *previous = node[@"previous"];

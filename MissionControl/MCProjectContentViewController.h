@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
+#import "MCDrawLine.h"
 @protocol MCAddNodeDelegate <NSObject>
 
 @optional
@@ -23,7 +24,7 @@
 - (IBAction)addWorkNode:(id)sender;
 - (void) pushToServerTask:(NSString *)task Worker:(NSString *)worker Prev:(NSString *)previous Tag:(int)tag Status:(bool)status Location:(CGPoint) point;
 - (void) pullFromServerProject;
-
+@property (strong, nonatomic) MCDrawLine *drawLine;
 @property NSDictionary *project;
 @property NSArray *WorkNodes;
 @end
