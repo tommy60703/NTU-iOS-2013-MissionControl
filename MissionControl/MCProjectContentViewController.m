@@ -28,7 +28,8 @@
     if ([self.project[@"user"] isEqualToString:self.project[@"owner"]]) {
         self.editSwitcher.hidden = NO;
     }
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moveWorkNodes) name:@"moveWorkNodes" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishWorkNodes) name:@"finishWorkNodes" object:nil];
     [self pullFromServerProject];
     
     CGSize size = self.view.frame.size;
@@ -41,8 +42,7 @@
         self->seq++;
     }
     [self drawAllLines];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moveWorkNodes) name:@"moveWorkNodes" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishWorkNodes) name:@"finishWorkNodes" object:nil];
+    
 
 }
 
@@ -192,11 +192,12 @@
     [self drawAllLines];
 }
 - (void)finishWorkNodes{
+   //NSLog(@"%d", userInfo[@"tag"]);
     for (UIView *subview in self.myScrollView.subviews) {
         if([subview isKindOfClass:[MCWorkNode class]]){
             MCWorkNode *finder = (MCWorkNode *)subview;
             [subview removeFromSuperview];
-            NSLog(@"%d",finder.status);
+            //NSLog(@"%d",finder.status);
             MCWorkNode *theNode  = [[MCWorkNode alloc] initWithPoint:finder.frame.origin Seq:finder.tag Task:finder.task Worker:finder.worker Prev:finder.previousNodes Status:finder.status];
             
             [self.myScrollView addSubview:theNode];
