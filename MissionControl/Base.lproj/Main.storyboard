@@ -72,13 +72,16 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6em-Xh-KJm">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tos-c3-CcN">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </scrollView>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="erp-ry-yOO">
+                            <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="lx0-Hq-6wG">
                                 <rect key="frame" x="251" y="453" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="switcherToggled:" destination="1JJ-IX-JEX" eventType="valueChanged" id="h2g-MD-cAR"/>
+                                </connections>
                             </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -95,14 +98,24 @@
                                 <segue destination="30F-Jb-oAt" kind="modal" identifier="addNode" id="szR-Fs-6gV"/>
                             </connections>
                         </button>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="7xI-Wc-uf0">
-                            <connections>
-                                <action selector="saveWorkFlow:" destination="1JJ-IX-JEX" id="fgm-v3-xWB"/>
-                            </connections>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="XYe-R1-Bh7">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="5g6-D3-4bY">
+                                <rect key="frame" x="233" y="5" width="71" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="Save">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="saveWorkFlow:" destination="1JJ-IX-JEX" eventType="touchUpInside" id="BpQ-Sd-nSf"/>
+                                </connections>
+                            </button>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="myScrollView" destination="6em-Xh-KJm" id="wAx-Iu-YMl"/>
+                        <outlet property="addNodeButton" destination="CsH-Gt-RlC" id="W3v-tR-ZAW"/>
+                        <outlet property="myScrollView" destination="Tos-c3-CcN" id="TqW-8y-7Ta"/>
+                        <outlet property="saveButton" destination="5g6-D3-4bY" id="2uy-1f-bHR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gfo-vA-zRJ" userLabel="First Responder" sceneMemberID="firstResponder"/>

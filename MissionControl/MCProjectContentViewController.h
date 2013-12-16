@@ -25,16 +25,23 @@
 #pragma mark - IBOutlet
 
 @property (strong, nonatomic) IBOutlet UIScrollView *myScrollView;
+@property (strong, nonatomic) IBOutlet UISwitch *editSwitcher;
+@property (strong, nonatomic) IBOutlet UIButton *addNodeButton;
+@property (strong, nonatomic) IBOutlet UIButton *saveButton;
+
 
 #pragma mark - Properties
 
 @property (strong, nonatomic) MCDrawLine *drawLine;
 @property NSDictionary *project;
 @property NSArray *workNodes;
+@property BOOL isEditingProjectContent;
 
 #pragma mark - IBAction
 
 - (IBAction)saveWorkFlow:(id)sender;
+- (IBAction)switcherToggled:(UISwitch *)sender;
+
 
 #pragma mark - Instance Method
 

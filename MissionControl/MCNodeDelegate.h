@@ -11,4 +11,5 @@
 @protocol MCNodeDelegate <NSObject>
 - (void)disableScroll;
 - (void)enableScroll;
+- (BOOL)isEditingContent;
 @end

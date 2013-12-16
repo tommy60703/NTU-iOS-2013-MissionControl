@@ -20,6 +20,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.isEditingProjectContent = NO;
+    
+    self.addNodeButton.hidden = YES;
+    self.saveButton.hidden = YES;
+    
     [self pullFromServerProject];
     
     CGSize size = self.view.frame.size;
@@ -54,6 +59,12 @@
     }
     [self.navigationController popViewControllerAnimated:YES];
 
+}
+
+- (IBAction)switcherToggled:(UISwitch *)sender {
+    self.isEditingProjectContent = !self.isEditingProjectContent;
+    self.addNodeButton.hidden = !self.addNodeButton.hidden;
+    self.saveButton.hidden = !self.saveButton.hidden;
 }
 
 #pragma mark - Instance Method
@@ -181,6 +192,10 @@
 
 - (void)enableScroll {
     self.myScrollView.scrollEnabled = YES;
+}
+
+- (BOOL)isEditingContent {
+    return self.isEditingProjectContent;
 }
 
 @end
