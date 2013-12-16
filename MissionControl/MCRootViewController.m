@@ -54,6 +54,8 @@
     [self updateProject];
     
     [self addToMyPlist];
+    
+    [NSTimer timerWithTimeInterval:10 target:self selector:@selector(reloadData) userInfo:nil repeats:YES];
 }
 
 /* Code to write into file */
