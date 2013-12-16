@@ -17,6 +17,7 @@
 @property (strong) UILabel *yLabel;
 @property (strong) NSString *task;
 @property (strong) NSString *worker;
+@property  bool status;
 @property (strong) NSMutableArray *previousNodes;
 @property (strong) id<MCNodeDelegate> delegate;
 

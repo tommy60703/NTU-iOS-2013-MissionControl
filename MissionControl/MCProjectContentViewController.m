@@ -42,6 +42,8 @@
     }
     [self drawAllLines];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moveWorkNodes) name:@"moveWorkNodes" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishWorkNodes) name:@"finishWorkNodes" object:nil];
+
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -58,11 +60,11 @@
     for (UIView *subview in self.myScrollView.subviews) {
         if([subview isKindOfClass:[MCWorkNode class]]){
             MCWorkNode *finder = (MCWorkNode *)subview;
-            NSLog(@"%d",finder.tag);
-            [self pushToServerTask:finder.task Worker:finder.worker Prev:finder.previousNodes Tag:finder.tag Status:false Location:finder.frame.origin];
+            //NSLog(@"%d",finder.tag);
+            [self pushToServerTask:finder.task Worker:finder.worker Prev:finder.previousNodes Tag:finder.tag Status:finder.status Location:finder.frame.origin];
         }
     }
-    [self.navigationController popViewControllerAnimated:YES];
+    //[self.navigationController popViewControllerAnimated:YES];
 
 }
 
@@ -80,6 +82,7 @@
         NSLog(@"%d",[[node objectForKey:@"seq"] integerValue] == tag);
         if ([[node objectForKey:@"seq"] integerValue] == tag) {
             NSLog(@"same");
+            node[@"previous"] = previous;
             node[@"state"] = [NSNumber numberWithBool:status];
             node[@"location_x"] = [NSNumber numberWithDouble:point.x];
             node[@"location_y"] = [NSNumber numberWithDouble:point.y];
@@ -121,7 +124,7 @@
         NSString *task = node[@"task"];
         NSString *worker = node[@"worker"];
         NSMutableArray *previous = node[@"previous"];
-        bool status = node[@"state"];
+        bool status = [node[@"state"] boolValue];
         MCWorkNode *theNode = [[MCWorkNode alloc] initWithPoint:position Seq:theSeq Task:task Worker:worker Prev:previous Status:status];
         theNode.delegate = self;
         [self.myScrollView addSubview:theNode];
@@ -188,7 +191,30 @@
     }
     [self drawAllLines];
 }
+- (void)finishWorkNodes{
+    for (UIView *subview in self.myScrollView.subviews) {
+        if([subview isKindOfClass:[MCWorkNode class]]){
+            MCWorkNode *finder = (MCWorkNode *)subview;
+            [subview removeFromSuperview];
+            NSLog(@"%d",finder.status);
+            MCWorkNode *theNode  = [[MCWorkNode alloc] initWithPoint:finder.frame.origin Seq:finder.tag Task:finder.task Worker:finder.worker Prev:finder.previousNodes Status:finder.status];
+            
+            [self.myScrollView addSubview:theNode];
+        }
+    }
+    [self syncStatusWithServer];
+}
 
+-(void)syncStatusWithServer{
+    for (UIView *subview in self.myScrollView.subviews) {
+        if([subview isKindOfClass:[MCWorkNode class]]){
+            MCWorkNode *finder = (MCWorkNode *)subview;
+            //NSLog(@"%d",finder.tag);
+            
+            [self pushToServerTask:finder.task Worker:finder.worker Prev:finder.previousNodes Tag:finder.tag Status:finder.status Location:finder.frame.origin];
+        }
+    }
+}
 #pragma mark - MCNodeDelegate
 
 - (void)disableScroll {

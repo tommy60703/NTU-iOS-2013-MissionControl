@@ -51,6 +51,7 @@
         self.task = task;
         self.worker = worker;
         self.previousNodes = previous;
+        self.status = status;
         [self setClipsToBounds:NO];
     }
     return self;
@@ -83,11 +84,14 @@
     if ([self.delegate isEditingContent]) {
         [self.delegate enableScroll];
     }
+    else{
+        self.status = (!self.status);
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"finishWorkNodes" object:self userInfo:nil];
+    }
 }
 
 - (void)makingFather {
     if ([self.delegate isEditingContent]) {
-        NSLog(@"loooooooooong press");
         if (!self.isMakingFather) {
             self.isMakingFather = YES;
             UIAlertView *newFatherAlert = [[UIAlertView alloc] initWithTitle:@"father" message:@"輸入新父點" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"確定", nil];
@@ -102,6 +106,7 @@
     if (buttonIndex == 1) {
         NSLog(@"%@", [alertView textFieldAtIndex:0].text);
         [self.previousNodes addObject:[alertView textFieldAtIndex:0].text];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"moveWorkNodes" object:nil userInfo:nil];
     }
 }
 
