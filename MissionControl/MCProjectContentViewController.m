@@ -25,6 +25,10 @@
     self.addNodeButton.hidden = YES;
     self.saveButton.hidden = YES;
     
+    if ([self.project[@"user"] isEqualToString:self.project[@"owner"]]) {
+        self.editSwitcher.hidden = NO;
+    }
+    
     [self pullFromServerProject];
     
     CGSize size = self.view.frame.size;
