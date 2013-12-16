@@ -28,8 +28,7 @@
     if ([self.project[@"user"] isEqualToString:self.project[@"owner"]]) {
         self.editSwitcher.hidden = NO;
     }
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moveWorkNodes) name:@"moveWorkNodes" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishWorkNodes:) name:@"finishWorkNodes" object:nil];
+    
     [self pullFromServerProject];
     
     CGSize size = self.view.frame.size;
@@ -42,8 +41,7 @@
         self->seq++;
     }
     [self drawAllLines];
-    
-
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moveWorkNodes) name:@"moveWorkNodes" object:nil];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -60,11 +58,11 @@
     for (UIView *subview in self.myScrollView.subviews) {
         if([subview isKindOfClass:[MCWorkNode class]]){
             MCWorkNode *finder = (MCWorkNode *)subview;
-            //NSLog(@"%d",finder.tag);
-            [self pushToServerTask:finder.task Worker:finder.worker Prev:finder.previousNodes Tag:finder.tag Status:finder.status Location:finder.frame.origin];
+            NSLog(@"%d",finder.tag);
+            [self pushToServerTask:finder.task Worker:finder.worker Prev:finder.previousNodes Tag:finder.tag Status:false Location:finder.frame.origin];
         }
     }
-    //[self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 
 }
 
@@ -79,10 +77,9 @@
 - (void)pushToServerTask:(NSString *)task Worker:(NSString *)worker Prev:(NSMutableArray *)previous Tag:(int)tag Status:(bool)status Location:(CGPoint)point {
     bool flag = true;
     for (PFObject *node in self.workNodes) {
-        //NSLog(@"%d",[[node objectForKey:@"seq"] integerValue] == tag);
+        NSLog(@"%d",[[node objectForKey:@"seq"] integerValue] == tag);
         if ([[node objectForKey:@"seq"] integerValue] == tag) {
-            //NSLog(@"same");
-            node[@"previous"] = previous;
+            NSLog(@"same");
             node[@"state"] = [NSNumber numberWithBool:status];
             node[@"location_x"] = [NSNumber numberWithDouble:point.x];
             node[@"location_y"] = [NSNumber numberWithDouble:point.y];
@@ -101,7 +98,7 @@
         projectContent[@"location_x"] = [NSNumber numberWithDouble:point.x];
         projectContent[@"location_y"] = [NSNumber numberWithDouble:point.y];
         [projectContent saveInBackground];
-        //NSLog(@"here");
+        NSLog(@"here");
     }
 }
 
@@ -124,13 +121,13 @@
         NSString *task = node[@"task"];
         NSString *worker = node[@"worker"];
         NSMutableArray *previous = node[@"previous"];
-        bool status = [node[@"state"] boolValue];
+        bool status = node[@"state"];
         MCWorkNode *theNode = [[MCWorkNode alloc] initWithPoint:position Seq:theSeq Task:task Worker:worker Prev:previous Status:status];
         theNode.delegate = self;
         [self.myScrollView addSubview:theNode];
     }
     self -> seq = maxSeq;
-    //NSLog(@"%d", self -> seq);
+    NSLog(@"%d", self -> seq);
 }
 
 #pragma mark - Private Method
@@ -191,34 +188,7 @@
     }
     [self drawAllLines];
 }
-- (void)finishWorkNodes:(NSNotification *) notification{
-    NSDictionary *dict = [notification userInfo];
-   //NSLog(@"%d", [[dict valueForKey:@"tag"] integerValue]);
-    for (UIView *subview in self.myScrollView.subviews) {
-        if([subview isKindOfClass:[MCWorkNode class]]){
-            MCWorkNode *finder = (MCWorkNode *)subview;
-            if (finder.tag == [[dict valueForKey:@"tag"] integerValue]) {
-                [subview removeFromSuperview];
-                MCWorkNode *theNode  = [[MCWorkNode alloc] initWithPoint:finder.frame.origin Seq:finder.tag Task:finder.task Worker:finder.worker Prev:finder.previousNodes Status:finder.status];
-                [self.myScrollView addSubview:theNode];
-            }
-            
-        }
-    }
-    [self syncStatusWithServer:[[dict valueForKey:@"tag"] integerValue]];
-}
 
--(void)syncStatusWithServer:(int) tag{
-    for (UIView *subview in self.myScrollView.subviews) {
-        if([subview isKindOfClass:[MCWorkNode class]]){
-            MCWorkNode *finder = (MCWorkNode *)subview;
-            //NSLog(@"%d",finder.tag);
-            if (finder.tag == tag) {
-            [self pushToServerTask:finder.task Worker:finder.worker Prev:finder.previousNodes Tag:finder.tag Status:finder.status Location:finder.frame.origin];
-            }
-        }
-    }
-}
 #pragma mark - MCNodeDelegate
 
 - (void)disableScroll {
