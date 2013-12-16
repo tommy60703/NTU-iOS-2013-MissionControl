@@ -38,31 +38,31 @@
         NSLog(@"Funny. Haha...");
     } else {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        NSLog(@"Join %@", self.textField.text);
-        PFQuery *query = [PFQuery queryWithClassName:@"project"];
-        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-        [f setNumberStyle:NSNumberFormatterDecimalStyle];
-        [query whereKey:@"projectPasscode" equalTo:[f numberFromString:self.textField.text]];
-        
-        PFObject *aProject = [query getFirstObject];
-        NSLog(@"%@",self.passwordField.text);
-        NSLog(@"%@",[aProject objectForKey:@"projectName"]);
-        NSLog(@"%@",[aProject objectForKey:@"projectPassword"]);
-        
-        
-        if (![self.passwordField.text isEqualToString:[aProject objectForKey:@"projectPassword"]]) {
-            NSLog(@"wrong password!");
-        }
-        else{
-            NSString *udid = [UIDevice currentDevice].identifierForVendor.UUIDString;
-            PFObject *projectParticipate = [PFObject objectWithClassName:@"projectParticipate"];
-            projectParticipate[@"user"] = udid;
-            projectParticipate[@"projectName"] = [aProject objectForKey:@"projectName"];
-            projectParticipate[@"projectPasscode"] = [aProject objectForKey:@"projectPasscode"];
-            [projectParticipate saveInBackground];
-            NSLog(@"successed!");
-        }
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"DoUpdateProject" object:nil userInfo:nil];
+            NSLog(@"Join %@", self.textField.text);
+            PFQuery *query = [PFQuery queryWithClassName:@"project"];
+            NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+            [f setNumberStyle:NSNumberFormatterDecimalStyle];
+            [query whereKey:@"projectPasscode" equalTo:[f numberFromString:self.textField.text]];
+            
+            PFObject *aProject = [query getFirstObject];
+            NSLog(@"%@",self.passwordField.text);
+            NSLog(@"%@",[aProject objectForKey:@"projectName"]);
+            NSLog(@"%@",[aProject objectForKey:@"projectPassword"]);
+            
+            
+            if (![self.passwordField.text isEqualToString:[aProject objectForKey:@"projectPassword"]]) {
+                NSLog(@"wrong password!");
+            }
+            else{
+                NSString *udid = [UIDevice currentDevice].identifierForVendor.UUIDString;
+                PFObject *projectParticipate = [PFObject objectWithClassName:@"projectParticipate"];
+                projectParticipate[@"user"] = udid;
+                projectParticipate[@"projectName"] = [aProject objectForKey:@"projectName"];
+                projectParticipate[@"projectPasscode"] = [aProject objectForKey:@"projectPasscode"];
+                [projectParticipate saveInBackground];
+                NSLog(@"successed!");
+            }
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"DoUpdateProject" object:nil userInfo:nil];
         });
         [self dismissViewControllerAnimated:YES completion:nil];
     }
