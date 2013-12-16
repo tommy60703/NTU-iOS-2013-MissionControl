@@ -34,7 +34,8 @@
     CGSize size = self.view.frame.size;
     self.myScrollView.contentSize = CGSizeMake(size.width, size.height*2);
     
-    if (self->seq == 0) {
+    if (self->seq == -1) {
+        self->seq = 0;
         [self addNodeTask:@"init" Worker:@"me" Previous:[NSMutableArray new]];
     } else {
         self->seq++;
@@ -102,7 +103,7 @@
 }
 
 - (void)pullFromServerProject {
-    int maxSeq = 0;
+    int maxSeq = -1;
     PFQuery *query = [PFQuery queryWithClassName:[self.project[@"projectName"] stringByAppendingString:[self.project[@"projectPasscode"] stringValue]]];
     [query orderByAscending:@"seq"];
 

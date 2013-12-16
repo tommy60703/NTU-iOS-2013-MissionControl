@@ -21,6 +21,7 @@
         
         // Load undo circle image
         // set the view size of MCWorkNode as same as undo circle image
+        
         UIImageView *dotImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"undo.png"]];
         CGSize imageSize = dotImageView.frame.size;
         self.frame = CGRectMake(point.x, point.y, imageSize.width, imageSize.height);
@@ -59,6 +60,7 @@
         CGPoint point = [[touches anyObject] locationInView:self];
         location = point;
     }
+    
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
