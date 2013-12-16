@@ -14,7 +14,7 @@
 @protocol MCAddNodeDelegate <NSObject>
 
 @optional
-- (void)addNodeTask:(NSString *)task Worker:(NSString*)worker Previous:(NSString*)previous;
+- (void)addNodeTask:(NSString *)task Worker:(NSString*)worker Previous:(NSMutableArray*)previous;
 
 @end
 
@@ -38,7 +38,7 @@
 
 #pragma mark - Instance Method
 
-- (void) pushToServerTask:(NSString *)task Worker:(NSString *)worker Prev:(NSString *)previous Tag:(int)tag Status:(bool)status Location:(CGPoint) point;
+- (void) pushToServerTask:(NSString *)task Worker:(NSString *)worker Prev:(NSMutableArray *)previous Tag:(int)tag Status:(bool)status Location:(CGPoint) point;
 - (void) pullFromServerProject;
 
 @end

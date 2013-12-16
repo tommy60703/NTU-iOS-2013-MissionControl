@@ -18,13 +18,12 @@
 @property (strong) NSString *task;
 @property (strong) NSString *worker;
 @property (strong) NSMutableArray *previousNodes;
-@property (strong) NSString *previous;
 @property (strong) id<MCNodeDelegate> delegate;
 
 
 @property BOOL isMakingFather;
 @property BOOL editing;
 
-- (MCWorkNode *)initWithPoint:(CGPoint)point Seq:(int)seq Task:(NSString*)task Worker:(NSString*)worker Prev:(NSString*)previous;
+- (MCWorkNode *)initWithPoint:(CGPoint)point Seq:(int)seq Task:(NSString*)task Worker:(NSString*)worker Prev:(NSMutableArray*)previous;
 
 @end

@@ -20,7 +20,9 @@
 }
 
 - (IBAction)doneButtonClick:(id)sender {
-    [self.delegate addNodeTask:self.taskInput.text Worker:self.workerInput.text Previous:self.previousInput.text];
+    NSMutableArray *foo = [NSMutableArray new];
+    [foo addObject:self.previousInput.text];
+    [self.delegate addNodeTask:self.taskInput.text Worker:self.workerInput.text Previous:foo];
     [self dismissViewControllerAnimated:YES completion:nil];
     
 }

@@ -19,11 +19,15 @@
     CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
     for (PFObject *point1 in self.points) {
         for (PFObject *point2 in self.points) {
-            if ([[point1 objectForKey:@"previous"] isEqualToString:[point2 objectForKey:@"task"]]) {
-                CGContextMoveToPoint(context, [[point1 objectForKey:@"location_x"] floatValue]+30, [[point1 objectForKey:@"location_y"] floatValue]+30);
-                CGContextAddLineToPoint(context, [[point2 objectForKey:@"location_x"] floatValue]+30, [[point2 objectForKey:@"location_y"] floatValue]+30);
-                CGContextStrokePath(context);
+            NSMutableArray *previousNodes = [point1 objectForKey:@"previous"];
+            for (NSString *previous in previousNodes) {
+                if ([previous isEqualToString:[point2 objectForKey:@"task"]]) {
+                    CGContextMoveToPoint(context, [[point1 objectForKey:@"location_x"] floatValue]+30, [[point1 objectForKey:@"location_y"] floatValue]+30);
+                    CGContextAddLineToPoint(context, [[point2 objectForKey:@"location_x"] floatValue]+30, [[point2 objectForKey:@"location_y"] floatValue]+30);
+                    CGContextStrokePath(context);
+                }
             }
+            
         }
     }
    

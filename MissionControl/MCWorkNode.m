@@ -12,7 +12,7 @@
 
 @synthesize xLabel, yLabel;
 
-- (MCWorkNode *)initWithPoint:(CGPoint)point Seq:(int)seq Task:(NSString *)task Worker:(NSString *)worker Prev:(NSString *)previous {
+- (MCWorkNode *)initWithPoint:(CGPoint)point Seq:(int)seq Task:(NSString *)task Worker:(NSString *)worker Prev:(NSMutableArray *)previous {
     self = [super init];
     if (self) {
         UILongPressGestureRecognizer *longPressGestureRecognizer =
@@ -44,7 +44,7 @@
         self.tag = seq;
         self.task = task;
         self.worker = worker;
-        self.previous = previous;
+        self.previousNodes = previous;
         [self setClipsToBounds:NO];
     }
     return self;

@@ -26,7 +26,7 @@
     self.myScrollView.contentSize = CGSizeMake(size.width, size.height*2);
     
     if (self->seq == 0) {
-        [self addNodeTask:@"init" Worker:@"me" Previous:@"none"];
+        [self addNodeTask:@"init" Worker:@"me" Previous:[NSMutableArray new]];
     } else {
         self->seq++;
     }
@@ -49,7 +49,7 @@
         if([subview isKindOfClass:[MCWorkNode class]]){
             MCWorkNode *finder = (MCWorkNode *)subview;
             NSLog(@"%d",finder.tag);
-            [self pushToServerTask:finder.task Worker:finder.worker Prev:finder.previous Tag:finder.tag Status:false Location:finder.frame.origin];
+            [self pushToServerTask:finder.task Worker:finder.worker Prev:finder.previousNodes Tag:finder.tag Status:false Location:finder.frame.origin];
         }
     }
     [self.navigationController popViewControllerAnimated:YES];
@@ -58,7 +58,7 @@
 
 #pragma mark - Instance Method
 
-- (void)pushToServerTask:(NSString *)task Worker:(NSString *)worker Prev:(NSString *)previous Tag:(int)tag Status:(bool)status Location:(CGPoint)point {
+- (void)pushToServerTask:(NSString *)task Worker:(NSString *)worker Prev:(NSMutableArray *)previous Tag:(int)tag Status:(bool)status Location:(CGPoint)point {
     bool flag = true;
     for (PFObject *node in self.workNodes) {
         NSLog(@"%d",[[node objectForKey:@"seq"] integerValue] == tag);
@@ -104,7 +104,7 @@
         
         NSString *task = node[@"task"];
         NSString *worker = node[@"worker"];
-        NSString *previous = node[@"previous"];
+        NSMutableArray *previous = node[@"previous"];
         
         MCWorkNode *theNode = [[MCWorkNode alloc] initWithPoint:position Seq:theSeq Task:task Worker:worker Prev:previous];
         theNode.delegate = self;
@@ -116,7 +116,7 @@
 
 #pragma mark - Private Method
 
-- (void)addNodeTask:(NSString *)task Worker:(NSString*)worker Previous:(NSString*)previous {
+- (void)addNodeTask:(NSString *)task Worker:(NSString*)worker Previous:(NSMutableArray*)previous {
     MCWorkNode *theNode = [[MCWorkNode alloc] initWithPoint:self.view.center Seq:seq Task:task Worker:worker Prev:previous];
     theNode.delegate = self;
     
