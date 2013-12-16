@@ -10,6 +10,7 @@
 #import <Parse/Parse.h>
 #import "MCDrawLine.h"
 #import "MCNodeDelegate.h"
+
 @protocol MCAddNodeDelegate <NSObject>
 
 @optional
@@ -17,16 +18,27 @@
 
 @end
 
-
-@interface MCProjectContentViewController : UIViewController <MCAddNodeDelegate, MCNodeDelegate>{
+@interface MCProjectContentViewController : UIViewController <MCAddNodeDelegate, MCNodeDelegate> {
     int seq;
 }
+
+#pragma mark - IBOutlet
+
 @property (strong, nonatomic) IBOutlet UIScrollView *myScrollView;
+
+#pragma mark - Properties
+
+@property (strong, nonatomic) MCDrawLine *drawLine;
+@property NSDictionary *project;
+@property NSArray *workNodes;
+
+#pragma mark - IBAction
+
 - (IBAction)saveWorkFlow:(id)sender;
+
+#pragma mark - Instance Method
 
 - (void) pushToServerTask:(NSString *)task Worker:(NSString *)worker Prev:(NSString *)previous Tag:(int)tag Status:(bool)status Location:(CGPoint) point;
 - (void) pullFromServerProject;
-@property (strong, nonatomic) MCDrawLine *drawLine;
-@property NSDictionary *project;
-@property NSArray *WorkNodes;
+
 @end

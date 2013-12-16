@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		44BF9B1D185DC71800C49253 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E81E884184C6E5300B4EBD7 /* Parse.framework */; };
 		5E067055185DEFEE00FC8445 /* done@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E067053185DEFEE00FC8445 /* done@2x.png */; };
 		5E067056185DEFEE00FC8445 /* undo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E067054185DEFEE00FC8445 /* undo@2x.png */; };
 		5E1224971846EC01009072EA /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E1224961846EC01009072EA /* AudioToolbox.framework */; };
@@ -23,6 +22,7 @@
 		5E80818C1858E38E004D9343 /* MCWorkNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E80818B1858E38E004D9343 /* MCWorkNode.m */; };
 		5E80819F18596782004D9343 /* MCNodeInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E80819E18596782004D9343 /* MCNodeInputViewController.m */; };
 		5E8081B4185D7781004D9343 /* MCDrawLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E8081B3185D7781004D9343 /* MCDrawLine.m */; };
+		6511251E185ED43500CDB01D /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E81E884184C6E5300B4EBD7 /* Parse.framework */; };
 		6514E2AC1840CA3D00468A8A /* MCJoinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6514E2AB1840CA3D00468A8A /* MCJoinViewController.m */; };
 		6514E2AF1840CA5500468A8A /* MCCreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6514E2AE1840CA5500468A8A /* MCCreateViewController.m */; };
 		6514E2B51840D79100468A8A /* MCRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6514E2B41840D79100468A8A /* MCRootViewController.m */; };
@@ -395,7 +395,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				44BF9B1D185DC71800C49253 /* Parse.framework in Frameworks */,
+				6511251E185ED43500CDB01D /* Parse.framework in Frameworks */,
 				5E1224A71846EC53009072EA /* SystemConfiguration.framework in Frameworks */,
 				5E1224A51846EC4B009072EA /* StoreKit.framework in Frameworks */,
 				5E1224A31846EC44009072EA /* Security.framework in Frameworks */,
@@ -1579,6 +1579,7 @@
 					/Users/tommy/Desktop,
 					"/Users/paiyuxuan/Desktop/NTU-iOS-2013-MissionControl",
 					/Users/paiyuxuan/Desktop/connectWithParseDB,
+					"/Users/tommy/git/NTU-iOS-2013-MissionControl",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MissionControl/MissionControl-Prefix.pch";
@@ -1600,6 +1601,7 @@
 					/Users/tommy/Desktop,
 					"/Users/paiyuxuan/Desktop/NTU-iOS-2013-MissionControl",
 					/Users/paiyuxuan/Desktop/connectWithParseDB,
+					"/Users/tommy/git/NTU-iOS-2013-MissionControl",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MissionControl/MissionControl-Prefix.pch";

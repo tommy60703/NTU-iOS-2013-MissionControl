@@ -9,6 +9,7 @@
 #import "MCJoinViewController.h"
 #import "MCProjects.h"
 #import <Parse/Parse.h>
+
 @interface MCJoinViewController () {
     MCProjects *projects;
 }

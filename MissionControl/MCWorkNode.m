@@ -9,54 +9,39 @@
 #import "MCWorkNode.h"
 
 @implementation MCWorkNode
+
 @synthesize xLabel, yLabel;
--(MCWorkNode *)initWithPoint:(CGPoint)point Seq:(int)seq Task:(NSString *)task Worker:(NSString *)worker Prev:(NSString *)previous Delegate:(id<MCNodeDelegate>)delegate{
+
+- (MCWorkNode *)initWithPoint:(CGPoint)point Seq:(int)seq Task:(NSString *)task Worker:(NSString *)worker Prev:(NSString *)previous {
     self = [super init];
-    
     if (self) {
-        UIImageView *dotImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"undo.png"]];
+        // Load undo circle image
+        // set the view size of MCWorkNode as same as undo circle image
+        UIImageView *dotImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"undo.png"]];
         CGSize imageSize = dotImageView.frame.size;
-        self.tag= seq;
-        //將畫面大小設成與圖片大小相同
-        //dotImageView.frame = CGRectMake(0, 0, 10, 10);
-        //NSLog(@"%d",dotImageView.tag);
-        [self setFrame:CGRectMake(point.x, point.y, imageSize.width, imageSize.height)];
+        self.frame = CGRectMake(point.x, point.y, imageSize.width, imageSize.height);
         [self addSubview:dotImageView];
         
-        //設定UILabel
-        xLabel = [[UILabel alloc]initWithFrame:CGRectMake(imageSize.width +1, 0.0, 20.0, 15.0)];
-        yLabel = [[UILabel alloc]initWithFrame:CGRectMake(imageSize.width +1, 16.0, 20.0, 15.0)];
+        // set node's label
+        xLabel = [[UILabel alloc] initWithFrame:CGRectMake(imageSize.width + 1, 0.0, 20.0, 15.0)];
+        yLabel = [[UILabel alloc] initWithFrame:CGRectMake(imageSize.width + 1, 16.0, 20.0, 15.0)];
         
         UIFont *font = [UIFont fontWithName:@"Arial" size:10.0];
-        [xLabel setFont:font];
-        [yLabel setFont:font];
-        
-//        xLabel.text = [NSString stringWithFormat:@"%.f", point.x];
-//        yLabel.text = [NSString stringWithFormat:@"%.f", point.y];
+        xLabel.font = font;
+        yLabel.font = font;
         xLabel.text = task;
         yLabel.text = worker;
-        self.task = task;
-        self.worker = worker;
-        self.previous = previous;
         [xLabel setBackgroundColor:[UIColor clearColor]];
         [yLabel setBackgroundColor:[UIColor clearColor]];
-        
         [self addSubview:xLabel];
         [self addSubview:yLabel];
         
-        //不切除超過邊界的畫面
+        // node's basic property settings
+        self.tag = seq;
+        self.task = task;
+        self.worker = worker;
+        self.previous = previous;
         [self setClipsToBounds:NO];
-        self.delegate = delegate;
-    }
-    
-    return self;
-}
-
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
     }
     return self;
 }
@@ -64,37 +49,23 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.delegate disableScroll];
     
-    
-    //將被觸碰到鍵移動到所有畫面的最上層
+    // 將被觸碰到鍵移動到所有畫面的最上層
     [[self superview] bringSubviewToFront:self];
-    
     CGPoint point = [[touches anyObject] locationInView:self];
     location = point;
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     CGPoint point = [[touches anyObject] locationInView:self];
-    
     CGRect frame = self.frame;
-    
     frame.origin.x += point.x - location.x;
     frame.origin.y += point.y - location.y;
-    [self setFrame:frame];
-     [[NSNotificationCenter defaultCenter] postNotificationName:@"moveWorkNodes" object:nil userInfo:nil];
+    self.frame = frame;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"moveWorkNodes" object:nil userInfo:nil];
     
-//    xLabel.text = [NSString stringWithFormat:@"%.f", frame.origin.x];
-//    yLabel.text = [NSString stringWithFormat:@"%.f", frame.origin.y];
 }
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.delegate enableScroll];
 }
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end

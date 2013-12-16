@@ -10,7 +10,6 @@
 
 @interface MCDrawLine : UIView
 
-
 @property CGPoint beginPoint;
 @property CGPoint endPoint;
 @property NSArray *points;

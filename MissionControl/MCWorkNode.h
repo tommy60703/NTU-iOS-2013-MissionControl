@@ -8,17 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "MCNodeDelegate.h"
-@interface MCWorkNode : UIView{
+
+@interface MCWorkNode : UIView {
     CGPoint location;
 }
 
-@property (strong)UILabel *xLabel;
-@property (strong)UILabel *yLabel;
-@property (strong)NSString *task;
-@property (strong)NSString *worker;
-@property (strong)NSString *previous;
+@property (strong) UILabel *xLabel;
+@property (strong) UILabel *yLabel;
+@property (strong) NSString *task;
+@property (strong) NSString *worker;
+@property (strong) NSString *previous;
 @property (strong) id<MCNodeDelegate> delegate;
 
--(MCWorkNode *)initWithPoint:(CGPoint)point Seq:(int)seq Task:(NSString*)task Worker:(NSString*)worker Prev:(NSString*)previous Delegate:(id<MCNodeDelegate>)delegate;
+- (MCWorkNode *)initWithPoint:(CGPoint)point Seq:(int)seq Task:(NSString*)task Worker:(NSString*)worker Prev:(NSString*)previous;
 
 @end

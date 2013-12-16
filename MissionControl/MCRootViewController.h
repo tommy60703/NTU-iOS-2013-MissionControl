@@ -8,9 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MCRootViewController : UITableViewController{
+@interface MCRootViewController : UITableViewController {
     NSArray *allProject;
 }
-
 
 @end
