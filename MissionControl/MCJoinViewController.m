@@ -37,6 +37,7 @@
     if ([self.textField.text isEqualToString:@""]) {
         NSLog(@"Funny. Haha...");
     } else {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         NSLog(@"Join %@", self.textField.text);
         PFQuery *query = [PFQuery queryWithClassName:@"project"];
         NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
@@ -61,8 +62,8 @@
             [projectParticipate saveInBackground];
             NSLog(@"successed!");
         }
-        sleep(1);
         [[NSNotificationCenter defaultCenter] postNotificationName:@"DoUpdateProject" object:nil userInfo:nil];
+        });
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 }

@@ -42,31 +42,32 @@ int randomCode(){
 - (IBAction)doneButtonClicked:(id)sender {
     NSLog(@"Something created...");
     NSLog(@"%@", self.projectName.text);
-
-    int random = randomCode();
-    NSString *udid = [UIDevice currentDevice].identifierForVendor.UUIDString;
-    PFObject *project = [PFObject objectWithClassName:@"project"];
-    project[@"projectName"] = self.projectName.text;
-    project[@"projectPasscode"] = [NSNumber numberWithInt:random];
-//    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-//    [f setNumberStyle:NSNumberFormatterDecimalStyle];
-//    project[@"projectPassword"] = [f numberFromString:self.projectPassword.text];
-    project[@"projectPassword"] = self.projectPassword.text;
-    project[@"projectOwner"] = udid;
-    NSMutableArray *projectMember = [[NSMutableArray alloc]init];
-    [projectMember addObject:udid];
-    //NSLog(@"%d", projectMember.count);
-    [project addUniqueObjectsFromArray:projectMember forKey:@"projectMember"];
-    [project saveInBackground];
-
-    PFObject *projectParticipate = [PFObject objectWithClassName:@"projectParticipate"];
-    projectParticipate[@"user"] = udid;
-    projectParticipate[@"projectName"] = self.projectName.text;
-    projectParticipate[@"projectPasscode"] = [NSNumber numberWithInt:random];
-    [projectParticipate saveInBackground];
-    sleep(1);
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"DoUpdateProject" object:nil userInfo:nil];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        int random = randomCode();
+        NSString *udid = [UIDevice currentDevice].identifierForVendor.UUIDString;
+        PFObject *project = [PFObject objectWithClassName:@"project"];
+        project[@"projectName"] = self.projectName.text;
+        project[@"projectPasscode"] = [NSNumber numberWithInt:random];
+        //    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+        //    [f setNumberStyle:NSNumberFormatterDecimalStyle];
+        //    project[@"projectPassword"] = [f numberFromString:self.projectPassword.text];
+        project[@"projectPassword"] = self.projectPassword.text;
+        project[@"projectOwner"] = udid;
+        NSMutableArray *projectMember = [[NSMutableArray alloc]init];
+        [projectMember addObject:udid];
+        //NSLog(@"%d", projectMember.count);
+        [project addUniqueObjectsFromArray:projectMember forKey:@"projectMember"];
+        [project saveInBackground];
+        
+        PFObject *projectParticipate = [PFObject objectWithClassName:@"projectParticipate"];
+        projectParticipate[@"user"] = udid;
+        projectParticipate[@"projectName"] = self.projectName.text;
+        projectParticipate[@"projectPasscode"] = [NSNumber numberWithInt:random];
+        [projectParticipate saveInBackground];
+        //sleep(1);
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"DoUpdateProject" object:nil userInfo:nil];
+        });
+        [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 
