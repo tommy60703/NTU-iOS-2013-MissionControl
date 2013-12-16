@@ -198,9 +198,7 @@
         if([subview isKindOfClass:[MCWorkNode class]]){
             MCWorkNode *finder = (MCWorkNode *)subview;
             if (finder.tag == [[dict valueForKey:@"tag"] integerValue]) {
-                [subview removeFromSuperview];
-                MCWorkNode *theNode  = [[MCWorkNode alloc] initWithPoint:finder.frame.origin Seq:finder.tag Task:finder.task Worker:finder.worker Prev:finder.previousNodes Status:finder.status];
-                [self.myScrollView addSubview:theNode];
+                [MCWorkNode WorkNodeChange:finder];
             }
             
         }
