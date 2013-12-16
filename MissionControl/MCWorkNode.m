@@ -12,7 +12,7 @@
 
 @synthesize xLabel, yLabel;
 
-- (MCWorkNode *)initWithPoint:(CGPoint)point Seq:(int)seq Task:(NSString *)task Worker:(NSString *)worker Prev:(NSMutableArray *)previous {
+- (MCWorkNode *)initWithPoint:(CGPoint)point Seq:(int)seq Task:(NSString *)task Worker:(NSString *)worker Prev:(NSMutableArray *)previous Status:(bool)status {
     self = [super init];
     if (self) {
         UILongPressGestureRecognizer *longPressGestureRecognizer =
@@ -21,8 +21,13 @@
         
         // Load undo circle image
         // set the view size of MCWorkNode as same as undo circle image
-        
-        UIImageView *dotImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"undo.png"]];
+        UIImageView *dotImageView;
+        if (status == false) {
+        dotImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"undo.png"]];
+        }
+        else{
+        dotImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"done.png"]];
+        }
         CGSize imageSize = dotImageView.frame.size;
         self.frame = CGRectMake(point.x, point.y, imageSize.width, imageSize.height);
         [self addSubview:dotImageView];

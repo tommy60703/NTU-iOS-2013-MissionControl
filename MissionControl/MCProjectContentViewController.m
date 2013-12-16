@@ -121,8 +121,8 @@
         NSString *task = node[@"task"];
         NSString *worker = node[@"worker"];
         NSMutableArray *previous = node[@"previous"];
-        
-        MCWorkNode *theNode = [[MCWorkNode alloc] initWithPoint:position Seq:theSeq Task:task Worker:worker Prev:previous];
+        bool status = node[@"state"];
+        MCWorkNode *theNode = [[MCWorkNode alloc] initWithPoint:position Seq:theSeq Task:task Worker:worker Prev:previous Status:status];
         theNode.delegate = self;
         [self.myScrollView addSubview:theNode];
     }
@@ -133,7 +133,7 @@
 #pragma mark - Private Method
 
 - (void)addNodeTask:(NSString *)task Worker:(NSString*)worker Previous:(NSMutableArray*)previous {
-    MCWorkNode *theNode = [[MCWorkNode alloc] initWithPoint:self.view.center Seq:seq Task:task Worker:worker Prev:previous];
+    MCWorkNode *theNode = [[MCWorkNode alloc] initWithPoint:self.view.center Seq:seq Task:task Worker:worker Prev:previous Status:false];
     theNode.delegate = self;
     
     NSMutableArray *tempWorkNodes = [[NSMutableArray alloc] init];
