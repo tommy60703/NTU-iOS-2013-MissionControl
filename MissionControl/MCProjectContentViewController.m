@@ -18,7 +18,9 @@
 
 #pragma mark - Lifecycle
 -(void)viewWillAppear:(BOOL)animated{
+    if (!self.isEditingProjectContent) {
     self.syncWithServer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(refreshFromServer) userInfo:nil repeats:YES];
+    }
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [self.syncWithServer invalidate];
@@ -77,9 +79,11 @@
     self.isEditingProjectContent = !self.isEditingProjectContent;
     if (self.isEditingProjectContent) {
         [self.syncWithServer invalidate];
+        NSLog(@"%d",self.isEditingProjectContent);
     }
     else{
         self.syncWithServer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(refreshFromServer) userInfo:nil repeats:YES];
+        NSLog(@"%d",self.isEditingProjectContent);
     }
     self.addNodeButton.hidden = !self.addNodeButton.hidden;
     self.saveButton.hidden = !self.saveButton.hidden;
@@ -103,7 +107,7 @@
         
     }
     if (flag) {
-        PFObject *projectContent = [PFObject objectWithClassName:[self.project[@"projectName"]stringByAppendingString:[self.project[@"projectPasscode"] stringValue]]];
+        PFObject *projectContent = [PFObject objectWithClassName:[@"A" stringByAppendingString:[self.project[@"projectPasscode"] stringValue]]];
         projectContent[@"task"] = task;
         projectContent[@"worker"] = worker;
         projectContent[@"previous"] = previous;
