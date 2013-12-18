@@ -249,9 +249,13 @@
             //NSLog(@"%d",finder.tag);
             if (finder.tag == tag) {
             [self pushToServerTask:finder.task Worker:finder.worker Prev:finder.previousNodes Tag:finder.tag Status:finder.status Location:finder.frame.origin];
+                [self.syncWithServer invalidate];
+                //[self.syncWithServer fire];
+                self.syncWithServer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(refreshFromServer) userInfo:nil repeats:YES];
             }
         }
     }
+    
 }
 #pragma mark - MCNodeDelegate
 

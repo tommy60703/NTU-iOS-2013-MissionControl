@@ -85,7 +85,7 @@
         [self.delegate enableScroll];
     }
     else{
-        self.status = (!self.status);
+        //self.status = (!self.status);
         NSDictionary *dict = [NSDictionary dictionaryWithObject: [NSNumber numberWithInteger:self.tag] forKey:@"tag"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"finishWorkNodes" object:self userInfo:dict];
     }
@@ -112,6 +112,7 @@
 }
 
 + (void)WorkNodeChange:(MCWorkNode *) finder{
+    finder.status = !finder.status;
     for (UIImageView *oldimage in finder.subviews) {
         [oldimage removeFromSuperview];
     }
