@@ -127,8 +127,8 @@
             if ([newNode[@"task"] isEqualToString:oldNode[@"task"]]) {
                 if (newNode[@"state"] != oldNode[@"state"]) {
                     oldNode[@"state"] = newNode[@"state"];
-                    NSDictionary *dict = [NSDictionary dictionaryWithObject: [oldNode objectForKey:@"seq"] forKey:@"tag"];
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"finishWorkNodes" object:self userInfo:dict];
+                    [self refreshWorkNodes:[oldNode[@"seq"] integerValue]];
+                    
                 }
             }
         }
@@ -220,6 +220,40 @@
         }
     }
     [self drawAllLines];
+}
+- (void)refreshWorkNodes:(int)tag{
+    for (UIView *subview in self.myScrollView.subviews) {
+        if([subview isKindOfClass:[MCWorkNode class]]){
+            MCWorkNode *finder = (MCWorkNode *)subview;
+            if (finder.tag == tag) {
+                bool flag = true;
+                
+                NSSet *parents = [NSSet setWithArray:finder.previousNodes];
+                NSLog(@"%@",parents);
+                
+                for (PFObject *parentNode in self.workNodes) {
+                    
+                    if ([parents containsObject:[parentNode objectForKey:@"task"]])  {
+                        NSLog(@"%@",parentNode);
+                        NSLog(@"%d",[[parentNode objectForKey:@"state"] boolValue]);
+                        if ([[parentNode objectForKey:@"state"] boolValue] == false) {
+                            flag = false;
+                            break;
+                        }
+                    }
+                }
+                
+                NSLog(@"%d",flag);
+                if (flag) {
+                    [MCWorkNode WorkNodeChange:finder];
+                    [self syncStatusWithServer:tag];
+                }
+            }
+            
+        }
+    }
+    
+
 }
 - (void)finishWorkNodes:(NSNotification *) notification{
     NSDictionary *dict = [notification userInfo];
