@@ -30,7 +30,7 @@
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         allProject = [query findObjects];
-        NSLog(@"%@", [allProject valueForKey:@"projectPasscode"]);
+        //NSLog(@"%@", allProject);
         
         dispatch_sync(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
@@ -112,7 +112,9 @@
     NSDictionary *projectForThisCell = [allProject objectAtIndex:indexPath.row];
     
     UILabel *projectName = (UILabel *)[cell viewWithTag:1101];
+    UILabel *passcode = (UILabel *)[cell viewWithTag:1102];
     //UILabel *projectCreator = (UILabel *)[cell viewWithTag:1102];
+    passcode.text = [projectForThisCell[@"projectPasscode"] stringValue];
     projectName.text = projectForThisCell[@"projectName"];
     //projectCreator.text = projectForThisCell[MCProjectCreatorKey];
     
