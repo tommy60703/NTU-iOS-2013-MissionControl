@@ -11,7 +11,7 @@
 #import "MCNodeInputViewController.h"
 
 @interface MCProjectContentViewController ()
-
+@property (strong, nonatomic) NSTimer *syncWithServer;
 @end
 
 @implementation MCProjectContentViewController
@@ -42,7 +42,7 @@
         self->seq++;
     }
     [self drawAllLines];
-    
+    self.syncWithServer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(pullFromServerProject) userInfo:nil repeats:YES];
 
 }
 
@@ -198,12 +198,33 @@
         if([subview isKindOfClass:[MCWorkNode class]]){
             MCWorkNode *finder = (MCWorkNode *)subview;
             if (finder.tag == [[dict valueForKey:@"tag"] integerValue]) {
-                [MCWorkNode WorkNodeChange:finder];
+                bool flag = true;
+            
+                NSSet *parents = [NSSet setWithArray:finder.previousNodes];
+                NSLog(@"%@",parents);
+                
+                for (PFObject *parentNode in self.workNodes) {
+                    
+                    if ([parents containsObject:[parentNode objectForKey:@"task"]])  {
+                        NSLog(@"%@",parentNode);
+                        NSLog(@"%d",[[parentNode objectForKey:@"state"] boolValue]);
+                        if ([[parentNode objectForKey:@"state"] boolValue] == false) {
+                            flag = false;
+                            break;
+                        }
+                    }
+                }
+                
+                NSLog(@"%d",flag);
+                if (flag) {
+                    [MCWorkNode WorkNodeChange:finder];
+                    [self syncStatusWithServer:[[dict valueForKey:@"tag"] integerValue]];
+                }
             }
             
         }
     }
-    [self syncStatusWithServer:[[dict valueForKey:@"tag"] integerValue]];
+    
 }
 
 -(void)syncStatusWithServer:(int) tag{

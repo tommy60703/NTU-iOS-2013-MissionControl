@@ -33,10 +33,10 @@
         [self addSubview:dotImageView];
         
         // set node's label
-        xLabel = [[UILabel alloc] initWithFrame:CGRectMake(imageSize.width + 1, 0.0, 20.0, 15.0)];
-        yLabel = [[UILabel alloc] initWithFrame:CGRectMake(imageSize.width + 1, 16.0, 20.0, 15.0)];
+        xLabel = [[UILabel alloc] initWithFrame:CGRectMake(imageSize.width+1, 5.0, 50.0, 15.0)];
+        yLabel = [[UILabel alloc] initWithFrame:CGRectMake(imageSize.width+1, 21.0, 50.0, 15.0)];
         
-        UIFont *font = [UIFont fontWithName:@"Arial" size:10.0];
+        UIFont *font = [UIFont fontWithName:@"helvetica" size:15.0];
         xLabel.font = font;
         yLabel.font = font;
         xLabel.text = task;
@@ -127,10 +127,10 @@
     [finder addSubview:dotImageView];
     
     // set node's label
-    UILabel *AxLabel = [[UILabel alloc] initWithFrame:CGRectMake(imageSize.width + 1, 0.0, 20.0, 15.0)];
-    UILabel *AyLabel = [[UILabel alloc] initWithFrame:CGRectMake(imageSize.width + 1, 16.0, 20.0, 15.0)];
+    UILabel *AxLabel = [[UILabel alloc] initWithFrame:CGRectMake(imageSize.width + 1, 5.0, 50.0, 15.0)];
+    UILabel *AyLabel = [[UILabel alloc] initWithFrame:CGRectMake(imageSize.width + 1, 21.0, 50.0, 15.0)];
     
-    UIFont *font = [UIFont fontWithName:@"Arial" size:10.0];
+    UIFont *font = [UIFont fontWithName:@"helvetica" size:15.0];
     AxLabel.font = font;
     AyLabel.font = font;
     AxLabel.text = finder.task;

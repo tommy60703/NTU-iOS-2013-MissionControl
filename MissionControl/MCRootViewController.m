@@ -13,6 +13,8 @@
 
 @interface MCRootViewController ()
 
+@property (strong, nonatomic) NSTimer *reloadTimer;
+
 @end
 
 @implementation MCRootViewController
@@ -28,7 +30,7 @@
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         allProject = [query findObjects];
-        NSLog(@"%@", allProject);
+        //NSLog(@"%@", allProject);
         
         dispatch_sync(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
@@ -55,7 +57,14 @@
     
     [self addToMyPlist];
     
-    [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(updateProject) userInfo:nil repeats:YES];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+   self.reloadTimer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(updateProject) userInfo:nil repeats:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [self.reloadTimer invalidate];
 }
 
 /* Code to write into file */
