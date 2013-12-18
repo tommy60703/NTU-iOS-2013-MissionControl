@@ -135,9 +135,13 @@
         }
     }
     if ([self checkFinished]) {
-        NSLog(@"yoooooooo");
+        //NSLog(@"yoooooooo");
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Finished!" message:@"Congratz" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [alert show];
+        static BOOL shown = NO;
+        if (!shown) {
+            [alert show];
+            shown = YES;
+        }
     }
 }
 - (void)pullFromServerProject {
