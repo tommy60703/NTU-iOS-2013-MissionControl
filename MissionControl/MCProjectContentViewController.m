@@ -175,7 +175,7 @@
         [tempWorkNodes addObject:node];
     }
     
-    PFObject *projectContent = [PFObject objectWithClassName:[self.project[@"projectName"]stringByAppendingString:[self.project[@"projectPasscode"] stringValue]]];
+    PFObject *projectContent = [PFObject objectWithClassName:[@"A" stringByAppendingString:[self.project[@"projectPasscode"] stringValue]]];
     projectContent[@"task"] = task;
     projectContent[@"worker"] = worker;
     projectContent[@"previous"] = previous;
