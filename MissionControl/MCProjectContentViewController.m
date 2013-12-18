@@ -79,11 +79,11 @@
     self.isEditingProjectContent = !self.isEditingProjectContent;
     if (self.isEditingProjectContent) {
         [self.syncWithServer invalidate];
-        NSLog(@"%d",self.isEditingProjectContent);
+        //NSLog(@"%d",self.isEditingProjectContent);
     }
     else{
         self.syncWithServer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(refreshFromServer) userInfo:nil repeats:YES];
-        NSLog(@"%d",self.isEditingProjectContent);
+        //NSLog(@"%d",self.isEditingProjectContent);
     }
     self.addNodeButton.hidden = !self.addNodeButton.hidden;
     self.saveButton.hidden = !self.saveButton.hidden;
@@ -128,17 +128,17 @@
                 if (newNode[@"state"] != oldNode[@"state"]) {
                     oldNode[@"state"] = newNode[@"state"];
                     [self refreshWorkNodes:[oldNode[@"seq"] integerValue]];
-                    if ([self checkFinished]) {
-                        NSLog(@"yoooooooo");
-                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Finished!" message:@"Congratz" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-                        [alert show];
-                    }
+                    
                     
                 }
             }
         }
     }
-    
+    if ([self checkFinished]) {
+        NSLog(@"yoooooooo");
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Finished!" message:@"Congratz" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+    }
 }
 - (void)pullFromServerProject {
     int maxSeq = -1;
@@ -234,13 +234,13 @@
                 bool flag = true;
                 
                 NSSet *parents = [NSSet setWithArray:finder.previousNodes];
-                NSLog(@"%@",parents);
+                //NSLog(@"%@",parents);
                 
                 for (PFObject *parentNode in self.workNodes) {
                     
                     if ([parents containsObject:[parentNode objectForKey:@"task"]])  {
-                        NSLog(@"%@",parentNode);
-                        NSLog(@"%d",[[parentNode objectForKey:@"state"] boolValue]);
+                        //NSLog(@"%@",parentNode);
+                        //NSLog(@"%d",[[parentNode objectForKey:@"state"] boolValue]);
                         if ([[parentNode objectForKey:@"state"] boolValue] == false) {
                             flag = false;
                             break;
@@ -248,7 +248,7 @@
                     }
                 }
                 
-                NSLog(@"%d",flag);
+                //NSLog(@"%d",flag);
                 if (flag) {
                     [MCWorkNode WorkNodeChange:finder];
                     [self syncStatusWithServer:tag];
@@ -273,13 +273,13 @@
                     break;
                 }
                 NSSet *parents = [NSSet setWithArray:finder.previousNodes];
-                NSLog(@"%@",parents);
+                //NSLog(@"%@",parents);
                 
                 for (PFObject *parentNode in self.workNodes) {
                     
                     if ([parents containsObject:[parentNode objectForKey:@"task"]])  {
-                        NSLog(@"%@",parentNode);
-                        NSLog(@"%d",[[parentNode objectForKey:@"state"] boolValue]);
+//                        NSLog(@"%@",parentNode);
+//                        NSLog(@"%d",[[parentNode objectForKey:@"state"] boolValue]);
                         if ([[parentNode objectForKey:@"state"] boolValue] == false) {
                             flag = false;
                             break;
@@ -287,7 +287,7 @@
                     }
                 }
                 
-                NSLog(@"%d",flag);
+                //NSLog(@"%d",flag);
                 if (flag) {
                     [MCWorkNode WorkNodeChange:finder];
                     [self syncStatusWithServer:[[dict valueForKey:@"tag"] integerValue]];
@@ -314,12 +314,12 @@
     
 }
 -(bool)checkFinished{
-    NSLog(@"check");
+    //NSLog(@"check");
     bool flag = true;
     for (UIView *subview in self.myScrollView.subviews) {
         if([subview isKindOfClass:[MCWorkNode class]]){
             MCWorkNode *finder = (MCWorkNode *)subview;
-            NSLog(@"%d", finder.status);
+            //NSLog(@"%d", finder.status);
             if (!finder.status) {
                 flag = false;
                 break;
