@@ -15,6 +15,10 @@
 
 @implementation MCCreateViewController
 
+- (void)viewDidLoad {
+    [self.projectName performSelector:@selector(becomeFirstResponder) withObject:nil afterDelay:0.0f];
+}
+
 - (IBAction)cancelButtonClicked:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
