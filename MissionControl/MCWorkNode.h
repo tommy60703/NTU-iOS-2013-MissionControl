@@ -21,7 +21,6 @@
 @property (strong) NSMutableArray *previousNodes;
 @property (strong) id<MCNodeDelegate> delegate;
 
-
 @property BOOL isMakingFather;
 @property BOOL editing;
 

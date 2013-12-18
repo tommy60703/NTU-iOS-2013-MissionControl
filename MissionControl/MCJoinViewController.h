@@ -8,14 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MCJoinViewController : UIViewController {
-    NSArray *allProject;
-}
+@interface MCJoinViewController : UIViewController 
 
-@property (strong, nonatomic) IBOutlet UITextField *textField;
+@property (strong, nonatomic) IBOutlet UITextField *passcodeField;
 @property (strong, nonatomic) IBOutlet UITextField *passwordField;
-@property (strong, nonatomic) IBOutlet UILabel *projectName;
 @property (strong, nonatomic) IBOutlet UITextField *userJob;
-@property (strong, nonatomic) IBOutlet UILabel *projectCreator;
+
+@property (strong, nonatomic) IBOutlet UILabel *projectName;
 
 @end

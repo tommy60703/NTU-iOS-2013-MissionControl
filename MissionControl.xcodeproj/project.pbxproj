@@ -26,7 +26,7 @@
 		6514E2AF1840CA5500468A8A /* MCCreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6514E2AE1840CA5500468A8A /* MCCreateViewController.m */; };
 		6514E2B51840D79100468A8A /* MCRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6514E2B41840D79100468A8A /* MCRootViewController.m */; };
 		6514E2BA1840E6DC00468A8A /* NSArray+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 6514E2B91840E6DC00468A8A /* NSArray+JSON.m */; };
-		6514E2BD1840E78800468A8A /* MCProjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 6514E2BC1840E78800468A8A /* MCProjects.m */; };
+		6514E2BD1840E78800468A8A /* MCBrain.m in Sources */ = {isa = PBXBuildFile; fileRef = 6514E2BC1840E78800468A8A /* MCBrain.m */; };
 		6514E2C81840FAAA00468A8A /* test-projects.json in Resources */ = {isa = PBXBuildFile; fileRef = 6514E2C71840FAAA00468A8A /* test-projects.json */; };
 		654E5FD6185F10F9003CB454 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E81E884184C6E5300B4EBD7 /* Parse.framework */; };
 		658B34D5183AF007009C09EB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658B34D4183AF007009C09EB /* Foundation.framework */; };
@@ -148,8 +148,8 @@
 		6514E2B41840D79100468A8A /* MCRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCRootViewController.m; sourceTree = "<group>"; };
 		6514E2B81840E6DC00468A8A /* NSArray+JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+JSON.h"; sourceTree = "<group>"; };
 		6514E2B91840E6DC00468A8A /* NSArray+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+JSON.m"; sourceTree = "<group>"; };
-		6514E2BB1840E78800468A8A /* MCProjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCProjects.h; sourceTree = "<group>"; };
-		6514E2BC1840E78800468A8A /* MCProjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCProjects.m; sourceTree = "<group>"; };
+		6514E2BB1840E78800468A8A /* MCBrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCBrain.h; sourceTree = "<group>"; };
+		6514E2BC1840E78800468A8A /* MCBrain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCBrain.m; sourceTree = "<group>"; };
 		6514E2C71840FAAA00468A8A /* test-projects.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "test-projects.json"; sourceTree = "<group>"; };
 		65778B89183CD49900C4F02B /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		65778B8A183CD49900C4F02B /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -1005,8 +1005,8 @@
 			children = (
 				6514E2B81840E6DC00468A8A /* NSArray+JSON.h */,
 				6514E2B91840E6DC00468A8A /* NSArray+JSON.m */,
-				6514E2BB1840E78800468A8A /* MCProjects.h */,
-				6514E2BC1840E78800468A8A /* MCProjects.m */,
+				6514E2BB1840E78800468A8A /* MCBrain.h */,
+				6514E2BC1840E78800468A8A /* MCBrain.m */,
 			);
 			name = MCBrain;
 			sourceTree = "<group>";
@@ -1219,7 +1219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6514E2B51840D79100468A8A /* MCRootViewController.m in Sources */,
-				6514E2BD1840E78800468A8A /* MCProjects.m in Sources */,
+				6514E2BD1840E78800468A8A /* MCBrain.m in Sources */,
 				6514E2AC1840CA3D00468A8A /* MCJoinViewController.m in Sources */,
 				5E8081B4185D7781004D9343 /* MCDrawLine.m in Sources */,
 				6514E2AF1840CA5500468A8A /* MCCreateViewController.m in Sources */,

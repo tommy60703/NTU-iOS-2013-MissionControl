@@ -270,9 +270,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="passcodeField" destination="h18-FK-C8o" id="1eK-Aw-0NA"/>
                         <outlet property="passwordField" destination="UOF-NM-Udm" id="NvC-MH-CP4"/>
                         <outlet property="projectName" destination="GMB-cK-qF8" id="092-w2-yHc"/>
-                        <outlet property="textField" destination="h18-FK-C8o" id="Nmx-GO-Jih"/>
                         <outlet property="userJob" destination="waM-yD-ShQ" id="nqi-6e-If4"/>
                     </connections>
                 </viewController>

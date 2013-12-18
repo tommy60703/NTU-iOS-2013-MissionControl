@@ -7,53 +7,46 @@
 //
 
 #import "MCJoinViewController.h"
-#import "MCProjects.h"
+#import "MCBrain.h"
 #import <Parse/Parse.h>
 
-@interface MCJoinViewController () {
-    MCProjects *projects;
-}
+@interface MCJoinViewController ()
+
+@property (strong, nonatomic) NSArray *allProjects;
 
 @end
 
 @implementation MCJoinViewController
 
-- (void)viewWillAppear:(BOOL)animated {
-    self.projectName.text = @"";
-    self.projectCreator.text = @"";
-    
-}
+
 - (void) viewDidAppear:(BOOL)animated{
-    projects = [MCProjects shareData];
     PFQuery *query = [PFQuery queryWithClassName:@"project"];
-    allProject = [query findObjects];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        self.allProjects = [query findObjects];
+    });
     
-    [self.textField performSelector:@selector(becomeFirstResponder) withObject:nil afterDelay:0.0f];
+    [self.passcodeField performSelector:@selector(becomeFirstResponder) withObject:nil afterDelay:0.0f];
 }
+
 - (IBAction)cancelButtonClicked:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
 - (IBAction)joinButtonClicked:(id)sender {
-    if ([self.textField.text isEqualToString:@""]) {
+    if ([self.passcodeField.text isEqualToString:@""]) {
         NSLog(@"Funny. Haha...");
     } else {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-            NSLog(@"Join %@", self.textField.text);
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            NSLog(@"Try to join project with passcode %@", self.passcodeField.text);
             PFQuery *query = [PFQuery queryWithClassName:@"project"];
             NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
             [f setNumberStyle:NSNumberFormatterDecimalStyle];
-            [query whereKey:@"projectPasscode" equalTo:[f numberFromString:self.textField.text]];
-            
+            [query whereKey:@"projectPasscode" equalTo:[f numberFromString:self.passcodeField.text]];
+        
             PFObject *aProject = [query getFirstObject];
-            NSLog(@"%@",self.passwordField.text);
-            NSLog(@"%@",[aProject objectForKey:@"projectName"]);
-            NSLog(@"%@",[aProject objectForKey:@"projectPassword"]);
-            
-            
             if (![self.passwordField.text isEqualToString:[aProject objectForKey:@"projectPassword"]]) {
                 NSLog(@"wrong password!");
-            }
-            else{
+            } else {
                 NSString *udid = [UIDevice currentDevice].identifierForVendor.UUIDString;
                 PFObject *projectParticipate = [PFObject objectWithClassName:@"projectParticipate"];
                 projectParticipate[@"user"] = udid;
@@ -62,9 +55,12 @@
                 projectParticipate[@"projectName"] = [aProject objectForKey:@"projectName"];
                 projectParticipate[@"projectPasscode"] = [aProject objectForKey:@"projectPasscode"];
                 [projectParticipate saveInBackground];
-                NSLog(@"successed!");
+                NSLog(@"Joined project \"%@\"!", [aProject objectForKey:@"projectName"]);
             }
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"DoUpdateProject" object:nil userInfo:nil];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"doUpdateProjects" object:self];
+            });
         });
         [self dismissViewControllerAnimated:YES completion:nil];
     }
@@ -73,19 +69,12 @@
 - (IBAction)textChanged:(UITextField*)sender {
     if ([sender.text isEqualToString:@""]) {
         self.projectName.text = @"";
-        self.projectCreator.text = @"";
     } else {
-//        NSDictionary *queryProject = [projects projectForCode:[sender.text integerValue]];
-//        self.projectName.text = queryProject[MCProjectNameKey];
-//        self.projectCreator.text = queryProject[MCProjectCreatorKey];
-                //NSLog(@"%@", [allProject[0] objectForKey:@"projectName"]);
-        for (PFObject *project in allProject) {
+        for (PFObject *project in self.allProjects) {
             if ([sender.text integerValue] == [[project objectForKey:@"projectPasscode"] intValue]) {
                 self.projectName.text = project[@"projectName"];
-                //self.projectCreator.text = queryProject[MCProjectCreatorKey];
             }
         }
-        
     }
 }
 
