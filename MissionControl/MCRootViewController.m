@@ -13,6 +13,8 @@
 
 @interface MCRootViewController ()
 
+@property (strong, nonatomic) NSTimer *reloadTimer;
+
 @end
 
 @implementation MCRootViewController
@@ -55,7 +57,14 @@
     
     [self addToMyPlist];
     
-    [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(updateProject) userInfo:nil repeats:YES];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+   self.reloadTimer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(updateProject) userInfo:nil repeats:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [self.reloadTimer invalidate];
 }
 
 /* Code to write into file */
