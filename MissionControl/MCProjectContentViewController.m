@@ -19,7 +19,7 @@
 #pragma mark - Lifecycle
 -(void)viewWillAppear:(BOOL)animated{
     if (!self.isEditingProjectContent) {
-    self.syncWithServer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(refreshFromServer) userInfo:nil repeats:YES];
+    self.syncWithServer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(refreshFromServer) userInfo:nil repeats:YES];
     }
 }
 -(void)viewWillDisappear:(BOOL)animated{
@@ -128,6 +128,11 @@
                 if (newNode[@"state"] != oldNode[@"state"]) {
                     oldNode[@"state"] = newNode[@"state"];
                     [self refreshWorkNodes:[oldNode[@"seq"] integerValue]];
+                    if ([self checkFinished]) {
+                        NSLog(@"yoooooooo");
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Finished!" message:@"Congratz" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                        [alert show];
+                    }
                     
                 }
             }
@@ -307,6 +312,21 @@
         }
     }
     
+}
+-(bool)checkFinished{
+    NSLog(@"check");
+    bool flag = true;
+    for (UIView *subview in self.myScrollView.subviews) {
+        if([subview isKindOfClass:[MCWorkNode class]]){
+            MCWorkNode *finder = (MCWorkNode *)subview;
+            NSLog(@"%d", finder.status);
+            if (!finder.status) {
+                flag = false;
+                break;
+            }
+        }
+    }
+    return flag;
 }
 #pragma mark - MCNodeDelegate
 

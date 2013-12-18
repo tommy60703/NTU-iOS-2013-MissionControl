@@ -49,4 +49,7 @@
 - (void) pullFromServerProject;
 
 - (void) refreshWorkNodes:(int)tag;
+
+- (bool)checkFinished;
+
 @end
