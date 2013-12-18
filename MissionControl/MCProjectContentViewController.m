@@ -229,7 +229,7 @@
             MCWorkNode *finder = (MCWorkNode *)subview;
             if (finder.tag == [[dict valueForKey:@"tag"] integerValue]) {
                 bool flag = true;
-                if (finder.worker != self.project[@"job"]) {
+                if (![finder.worker isEqualToString:self.project[@"job"]]) {
                     flag=false;
                     break;
                 }
