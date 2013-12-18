@@ -141,6 +141,7 @@
         if (!shown) {
             [alert show];
             shown = YES;
+            [self.syncWithServer invalidate];
         }
     }
 }
