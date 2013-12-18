@@ -42,7 +42,7 @@
         self->seq++;
     }
     [self drawAllLines];
-    self.syncWithServer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(pullFromServerProject) userInfo:nil repeats:YES];
+    self.syncWithServer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(refreshFromServer) userInfo:nil repeats:YES];
 
 }
 
@@ -104,7 +104,22 @@
         //NSLog(@"here");
     }
 }
-
+- (void)refreshFromServer{
+    PFQuery *fresh = [PFQuery queryWithClassName:[self.project[@"projectName"] stringByAppendingString:[self.project[@"projectPasscode"] stringValue]]];
+    NSArray *newWorkNodes = [fresh findObjects];
+    for (PFObject *newNode in newWorkNodes) {
+        for (PFObject *oldNode in self.workNodes) {
+            if ([newNode[@"task"] isEqualToString:oldNode[@"task"]]) {
+                if (newNode[@"state"] != oldNode[@"state"]) {
+                    oldNode[@"state"] = newNode[@"state"];
+                    NSDictionary *dict = [NSDictionary dictionaryWithObject: [oldNode objectForKey:@"seq"] forKey:@"tag"];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"finishWorkNodes" object:self userInfo:dict];
+                }
+            }
+        }
+    }
+    
+}
 - (void)pullFromServerProject {
     int maxSeq = -1;
     PFQuery *query = [PFQuery queryWithClassName:[self.project[@"projectName"] stringByAppendingString:[self.project[@"projectPasscode"] stringValue]]];
