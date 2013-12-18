@@ -113,9 +113,11 @@
     
     UILabel *projectName = (UILabel *)[cell viewWithTag:1101];
     UILabel *passcode = (UILabel *)[cell viewWithTag:1102];
+    UILabel *worker = (UILabel *)[cell viewWithTag:1103];
     //UILabel *projectCreator = (UILabel *)[cell viewWithTag:1102];
     passcode.text = [projectForThisCell[@"projectPasscode"] stringValue];
     projectName.text = projectForThisCell[@"projectName"];
+    worker.text = projectForThisCell[@"job"];
     //projectCreator.text = projectForThisCell[MCProjectCreatorKey];
     
     return cell;
