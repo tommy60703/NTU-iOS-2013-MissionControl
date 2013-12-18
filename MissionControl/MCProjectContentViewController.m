@@ -12,6 +12,7 @@
 
 @interface MCProjectContentViewController ()
 @property (strong, nonatomic) NSTimer *syncWithServer;
+@property BOOL shown;
 @end
 
 @implementation MCProjectContentViewController
@@ -28,7 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.isEditingProjectContent = NO;
-    
+    self.shown = NO;
     self.addNodeButton.hidden = YES;
     self.saveButton.hidden = YES;
     
@@ -137,10 +138,9 @@
     if ([self checkFinished]) {
         //NSLog(@"yoooooooo");
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Finished!" message:@"Congratz" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        static BOOL shown = NO;
-        if (!shown) {
+        if (!self.shown) {
             [alert show];
-            shown = YES;
+            self.shown = YES;
             [self.syncWithServer invalidate];
         }
     }
