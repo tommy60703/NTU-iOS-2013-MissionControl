@@ -15,6 +15,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *textField;
 @property (strong, nonatomic) IBOutlet UITextField *passwordField;
 @property (strong, nonatomic) IBOutlet UILabel *projectName;
+@property (strong, nonatomic) IBOutlet UITextField *userJob;
 @property (strong, nonatomic) IBOutlet UILabel *projectCreator;
 
 @end

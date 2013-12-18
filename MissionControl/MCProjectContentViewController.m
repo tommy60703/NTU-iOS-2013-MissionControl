@@ -44,7 +44,7 @@
     
     if (self->seq == -1) {
         self->seq = 0;
-        [self addNodeTask:@"init" Worker:@"me" Previous:[NSMutableArray new]];
+        [self addNodeTask:@"Start" Worker:self.project[@"job"] Previous:[NSMutableArray new]];
     } else {
         self->seq++;
     }
@@ -229,7 +229,10 @@
             MCWorkNode *finder = (MCWorkNode *)subview;
             if (finder.tag == [[dict valueForKey:@"tag"] integerValue]) {
                 bool flag = true;
-            
+                if (finder.worker != self.project[@"job"]) {
+                    flag=false;
+                    break;
+                }
                 NSSet *parents = [NSSet setWithArray:finder.previousNodes];
                 NSLog(@"%@",parents);
                 

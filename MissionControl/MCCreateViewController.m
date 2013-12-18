@@ -66,6 +66,7 @@ int randomCode(){
         PFObject *projectParticipate = [PFObject objectWithClassName:@"projectParticipate"];
         projectParticipate[@"user"] = udid;
         projectParticipate[@"owner"] = udid;
+        projectParticipate[@"job"] = self.userJob.text;
         projectParticipate[@"projectName"] = self.projectName.text;
         projectParticipate[@"projectPasscode"] = [NSNumber numberWithInt:random];
         [projectParticipate saveInBackground];

@@ -57,6 +57,7 @@
                 NSString *udid = [UIDevice currentDevice].identifierForVendor.UUIDString;
                 PFObject *projectParticipate = [PFObject objectWithClassName:@"projectParticipate"];
                 projectParticipate[@"user"] = udid;
+                projectParticipate[@"job"] = self.userJob.text;
                 projectParticipate[@"owner"] = [aProject objectForKey:@"projectOwner"];
                 projectParticipate[@"projectName"] = [aProject objectForKey:@"projectName"];
                 projectParticipate[@"projectPasscode"] = [aProject objectForKey:@"projectPasscode"];
