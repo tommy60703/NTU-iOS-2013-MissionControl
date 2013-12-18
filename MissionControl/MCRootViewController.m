@@ -55,7 +55,7 @@
     
     [self addToMyPlist];
     
-    [NSTimer timerWithTimeInterval:10 target:self selector:@selector(reloadData) userInfo:nil repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(updateProject) userInfo:nil repeats:YES];
 }
 
 /* Code to write into file */
