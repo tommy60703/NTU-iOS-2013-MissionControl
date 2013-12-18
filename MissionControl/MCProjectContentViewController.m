@@ -17,7 +17,12 @@
 @implementation MCProjectContentViewController
 
 #pragma mark - Lifecycle
-
+-(void)viewWillAppear:(BOOL)animated{
+    self.syncWithServer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(refreshFromServer) userInfo:nil repeats:YES];
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    [self.syncWithServer invalidate];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.isEditingProjectContent = NO;
@@ -42,7 +47,7 @@
         self->seq++;
     }
     [self drawAllLines];
-    self.syncWithServer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(refreshFromServer) userInfo:nil repeats:YES];
+    
 
 }
 
@@ -70,6 +75,12 @@
 
 - (IBAction)switcherToggled:(UISwitch *)sender {
     self.isEditingProjectContent = !self.isEditingProjectContent;
+    if (self.isEditingProjectContent) {
+        [self.syncWithServer invalidate];
+    }
+    else{
+        self.syncWithServer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(refreshFromServer) userInfo:nil repeats:YES];
+    }
     self.addNodeButton.hidden = !self.addNodeButton.hidden;
     self.saveButton.hidden = !self.saveButton.hidden;
 }
@@ -105,7 +116,7 @@
     }
 }
 - (void)refreshFromServer{
-    PFQuery *fresh = [PFQuery queryWithClassName:[self.project[@"projectName"] stringByAppendingString:[self.project[@"projectPasscode"] stringValue]]];
+    PFQuery *fresh = [PFQuery queryWithClassName:[@"A" stringByAppendingString:[self.project[@"projectPasscode"] stringValue]]];
     NSArray *newWorkNodes = [fresh findObjects];
     for (PFObject *newNode in newWorkNodes) {
         for (PFObject *oldNode in self.workNodes) {
@@ -122,7 +133,7 @@
 }
 - (void)pullFromServerProject {
     int maxSeq = -1;
-    PFQuery *query = [PFQuery queryWithClassName:[self.project[@"projectName"] stringByAppendingString:[self.project[@"projectPasscode"] stringValue]]];
+    PFQuery *query = [PFQuery queryWithClassName:[@"A" stringByAppendingString:[self.project[@"projectPasscode"] stringValue]]];
     [query orderByAscending:@"seq"];
 
     self.workNodes = [query findObjects];
@@ -250,8 +261,7 @@
             if (finder.tag == tag) {
             [self pushToServerTask:finder.task Worker:finder.worker Prev:finder.previousNodes Tag:finder.tag Status:finder.status Location:finder.frame.origin];
                 [self.syncWithServer invalidate];
-                //[self.syncWithServer fire];
-                self.syncWithServer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(refreshFromServer) userInfo:nil repeats:YES];
+                self.syncWithServer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(refreshFromServer) userInfo:nil repeats:YES];
             }
         }
     }
