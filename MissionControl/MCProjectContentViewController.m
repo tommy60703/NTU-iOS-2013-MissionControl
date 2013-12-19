@@ -31,7 +31,7 @@
     self.isEditingProjectContent = NO;
     self.shown = NO;
     self.addNodeButton.hidden = YES;
-    self.saveButton.hidden = YES;
+    //self.saveButton.hidden = YES;
     
     if ([self.project[@"user"] isEqualToString:self.project[@"owner"]]) {
         self.editSwitcher.hidden = NO;
@@ -58,7 +58,7 @@
 
 #pragma mark - IBAction
 
-- (IBAction)saveWorkFlow:(id)sender {
+- (void)saveWorkFlow{
     for (UIView *subview in self.myScrollView.subviews) {
         if([subview isKindOfClass:[MCWorkNode class]]){
             MCWorkNode *finder = (MCWorkNode *)subview;
@@ -81,7 +81,7 @@
         //NSLog(@"%d",self.isEditingProjectContent);
     }
     self.addNodeButton.hidden = !self.addNodeButton.hidden;
-    self.saveButton.hidden = !self.saveButton.hidden;
+    //self.saveButton.hidden = !self.saveButton.hidden;
 }
 
 #pragma mark - Instance Method
@@ -211,6 +211,7 @@
     self->seq++;
     
     [self.myScrollView addSubview:theNode];
+    
     [self drawAllLines];
 }
 
@@ -226,6 +227,7 @@
     [self.drawLine addPoints:(NSMutableArray *)self.workNodes];
     self.drawLine.tag = -1;
     [self.myScrollView insertSubview:self.drawLine atIndex:0];
+    [self saveWorkFlow];
     
 }
 
@@ -241,6 +243,7 @@
             }
         }
     }
+    
     [self drawAllLines];
 }
 - (void)refreshWorkNodes:(int)tag{

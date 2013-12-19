@@ -39,7 +39,7 @@
 
 #pragma mark - IBAction
 
-- (IBAction)saveWorkFlow:(id)sender;
+- (void)saveWorkFlow;
 - (IBAction)switcherToggled:(UISwitch *)sender;
 
 #pragma mark - Instance Method
