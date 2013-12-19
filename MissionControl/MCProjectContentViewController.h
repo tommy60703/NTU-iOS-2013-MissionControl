@@ -35,6 +35,7 @@
 @property (strong, nonatomic) MCDrawLine *drawLine;
 @property NSDictionary *project;
 @property NSArray *workNodes;
+@property NSArray *workerList;
 @property BOOL isEditingProjectContent;
 
 #pragma mark - IBAction

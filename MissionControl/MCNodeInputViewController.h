@@ -16,6 +16,8 @@
 @property (strong, nonatomic) IBOutlet UITextField *taskInput;
 @property (strong, nonatomic) IBOutlet UITextField *workerInput;
 @property (strong, nonatomic) IBOutlet UITextField *previousInput;
+@property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
+@property NSArray *workerList;
 
 - (IBAction)cancelButtonClick:(id)sender;
 - (IBAction)doneButtonClick:(id)sender;

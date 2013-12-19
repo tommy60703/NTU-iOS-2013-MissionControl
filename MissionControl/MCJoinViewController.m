@@ -55,6 +55,13 @@
                 projectParticipate[@"projectName"] = [aProject objectForKey:@"projectName"];
                 projectParticipate[@"projectPasscode"] = [aProject objectForKey:@"projectPasscode"];
                 [projectParticipate saveInBackground];
+                PFQuery *addWorker = [PFQuery queryWithClassName:@"project"];
+                [addWorker whereKey:@"projectName" equalTo:[aProject objectForKey:@"projectName"]];
+                PFObject *theProject = [addWorker getFirstObject];
+                [theProject addUniqueObject:self.userJob.text forKey:@"projectWorkers"];
+                [theProject saveInBackground];
+                
+                
                 NSLog(@"Joined project \"%@\"!", [aProject objectForKey:@"projectName"]);
             }
             

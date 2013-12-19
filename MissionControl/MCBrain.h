@@ -12,6 +12,7 @@
 
 @property (strong, nonatomic) NSString *deviceUDID;
 @property (strong, nonatomic) NSArray *projects;
+@property (strong, nonatomic) NSArray *workers;
 
 + (MCBrain *)shareInstance;
 + (NSInteger)getUniquePasscode;

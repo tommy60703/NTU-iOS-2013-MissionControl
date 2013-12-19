@@ -42,6 +42,13 @@
     
     CGSize size = self.view.frame.size;
     self.myScrollView.contentSize = CGSizeMake(size.width, size.height*2);
+   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+       PFQuery *queryWorkers = [PFQuery queryWithClassName:@"project"];
+       [queryWorkers whereKey:@"projectName" equalTo:self.project[@"projectName"]];
+       PFObject *findWorkers = [queryWorkers getFirstObject];
+       self.workerList = findWorkers[@"projectWorkers"];
+       NSLog(@"%@", self.workerList);
+    });
     [self pullFromServerProject];
     [self drawAllLines];
     
@@ -50,9 +57,12 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"addNode"]) {
+    
         UINavigationController *destinationViewController = segue.destinationViewController;
         MCNodeInputViewController *destination = [destinationViewController viewControllers][0];
+        destination.workerList = self.workerList;
         destination.delegate = self;
+        
     }
 }
 

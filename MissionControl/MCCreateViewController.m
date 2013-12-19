@@ -36,8 +36,8 @@
         project[@"projectOwner"] = udid;
         
         NSMutableArray *projectMember = [[NSMutableArray alloc]init];
-        [projectMember addObject:udid];
-        [project addUniqueObjectsFromArray:projectMember forKey:@"projectMember"];
+        [projectMember addObject:self.userJob.text];
+        [project addUniqueObjectsFromArray:projectMember forKey:@"projectWorkers"];
         [project saveInBackground];
         
         PFObject *projectParticipate = [PFObject objectWithClassName:@"projectParticipate"];

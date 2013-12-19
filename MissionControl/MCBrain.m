@@ -57,6 +57,7 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         NSLog(@"MCBrain is loading projects asynchronously");
         self.projects = [query findObjects];
+        
         dispatch_sync(dispatch_get_main_queue(), ^{
             [[NSNotificationCenter defaultCenter] postNotificationName:@"didUpdateProjects" object:self];
         });
