@@ -115,10 +115,10 @@
     }
 }
 - (void)refreshFromServer{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
     PFQuery *fresh = [PFQuery queryWithClassName:[@"A" stringByAppendingString:[self.project[@"projectPasscode"] stringValue]]];
         NSArray *newWorkNodes = [fresh findObjects];
-    dispatch_sync(dispatch_get_main_queue(), ^{
+//    dispatch_sync(dispatch_get_main_queue(), ^{
         for (PFObject *newNode in newWorkNodes) {
             for (PFObject *oldNode in self.workNodes) {
                 if ([newNode[@"task"] isEqualToString:oldNode[@"task"]]) {
@@ -132,9 +132,9 @@
             }
         }
 
-        });
-    });
-        
+//        });
+//    });
+    
             if ([self checkFinished]) {
         //NSLog(@"yoooooooo");
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Finished!" message:@"Congratz" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
