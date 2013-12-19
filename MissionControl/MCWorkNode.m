@@ -95,7 +95,7 @@
     if ([self.delegate isEditingContent]) {
         if (!self.isMakingFather) {
             self.isMakingFather = YES;
-            UIAlertView *newFatherAlert = [[UIAlertView alloc] initWithTitle:@"father" message:@"輸入新父點" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"確定", nil];
+            UIAlertView *newFatherAlert = [[UIAlertView alloc] initWithTitle:@"輸入上一個工作" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"確定", nil];
             [newFatherAlert setAlertViewStyle:UIAlertViewStylePlainTextInput];
             [newFatherAlert show];
         }

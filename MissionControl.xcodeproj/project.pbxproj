@@ -42,6 +42,7 @@
 		658B34F9183AF007009C09EB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658B34D8183AF007009C09EB /* UIKit.framework */; };
 		658B3501183AF007009C09EB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 658B34FF183AF007009C09EB /* InfoPlist.strings */; };
 		658B3503183AF007009C09EB /* MissionControlTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 658B3502183AF007009C09EB /* MissionControlTests.m */; };
+		658BCD41186291C200A1ECEF /* Appicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 658BCD40186291C200A1ECEF /* Appicon@2x.png */; };
 		65C024FA1848546D000CC42B /* projectContent.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65C024F91848546D000CC42B /* projectContent.plist */; };
 /* End PBXBuildFile section */
 
@@ -387,6 +388,7 @@
 		658B34FE183AF007009C09EB /* MissionControlTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MissionControlTests-Info.plist"; sourceTree = "<group>"; };
 		658B3500183AF007009C09EB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		658B3502183AF007009C09EB /* MissionControlTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MissionControlTests.m; sourceTree = "<group>"; };
+		658BCD40186291C200A1ECEF /* Appicon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Appicon@2x.png"; sourceTree = "<group>"; };
 		65C024F91848546D000CC42B /* projectContent.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = projectContent.plist; path = ../projectContent.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -983,6 +985,7 @@
 				5E8081881858E33F004D9343 /* MCProjectContentViewController.m */,
 				5E80819D18596782004D9343 /* MCNodeInputViewController.h */,
 				5E80819E18596782004D9343 /* MCNodeInputViewController.m */,
+				658BCD40186291C200A1ECEF /* Appicon@2x.png */,
 			);
 			name = ProjectContent;
 			sourceTree = "<group>";
@@ -1059,6 +1062,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Tommy Lin";
 				TargetAttributes = {
+					658B34D0183AF007009C09EB = {
+						DevelopmentTeam = X8LS9W6YRM;
+					};
 					658B34F4183AF007009C09EB = {
 						TestTargetID = 658B34D0183AF007009C09EB;
 					};
@@ -1199,6 +1205,7 @@
 				658B34DF183AF007009C09EB /* InfoPlist.strings in Resources */,
 				5E067055185DEFEE00FC8445 /* done@2x.png in Resources */,
 				658B34E8183AF007009C09EB /* Main.storyboard in Resources */,
+				658BCD41186291C200A1ECEF /* Appicon@2x.png in Resources */,
 				5E067056185DEFEE00FC8445 /* undo@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1572,6 +1579,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/tommy/Documents/FacebookSDK,
@@ -1585,6 +1594,7 @@
 				GCC_PREFIX_HEADER = "MissionControl/MissionControl-Prefix.pch";
 				INFOPLIST_FILE = "MissionControl/MissionControl-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1594,6 +1604,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/tommy/Documents/FacebookSDK,
@@ -1607,6 +1619,7 @@
 				GCC_PREFIX_HEADER = "MissionControl/MissionControl-Prefix.pch";
 				INFOPLIST_FILE = "MissionControl/MissionControl-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
