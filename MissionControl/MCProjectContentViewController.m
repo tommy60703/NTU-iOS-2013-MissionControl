@@ -38,17 +38,11 @@
     }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moveWorkNodes) name:@"moveWorkNodes" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishWorkNodes:) name:@"finishWorkNodes" object:nil];
-    [self pullFromServerProject];
+    
     
     CGSize size = self.view.frame.size;
     self.myScrollView.contentSize = CGSizeMake(size.width, size.height*2);
-    
-    if (self->seq == -1) {
-        self->seq = 0;
-        [self addNodeTask:@"Start" Worker:self.project[@"job"] Previous:[NSMutableArray new]];
-    } else {
-        self->seq++;
-    }
+    [self pullFromServerProject];
     [self drawAllLines];
     
 
@@ -121,21 +115,27 @@
     }
 }
 - (void)refreshFromServer{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
     PFQuery *fresh = [PFQuery queryWithClassName:[@"A" stringByAppendingString:[self.project[@"projectPasscode"] stringValue]]];
-    NSArray *newWorkNodes = [fresh findObjects];
-    for (PFObject *newNode in newWorkNodes) {
-        for (PFObject *oldNode in self.workNodes) {
-            if ([newNode[@"task"] isEqualToString:oldNode[@"task"]]) {
-                if (newNode[@"state"] != oldNode[@"state"]) {
-                    oldNode[@"state"] = newNode[@"state"];
-                    [self refreshWorkNodes:[oldNode[@"seq"] integerValue]];
-                    
-                    
+        NSArray *newWorkNodes = [fresh findObjects];
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        for (PFObject *newNode in newWorkNodes) {
+            for (PFObject *oldNode in self.workNodes) {
+                if ([newNode[@"task"] isEqualToString:oldNode[@"task"]]) {
+                    if (newNode[@"state"] != oldNode[@"state"]) {
+                        oldNode[@"state"] = newNode[@"state"];
+                        [self refreshWorkNodes:[oldNode[@"seq"] integerValue]];
+                        
+                        
+                    }
                 }
             }
         }
-    }
-    if ([self checkFinished]) {
+
+        });
+    });
+        
+            if ([self checkFinished]) {
         //NSLog(@"yoooooooo");
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Finished!" message:@"Congratz" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         if (!self.shown) {
@@ -146,6 +146,8 @@
     }
 }
 - (void)pullFromServerProject {
+
+        NSLog(@"pull frome Server");
     int maxSeq = -1;
     PFQuery *query = [PFQuery queryWithClassName:[@"A" stringByAppendingString:[self.project[@"projectPasscode"] stringValue]]];
     [query orderByAscending:@"seq"];
@@ -167,10 +169,20 @@
         bool status = [node[@"state"] boolValue];
         MCWorkNode *theNode = [[MCWorkNode alloc] initWithPoint:position Seq:theSeq Task:task Worker:worker Prev:previous Status:status];
         theNode.delegate = self;
+
         [self.myScrollView addSubview:theNode];
+ 
     }
     self -> seq = maxSeq;
+        
+    if (self->seq == -1) {
+        self->seq = 0;
+        [self addNodeTask:@"Start" Worker:self.project[@"job"] Previous:[NSMutableArray new]];
+    } else {
+            self->seq++;
+    }
     //NSLog(@"%d", self -> seq);
+
 }
 
 #pragma mark - Private Method
