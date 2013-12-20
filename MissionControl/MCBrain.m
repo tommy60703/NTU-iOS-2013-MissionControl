@@ -29,6 +29,7 @@
     if (self = [super init]) {
         self.deviceUDID = [UIDevice currentDevice].identifierForVendor.UUIDString;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateProjects) name:@"doUpdateProjects" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteProject:) name:@"deleteProject" object:nil];
     }
     return self;
 }
@@ -65,4 +66,16 @@
 
 }
 
+- (void)deleteProject:(NSNotification *)notification{
+    NSDictionary *dict = [notification userInfo];
+    NSLog(@"%@", dict);
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        PFQuery *query = [PFQuery queryWithClassName:@"projectParticipate"];
+        [query whereKey:@"projectPasscode" equalTo:[dict valueForKey:@"deleteNode"]];
+        [query whereKey:@"job" equalTo:[dict valueForKey:@"job"]];
+        PFObject *theProject = [query getFirstObject];
+        [theProject deleteInBackground];
+    });
+    
+}
 @end

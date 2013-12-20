@@ -68,10 +68,16 @@
 }
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObject: [MCBrain shareInstance].projects[indexPath.row][@"projectPasscode"] forKey:@"deleteNode"];
+        [dict setValue:[MCBrain shareInstance].projects[indexPath.row][@"job"] forKey:@"job"];
+       
+        NSLog(@"%@", dict);
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"deleteProject" object:self userInfo:dict];
         [[MCBrain shareInstance].projects removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationRight];
         
         
+
     }
 }
 @end
