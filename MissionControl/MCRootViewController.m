@@ -54,6 +54,7 @@
         UITableViewCell *cell = (UITableViewCell *)sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
         [MCProject shareInstance].projectMeta = [MCBrain shareInstance].projectMetas[indexPath.row];
+        NSLog(@"%@", [MCProject shareInstance].projectMeta);
     }
 }
 

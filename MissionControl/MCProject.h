@@ -11,8 +11,10 @@
 
 @interface MCProject : NSObject
 
-@property (strong, nonatomic) NSDictionary *projectMeta;
+@property (strong, nonatomic) NSString *projectClassName;
+@property (strong, nonatomic) PFObject *projectMeta;
 @property (strong, nonatomic) NSMutableArray *workNodes;
+@property (strong, nonatomic) NSDate *lastModifyTime;
 
 + (instancetype)shareInstance;
 
@@ -23,5 +25,6 @@
 - (void)clean;
 - (void)pushToDatabase;
 - (void)pullFromDatabase;
+- (void)updateWorkNode:(MCWorkNode *)updateNode;
 
 @end

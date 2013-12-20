@@ -14,6 +14,7 @@
 
 #pragma mark - Properties
 
+@property (strong) NSString *objectId;
 @property (strong) NSString *task;
 @property (strong) NSString *worker;
 @property (strong) NSMutableArray *previousNodes;

@@ -12,8 +12,10 @@
 #import "MCWokeNodeView.h"
 
 @interface MCProjectContentViewController ()
-//@property (strong, nonatomic) NSTimer *syncWithServerTimer;
+@property (strong, nonatomic) NSTimer *checkModifyTimer;
 @property BOOL finished;
+
+@property BOOL checking;
 @end
 
 @implementation MCProjectContentViewController
@@ -23,7 +25,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(initCanvas) name:@"projectContentLoaded" object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshCanvas) name:@"newNodeAdded" object:nil];
     
     CGSize size = self.view.frame.size;
     self.myScrollView.contentSize = CGSizeMake(size.width, size.height*2);
@@ -34,21 +35,42 @@
     self.addNodeButton.hidden = YES;
     self.saveButton.hidden = YES;
     
+    self.checking = YES;
     [[MCProject shareInstance] clean];
     [[MCProject shareInstance] pullFromDatabase];
+    self.checking = NO;
+    [self drawAllLines];
 }
 
--(void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
     if (!self.isEditingProjectContent) {
-//        self.syncWithServerTimer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(pullProjectContent) userInfo:nil repeats:YES];
+        self.checkModifyTimer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(pullProjectContent) userInfo:nil repeats:YES];
     }
 }
--(void)viewWillDisappear:(BOOL)animated {
+- (void)viewWillDisappear:(BOOL)animated {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-//    [self.syncWithServerTimer invalidate];
+    [self.checkModifyTimer invalidate];
+}
+
+- (void)checkModify {
+    if (!self.checking) {
+        self.checking = YES;
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+
+            NSLog(@"checking");
+            PFQuery *query = [PFQuery queryWithClassName:@"project"];
+            PFObject *object = [query getObjectWithId:[MCProject shareInstance].projectMeta[@"idOfProjectClass"]];
+            if (![[MCProject shareInstance].lastModifyTime isEqualToDate:object[@"lastModifyTime"]]) {
+                [[MCProject shareInstance] pullFromDatabase];
+                [MCProject shareInstance].lastModifyTime = object[@"lastModifyTime"];
+            }
+        });
+    }
+    self.checking = NO;
 }
 
 - (void)pullProjectContent {
+    [[MCProject shareInstance] clean];
     [[MCProject shareInstance] pullFromDatabase];
 }
 
@@ -56,12 +78,12 @@
     NSInteger count = 100;
     for (MCWorkNode *node in [MCProject shareInstance].workNodes) {
         MCWokeNodeView *newNodeView = [[MCWokeNodeView alloc] initWithWorkNodeContent:node];
+        newNodeView.viewControllerDelegate = self;
         newNodeView.center = CGPointMake(100, count);
         [self.myScrollView addSubview:newNodeView];
         count += 100;
     }
 }
-
 
 #pragma mark - IBAction
 
@@ -70,7 +92,9 @@
 }
 
 - (IBAction)switcherToggled:(UISwitch *)sender {
-    
+    self.isEditingProjectContent = !self.isEditingProjectContent;
+    self.addNodeButton.hidden = !self.addNodeButton.hidden;
+    self.saveButton.hidden = !self.saveButton.hidden;
 }
 
 

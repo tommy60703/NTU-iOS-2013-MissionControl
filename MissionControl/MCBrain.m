@@ -28,6 +28,7 @@
 - (id)init {
     if (self = [super init]) {
         self.deviceUDID = [UIDevice currentDevice].identifierForVendor.UUIDString;
+//        self.deviceUDID = @"35F53C59-A61B-4D04-A88B-7E92516DB370";
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateProjects) name:@"doUpdateProjects" object:nil];
     }
     return self;
@@ -57,6 +58,7 @@
 - (void)updateProjects {
     PFQuery *query = [PFQuery queryWithClassName:@"projectParticipate"];
     [query whereKey:@"user" equalTo:self.deviceUDID];
+    NSLog(@"%@", self.deviceUDID);
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         NSLog(@"MCBrain is loading projects asynchronously");

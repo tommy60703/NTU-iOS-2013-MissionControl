@@ -67,7 +67,8 @@
             projectParticipate[@"owner"] = [aProject objectForKey:@"projectOwner"];
             projectParticipate[@"projectName"] = [aProject objectForKey:@"projectName"];
             projectParticipate[@"projectPasscode"] = [aProject objectForKey:@"projectPasscode"];
-            [projectParticipate saveInBackground];
+            projectParticipate[@"idOfProjectClass"] = aProject.objectId;
+            [projectParticipate save];
             NSLog(@"Joined project \"%@\"!", [aProject objectForKey:@"projectName"]);
         }
         

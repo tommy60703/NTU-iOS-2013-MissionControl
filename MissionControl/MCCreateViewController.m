@@ -43,14 +43,16 @@
         NSMutableArray *projectMember = [NSMutableArray new];
         [projectMember addObject:udid];
         [projectMeta addUniqueObjectsFromArray:projectMember forKey:@"projectMember"];
-        [projectMeta saveInBackground];
+        [projectMeta save];
         
         PFObject *projectParticipate = [PFObject objectWithClassName:@"projectParticipate"];
+        projectParticipate[@"idOfProjectClass"] = projectMeta.objectId;
         projectParticipate[@"projectPasscode"] = [NSNumber numberWithInt:random];
+        projectParticipate[@"projectName"] = self.projectName.text;
         projectParticipate[@"owner"] = udid;
         projectParticipate[@"user"] = udid;
         projectParticipate[@"job"] = self.userJob.text;
-        [projectParticipate saveInBackground];
+        [projectParticipate save];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [[NSNotificationCenter defaultCenter] postNotificationName:@"doUpdateProjects" object:self];

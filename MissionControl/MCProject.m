@@ -37,37 +37,65 @@
 }
 
 - (void)addAPreviousNode:(MCWorkNode *)previousNode ToNode:(MCWorkNode *)node {
+    [previousNode addObserver:node forKeyPath:@"complete" options:(NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld) context:NULL];
     [node.previousNodes addObject:previousNode];
     node.previousCompleteCountDown++;
-    [previousNode addObserver:node forKeyPath:@"complete" options:(NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld) context:NULL];
 }
 
 - (void)clean {
     [self.workNodes removeAllObjects];
 }
 
-- (void)pushToDatabase {
-    
-}
-
 - (void)pullFromDatabase {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         NSString *passcode = [self.projectMeta[@"projectPasscode"] stringValue];
         NSString *projectClassName = [@"A" stringByAppendingString:passcode];
+        self.projectClassName = projectClassName;
+        
         PFQuery *query = [PFQuery queryWithClassName:projectClassName];
         NSArray *newWorkNodes = [query findObjects];
         for (PFObject *newNode in newWorkNodes) {
+            NSString *nodeId = newNode.objectId;
             NSString *task = newNode[@"task"];
             NSString *worker = newNode[@"worker"];
-            NSArray *previousNodes = newNode[@"previous"];
-            BOOL completion = newNode[@"state"]? NO:YES;
+            NSArray *previousNodesString = newNode[@"previous"];
+            bool completion = [newNode[@"state"] boolValue];
+            
+            NSMutableArray *previousNodes = [NSMutableArray new];
+            for (NSString *previousString in previousNodesString) {
+                [previousNodes addObject: [[MCProject shareInstance] findNodeByTask:previousString]];
+            }
             
             MCWorkNode *workNode = [[MCWorkNode alloc] initWithTask:task Worker:worker PreviousNodes:previousNodes Completion:completion];
+            workNode.objectId = nodeId;
             [self addWorkNode:workNode];
         }
-        dispatch_sync(dispatch_get_main_queue(), ^{
+        
+        query = [PFQuery queryWithClassName:@"project"];
+        PFObject *object = [query getObjectWithId:self.projectMeta[@"idOfProjectClass"]];
+        self.lastModifyTime = object[@"lastModifyTime"];
+        NSLog(@"%@", self.lastModifyTime);
+
+        dispatch_async(dispatch_get_main_queue(), ^{
             [[NSNotificationCenter defaultCenter] postNotificationName:@"projectContentLoaded" object:self];
         });
+    });
+}
+
+- (void)updateWorkNode:(MCWorkNode *)updateNode {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        NSString *projectClassName = [@"A" stringByAppendingString:[self.projectMeta[@"projectPasscode"] stringValue]];
+        PFQuery *query = [PFQuery queryWithClassName:projectClassName];
+        // Retrieve the object by id
+        PFObject *updated = [query getObjectWithId:updateNode.objectId];
+        updated[@"state"] = @(updateNode.complete);
+        [updated save];
+        
+        query = [PFQuery queryWithClassName:@"project"];
+        [query getObjectInBackgroundWithId:self.projectMeta[@"idOfProjectClass"] block:^(PFObject *object, NSError *error) {
+            object[@"lastModifyTime"] = [NSDate date];
+            [object save];
+        }];
     });
 }
 

@@ -62,7 +62,9 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     if ([self.viewControllerDelegate isEditingContent]) {
         [self.viewControllerDelegate disableScroll];
-    } else {
+        NSLog(@"editing");
+    } else if (self.workNodeContent.previousCompleteCountDown == 0 && !self.workNodeContent.complete) {
+        NSLog(@"change complete");
         [self.workNodeContent changeState];
         [self putNodeImage];
     }

@@ -23,12 +23,18 @@
     return self;
 }
 
+- (void)dealloc {
+    for (MCWorkNode *prev in self.previousNodes) {
+        [prev removeObserver:self forKeyPath:@"complete"];
+    }
+}
+
 #pragma mark - Instance Methods
 
 - (NSInteger)getCountdown {
     NSInteger count = 0;
-    for (NSString *taskName in self.previousNodes) {
-        MCWorkNode *node = [[MCProject shareInstance] findNodeByTask:taskName];
+    for (MCWorkNode *node in self.previousNodes) {
+        [node addObserver:self forKeyPath:@"complete" options:(NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld) context:NULL];
         if (!node.complete) {
             count++;
         }
@@ -38,11 +44,16 @@
 
 - (void)changeState {
     self.complete = !self.complete;
+    [[MCProject shareInstance] updateWorkNode:self];
+    
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if ([keyPath isEqualToString:@"complete"]) {
-        self.previousCompleteCountDown--;
+        if (self.previousCompleteCountDown != 0) {
+            self.previousCompleteCountDown--;
+        }
+        NSLog(@"%@ %d", self.task, self.previousCompleteCountDown);
     }
 }
 
