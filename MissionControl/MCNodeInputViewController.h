@@ -10,9 +10,7 @@
 #import "MCProjectContentViewController.h"
 
 @protocol MCPreviousInputDelegate <NSObject>
-
-@required
-- (NSArray *)getPreviousList;
+@optional - (void)getPreviousList:(NSMutableArray *)selectPrevious;
 
 @end
 
@@ -27,6 +25,7 @@
 
 @property NSArray *workerList;
 @property NSArray *previousList;
+@property NSMutableArray *previousSelectionList;
 
 - (IBAction)cancelButtonClick:(id)sender;
 - (IBAction)doneButtonClick:(id)sender;

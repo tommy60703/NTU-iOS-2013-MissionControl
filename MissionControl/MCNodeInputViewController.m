@@ -16,8 +16,12 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    NSLog(@"%@", self.workerList);
-    NSLog(@"%@", self.previousList);
+    
+    //    NSLog(@"%@", self.workerList);
+    NSDictionary *dict = [NSDictionary dictionaryWithObject:self.previousList forKey:@"previousList"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadPreviousList" object:self userInfo:dict];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getPreviousList:) name:@"getPreviousList" object:nil];
 }
 
 - (IBAction)cancelButtonClick:(id)sender {
@@ -27,9 +31,10 @@
 
 
 - (IBAction)doneButtonClick:(id)sender {
-    NSMutableArray *foo = [NSMutableArray new];
-    [foo addObject:self.previousInput.text];
-    [self.delegate addNodeTask:self.taskInput.text Worker:self.workerInput.text Previous:foo];
+    //NSMutableArray *foo = [NSMutableArray new];
+    //[foo addObject:self.previousInput.text];
+    [self.delegate addNodeTask:self.taskInput.text Worker:self.workerInput.text Previous:self.previousSelectionList];
+    //NSLog(@"%@", self.previousSelectionList);
     [self dismissViewControllerAnimated:YES completion:nil];
     
 }
@@ -51,11 +56,19 @@
 
 - (void)pickerView:(UIPickerView *)thePickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     
-    self.previousInput.text = [self.workerList objectAtIndex:row];
+    self.workerInput.text = [self.workerList objectAtIndex:row];
 }
 
-- (NSArray *)getPreviousList {
-    return self.previousList;
+- (void)getPreviousList:(NSNotification *)notification{
+    NSDictionary *selectPrevious = [notification userInfo];
+    
+    NSLog(@"%@", [selectPrevious valueForKey:@"previousSelectionList"]);
+    
+    self.previousSelectionList = [NSMutableArray new];
+    [self.previousSelectionList addObjectsFromArray:[selectPrevious valueForKey:@"previousSelectionList"]];
+    
+    NSLog(@"%@", self.previousSelectionList);
 }
+
 
 @end

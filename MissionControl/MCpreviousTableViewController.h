@@ -10,6 +10,7 @@
 #import "MCNodeInputViewController.h"
 @interface MCpreviousTableViewController : UITableViewController
 
-@property (strong, nonatomic) id<MCPreviousInputDelegate> delegate;
-
+@property id<MCPreviousInputDelegate> delegate;
+@property (strong, nonatomic) NSArray *previousList;
+@property NSMutableArray *previousSelectionList;
 @end

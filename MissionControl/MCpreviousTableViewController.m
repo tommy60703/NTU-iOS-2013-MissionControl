@@ -26,9 +26,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.previousSelectionList = [NSMutableArray new];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LoadPreviousList:) name:@"LoadPreviousList" object:nil];
+
     self.delegate = [self.storyboard instantiateViewControllerWithIdentifier:@"NodeInputController"];
-    NSLog(@"%@",[self.delegate getPreviousList]);
+    
+    //NSLog(@"%d", [self.delegate getPreviousList].count);
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -46,16 +50,16 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
+
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
+
     // Return the number of rows in the section.
-    return 0;
+    return self.previousList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -63,60 +67,50 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    // Configure the cell...
     
+    // Configure the cell...
+    NSString *previousForThisCell = [self.previousList objectAtIndex:indexPath.row];
+    
+    UILabel *previousTask = (UILabel *)[cell viewWithTag:1001];
+    
+    previousTask.text = previousForThisCell;
+    
+
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *cellText = self.previousList[indexPath.row];
+    NSLog(@"%@", cellText);
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if (cell.accessoryType != UITableViewCellAccessoryCheckmark) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        [self.previousSelectionList addObject:cellText];
+        NSDictionary *dict = [NSDictionary dictionaryWithObject:self.previousSelectionList forKey:@"previousSelectionList"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"getPreviousList" object:self userInfo:dict];
+        //NSLog(@"%@",self.previousSelectionList);
+//        [self.delegate getPreviousList:self.previousSelectionList];
+        
+    }
+    else{
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        [self.previousSelectionList removeObject:cellText];
+        NSDictionary *dict = [NSDictionary dictionaryWithObject:self.previousSelectionList forKey:@"previousSelectionList"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"getPreviousList" object:self userInfo:dict];
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
+//        [self.delegate getPreviousList:self.previousSelectionList];
+        //[self.delegate deletePreviousList:cellText];
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a story board-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    }
+    
+    
 }
 
- */
+-(void)LoadPreviousList:(NSNotification *)notification{
+    NSDictionary *dict = [notification userInfo];
+    
+    self.previousList = [dict valueForKey:@"previousList"];
+    //NSLog(@"%@",self.previousList);
+}
 
 @end

@@ -44,10 +44,10 @@
     self.myScrollView.contentSize = CGSizeMake(size.width, size.height*2);
    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
        PFQuery *queryWorkers = [PFQuery queryWithClassName:@"project"];
-       [queryWorkers whereKey:@"projectName" equalTo:self.project[@"projectName"]];
+       [queryWorkers whereKey:@"projectPasscode" equalTo:self.project[@"projectPasscode"]];
        PFObject *findWorkers = [queryWorkers getFirstObject];
        self.workerList = findWorkers[@"projectWorkers"];
-       NSLog(@"%@", self.workerList);
+       //NSLog(@"%@", self.workerList);
     });
     [self pullFromServerProject];
     [self drawAllLines];
