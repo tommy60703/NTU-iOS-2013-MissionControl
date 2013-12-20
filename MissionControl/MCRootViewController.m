@@ -31,8 +31,7 @@
     return [MCBrain shareInstance].projects.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     NSDictionary *projectForThisCell = [[MCBrain shareInstance].projects objectAtIndex:indexPath.row];
@@ -40,8 +39,8 @@
     UILabel *projectName = (UILabel *)[cell viewWithTag:1101];
     UILabel *passcode = (UILabel *)[cell viewWithTag:1102];
     UILabel *worker = (UILabel *)[cell viewWithTag:1103];
-    passcode.text = [projectForThisCell[@"projectPasscode"] stringValue];
     projectName.text = projectForThisCell[@"projectName"];
+    passcode.text = [NSString stringWithFormat:@"passcode: %@", [projectForThisCell[@"projectPasscode"] stringValue]];
     worker.text = projectForThisCell[@"job"];
     
     return cell;
@@ -53,7 +52,6 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-
     if ([segue.identifier isEqualToString:@"ShowProjectContent"]) {
         UITableViewCell *cell = (UITableViewCell *)sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
@@ -62,6 +60,5 @@
         destinationViewController.project = [[MCBrain shareInstance].projects objectAtIndex:indexPath.row];
     }
 }
-
 
 @end

@@ -24,7 +24,6 @@
 }
 
 - (IBAction)doneButtonClicked:(id)sender {
-    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         NSInteger random = [MCBrain getUniquePasscode];
         NSString *udid = [MCBrain shareInstance].deviceUDID;

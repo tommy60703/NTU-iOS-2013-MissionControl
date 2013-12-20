@@ -18,6 +18,4 @@
 
 - (void)updateProjects;
 
-
-
 @end

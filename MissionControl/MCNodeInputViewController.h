@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "MCProjectContentViewController.h"
+#import "MCNodeDelegate.h"
 
 
 @interface MCNodeInputViewController : UIViewController
 
-@property id<MCAddNodeDelegate> delegate;
+@property id<MCNodeDelegate> delegate;
 @property (strong, nonatomic) IBOutlet UITextField *taskInput;
 @property (strong, nonatomic) IBOutlet UITextField *workerInput;
 @property (strong, nonatomic) IBOutlet UITextField *previousInput;

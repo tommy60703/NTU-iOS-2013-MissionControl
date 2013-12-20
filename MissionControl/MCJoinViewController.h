@@ -13,7 +13,6 @@
 @property (strong, nonatomic) IBOutlet UITextField *passcodeField;
 @property (strong, nonatomic) IBOutlet UITextField *passwordField;
 @property (strong, nonatomic) IBOutlet UITextField *userJob;
-
 @property (strong, nonatomic) IBOutlet UILabel *projectName;
 
 @end

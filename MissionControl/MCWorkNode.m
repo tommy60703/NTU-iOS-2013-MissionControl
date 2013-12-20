@@ -10,89 +10,106 @@
 
 @implementation MCWorkNode
 
-@synthesize xLabel, yLabel;
+#pragma mark - Lifecycle
 
-- (MCWorkNode *)initWithPoint:(CGPoint)point Seq:(int)seq Task:(NSString *)task Worker:(NSString *)worker Prev:(NSMutableArray *)previous Status:(bool)status {
-    self = [super init];
-    if (self) {
+- (instancetype)initWithTask:(NSString *)task Worker:(NSString *)worker PreviousNodes:(NSArray *)previousNodes Completion:(BOOL)completion {
+    if (self = [super init]) {
+        // node's basic property settings
+        self.task = task;
+        self.worker = worker;
+        self.previousNodes = (NSMutableArray *)previousNodes;
+        self.previousNodesCompletionCountdown = self.previousNodes.count;
+        self.completion = completion;
+        [self setClipsToBounds:NO];
+        
+        // Add Long Press Gesture Recognizer
         UILongPressGestureRecognizer *longPressGestureRecognizer =
-            [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(makingFather)];
+        [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(editNode)];
         [self addGestureRecognizer:longPressGestureRecognizer];
         
         // Load undo circle image
         // set the view size of MCWorkNode as same as undo circle image
-        UIImageView *dotImageView;
-        if (status == false) {
-        dotImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"undo.png"]];
-        }
-        else{
-        dotImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"done.png"]];
-        }
-        CGSize imageSize = dotImageView.frame.size;
-        self.frame = CGRectMake(point.x, point.y, imageSize.width, imageSize.height);
-        [self addSubview:dotImageView];
+        self.nodeImageView = completion ? [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"done.png"]] :
+                                            [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"undo.png"]];
+        
+        CGSize imageSize = self.nodeImageView.frame.size;
+        self.frame = CGRectMake(120, 150, imageSize.width, imageSize.height);
+        [self addSubview:self.nodeImageView];
         
         // set node's label
-        xLabel = [[UILabel alloc] initWithFrame:CGRectMake(imageSize.width+1, 5.0, 50.0, 15.0)];
-        yLabel = [[UILabel alloc] initWithFrame:CGRectMake(imageSize.width+1, 21.0, 50.0, 15.0)];
+        UILabel *taskNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(imageSize.width+5, 5.0, 100.0, 20.0)];
+        UIFont *taskFont = [UIFont fontWithName:@"helvetica" size:18.0];
+        taskNameLabel.font = taskFont;
+        taskNameLabel.text = task;
+        [taskNameLabel setBackgroundColor:[UIColor clearColor]];
         
-        UIFont *font = [UIFont fontWithName:@"helvetica" size:15.0];
-        xLabel.font = font;
-        yLabel.font = font;
-        xLabel.text = task;
-        yLabel.text = worker;
-        [xLabel setBackgroundColor:[UIColor clearColor]];
-        [yLabel setBackgroundColor:[UIColor clearColor]];
-        [self addSubview:xLabel];
-        [self addSubview:yLabel];
+        UILabel *workerNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(imageSize.width+5, 22.0, 100.0, 20.0)];
+        UIFont *workerFont = [UIFont fontWithName:@"helvetica" size:15.0];
+        workerNameLabel.font = workerFont;
+        workerNameLabel.text = worker;
+        [workerNameLabel setBackgroundColor:[UIColor clearColor]];
+        workerNameLabel.textColor = [UIColor lightGrayColor];
         
-        // node's basic property settings
-        self.tag = seq;
-        self.task = task;
-        self.worker = worker;
-        self.previousNodes = previous;
-        self.status = status;
-        [self setClipsToBounds:NO];
+        [self addSubview:taskNameLabel];
+        [self addSubview:workerNameLabel];
     }
     return self;
 }
 
+#pragma mark - Touch Events
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    if ([self.delegate isEditingContent]) {
-        [self.delegate disableScroll];
+    if ([self.viewControllerDelegate isEditingContent]) {
+        [self.viewControllerDelegate disableScroll];
         
         // 將被觸碰到鍵移動到所有畫面的最上層
         [[self superview] bringSubviewToFront:self];
         CGPoint point = [[touches anyObject] locationInView:self];
-        location = point;
+        self.location = point;
+    } else {
+        [self changeState];
     }
-    
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    if ([self.delegate isEditingContent]) {
+    if ([self.viewControllerDelegate isEditingContent]) {
+        // Move the node
         CGPoint point = [[touches anyObject] locationInView:self];
         CGRect frame = self.frame;
-        frame.origin.x += point.x - location.x;
-        frame.origin.y += point.y - location.y;
+        frame.origin.x += point.x - self.location.x;
+        frame.origin.y += point.y - self.location.y;
         self.frame = frame;
         [[NSNotificationCenter defaultCenter] postNotificationName:@"moveWorkNodes" object:nil userInfo:nil];
     }
     
 }
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    if ([self.delegate isEditingContent]) {
-        [self.delegate enableScroll];
-    }
-    else{
-        //self.status = (!self.status);
+    if ([self.viewControllerDelegate isEditingContent]) {
+        [self.viewControllerDelegate enableScroll];
+    } else {
         NSDictionary *dict = [NSDictionary dictionaryWithObject: [NSNumber numberWithInteger:self.tag] forKey:@"tag"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"finishWorkNodes" object:self userInfo:dict];
     }
 }
 
-- (void)makingFather {
-    if ([self.delegate isEditingContent]) {
+#pragma mark - Instance Methods
+
+- (void)changeState {
+    self.completion = !self.completion;
+    self.nodeImageView = self.completion ? [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"done.png"]] :
+    [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"undo.png"]];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"completion"]) {
+        self.previousNodesCompletionCountdown -= 1;
+    }
+}
+
+#pragma mark - Private Methods
+
+- (void)editNode {
+    if ([self.viewControllerDelegate isEditingContent]) {
         if (!self.isMakingFather) {
             self.isMakingFather = YES;
             UIAlertView *newFatherAlert = [[UIAlertView alloc] initWithTitle:@"輸入上一個工作" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"確定", nil];
@@ -106,40 +123,11 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
         NSLog(@"%@", [alertView textFieldAtIndex:0].text);
+        MCWorkNode *prev = [self.editDelegate findNodeByTask:[alertView textFieldAtIndex:0].text];
+        [self.editDelegate addAPreviousNode:prev ToNode:self];
         [self.previousNodes addObject:[alertView textFieldAtIndex:0].text];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"moveWorkNodes" object:nil userInfo:nil];
     }
 }
 
-+ (void)WorkNodeChange:(MCWorkNode *) finder{
-    finder.status = !finder.status;
-    for (UIImageView *oldimage in finder.subviews) {
-        [oldimage removeFromSuperview];
-    }
-    UIImageView *dotImageView;
-    if (finder.status == false) {
-        dotImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"undo.png"]];
-    }
-    else{
-        dotImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"done.png"]];
-    }
-    CGSize imageSize = dotImageView.frame.size;
-    finder.frame = CGRectMake(finder.frame.origin.x, finder.frame.origin.y, imageSize.width, imageSize.height);
-    [finder addSubview:dotImageView];
-    
-    // set node's label
-    UILabel *AxLabel = [[UILabel alloc] initWithFrame:CGRectMake(imageSize.width + 1, 5.0, 50.0, 15.0)];
-    UILabel *AyLabel = [[UILabel alloc] initWithFrame:CGRectMake(imageSize.width + 1, 21.0, 50.0, 15.0)];
-    
-    UIFont *font = [UIFont fontWithName:@"helvetica" size:15.0];
-    AxLabel.font = font;
-    AyLabel.font = font;
-    AxLabel.text = finder.task;
-    AyLabel.text = finder.worker;
-    [AxLabel setBackgroundColor:[UIColor clearColor]];
-    [AyLabel setBackgroundColor:[UIColor clearColor]];
-    [finder addSubview:AxLabel];
-    [finder addSubview:AyLabel];
-    
-}
 @end

@@ -33,6 +33,8 @@
     return self;
 }
 
+#pragma mark - Class Methods
+
 + (NSInteger)getUniquePasscode {
     NSInteger random = 0;
     BOOL unique = NO;
@@ -50,6 +52,8 @@
     return random;
 }
 
+#pragma mark - Instance Methods
+
 - (void)updateProjects {
     PFQuery *query = [PFQuery queryWithClassName:@"projectParticipate"];
     [query whereKey:@"user" equalTo:self.deviceUDID];
@@ -63,5 +67,6 @@
     });
 
 }
+
 
 @end

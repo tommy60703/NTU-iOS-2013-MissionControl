@@ -7,29 +7,25 @@
 //
 
 #import "MCProjectContentViewController.h"
-#import "MCWorkNode.h"
 #import "MCNodeInputViewController.h"
+#import "MCWorkNode.h"
 
 @interface MCProjectContentViewController ()
-@property (strong, nonatomic) NSTimer *syncWithServer;
-@property BOOL shown;
+@property (strong, nonatomic) NSTimer *syncWithServerTimer;
+@property BOOL finished;
 @end
 
 @implementation MCProjectContentViewController
 
 #pragma mark - Lifecycle
--(void)viewWillAppear:(BOOL)animated{
-    if (!self.isEditingProjectContent) {
-    self.syncWithServer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(refreshFromServer) userInfo:nil repeats:YES];
-    }
-}
--(void)viewWillDisappear:(BOOL)animated{
-    [self.syncWithServer invalidate];
-}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    CGSize size = self.view.frame.size;
+    self.myScrollView.contentSize = CGSizeMake(size.width, size.height*2);
+    
     self.isEditingProjectContent = NO;
-    self.shown = NO;
+    self.finished = NO;
     self.addNodeButton.hidden = YES;
     self.saveButton.hidden = YES;
     
@@ -38,20 +34,21 @@
     }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moveWorkNodes) name:@"moveWorkNodes" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishWorkNodes:) name:@"finishWorkNodes" object:nil];
-    [self pullFromServerProject];
     
-    CGSize size = self.view.frame.size;
-    self.myScrollView.contentSize = CGSizeMake(size.width, size.height*2);
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshCanvas) name:@"loadedData" object:nil];
+    [self reloadFromServer];
     
-    if (self->seq == -1) {
-        self->seq = 0;
-        [self addNodeTask:@"Start" Worker:self.project[@"job"] Previous:[NSMutableArray new]];
-    } else {
-        self->seq++;
-    }
     [self drawAllLines];
-    
+}
 
+-(void)viewWillAppear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshCanvas) name:@"doRefreshCanvas" object:nil];
+    if (!self.isEditingProjectContent) {
+        self.syncWithServerTimer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(reloadFromServer) userInfo:nil repeats:YES];
+    }
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    [self.syncWithServerTimer invalidate];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -62,6 +59,10 @@
     }
 }
 
+- (void)refreshCanvas {
+    
+}
+
 #pragma mark - IBAction
 
 - (IBAction)saveWorkFlow:(id)sender {
@@ -69,7 +70,7 @@
         if([subview isKindOfClass:[MCWorkNode class]]){
             MCWorkNode *finder = (MCWorkNode *)subview;
             //NSLog(@"%d",finder.tag);
-            [self pushToServerTask:finder.task Worker:finder.worker Prev:finder.previousNodes Tag:finder.tag Status:finder.status Location:finder.frame.origin];
+            [self pushToServerTask:finder.task Worker:finder.worker Prev:finder.previousNodes Tag:finder.tag Status:finder.completion Location:finder.frame.origin];
         }
     }
     //[self.navigationController popViewControllerAnimated:YES];
@@ -79,12 +80,9 @@
 - (IBAction)switcherToggled:(UISwitch *)sender {
     self.isEditingProjectContent = !self.isEditingProjectContent;
     if (self.isEditingProjectContent) {
-        [self.syncWithServer invalidate];
-        //NSLog(@"%d",self.isEditingProjectContent);
-    }
-    else{
-        self.syncWithServer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(refreshFromServer) userInfo:nil repeats:YES];
-        //NSLog(@"%d",self.isEditingProjectContent);
+        [self.syncWithServerTimer invalidate];
+    } else {
+        self.syncWithServerTimer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(reloadFromServer) userInfo:nil repeats:YES];
     }
     self.addNodeButton.hidden = !self.addNodeButton.hidden;
     self.saveButton.hidden = !self.saveButton.hidden;
@@ -94,7 +92,7 @@
 
 - (void)pushToServerTask:(NSString *)task Worker:(NSString *)worker Prev:(NSMutableArray *)previous Tag:(int)tag Status:(bool)status Location:(CGPoint)point {
     bool flag = true;
-    for (PFObject *node in self.workNodes) {
+    for (PFObject *node in self.project.workNodes) {
         //NSLog(@"%d",[[node objectForKey:@"seq"] integerValue] == tag);
         if ([[node objectForKey:@"seq"] integerValue] == tag) {
             //NSLog(@"same");
@@ -120,68 +118,61 @@
         //NSLog(@"here");
     }
 }
-- (void)refreshFromServer{
-    PFQuery *fresh = [PFQuery queryWithClassName:[@"A" stringByAppendingString:[self.project[@"projectPasscode"] stringValue]]];
-    NSArray *newWorkNodes = [fresh findObjects];
-    for (PFObject *newNode in newWorkNodes) {
-        for (PFObject *oldNode in self.workNodes) {
-            if ([newNode[@"task"] isEqualToString:oldNode[@"task"]]) {
-                if (newNode[@"state"] != oldNode[@"state"]) {
-                    oldNode[@"state"] = newNode[@"state"];
-                    [self refreshWorkNodes:[oldNode[@"seq"] integerValue]];
-                    
-                    
+- (void)reloadFromServer {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        PFQuery *fresh = [PFQuery queryWithClassName:[@"A" stringByAppendingString:[self.project[@"projectPasscode"] stringValue]]];
+        NSArray *newWorkNodes = [fresh findObjects];
+        for (PFObject *newNode in newWorkNodes) {
+            for (PFObject *oldNode in self.project.workNodes) {
+                if ([newNode[@"task"] isEqualToString:oldNode[@"task"]]) {
+                    if (newNode[@"state"] != oldNode[@"state"]) {
+                        oldNode[@"state"] = newNode[@"state"];
+                        [self refreshWorkNodes:[oldNode[@"seq"] integerValue]];
+                    }
                 }
             }
         }
-    }
-    if ([self checkFinished]) {
-        //NSLog(@"yoooooooo");
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Finished!" message:@"Congratz" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        if (!self.shown) {
-            [alert show];
-            self.shown = YES;
-            [self.syncWithServer invalidate];
+        if ([self checkFinished]) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Finished!" message:@"Congratz" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            if (!self.finished) {
+                [alert show];
+                self.finished = YES;
+                [self.syncWithServerTimer invalidate];
+            }
         }
-    }
+
+    });
 }
 - (void)pullFromServerProject {
-    int maxSeq = -1;
     PFQuery *query = [PFQuery queryWithClassName:[@"A" stringByAppendingString:[self.project[@"projectPasscode"] stringValue]]];
     [query orderByAscending:@"seq"];
 
-    self.workNodes = [query findObjects];
+    self.project.workNodes =[NSMutableArray arrayWithArray:[query findObjects]];
     
-    for (PFObject *node in self.workNodes) {
+    for (PFObject *node in self.project.workNodes) {
         CGPoint position;
         position.x = [[node objectForKey:@"location_x"] floatValue];
         position.y = [[node objectForKey:@"location_y"] floatValue];
-        int theSeq = [[node objectForKey:@"seq"] integerValue];
-        if(theSeq > maxSeq){
-            maxSeq = theSeq;
-        }
-        
+
         NSString *task = node[@"task"];
         NSString *worker = node[@"worker"];
         NSMutableArray *previous = node[@"previous"];
-        bool status = [node[@"state"] boolValue];
-        MCWorkNode *theNode = [[MCWorkNode alloc] initWithPoint:position Seq:theSeq Task:task Worker:worker Prev:previous Status:status];
-        theNode.delegate = self;
+        BOOL completion = [node[@"state"] boolValue];
+        MCWorkNode *theNode = [[MCWorkNode alloc] initWithTask:task Worker:worker PreviousNodes:previous Completion:completion];
+        theNode.viewControllerDelegate = self;
         [self.myScrollView addSubview:theNode];
     }
-    self -> seq = maxSeq;
-    //NSLog(@"%d", self -> seq);
 }
 
 #pragma mark - Private Method
 
 - (void)addNodeTask:(NSString *)task Worker:(NSString*)worker Previous:(NSMutableArray*)previous {
-    MCWorkNode *theNode = [[MCWorkNode alloc] initWithPoint:self.view.center Seq:seq Task:task Worker:worker Prev:previous Status:false];
-    theNode.delegate = self;
+    MCWorkNode *theNode = [[MCWorkNode alloc] initWithTask:task Worker:worker PreviousNodes:previous Completion:NO];
+    theNode.viewControllerDelegate = self;
     
     NSMutableArray *tempWorkNodes = [[NSMutableArray alloc] init];
     
-    for (PFObject *node in self.workNodes) {
+    for (PFObject *node in self.project.workNodes) {
         [tempWorkNodes addObject:node];
     }
     
@@ -189,14 +180,12 @@
     projectContent[@"task"] = task;
     projectContent[@"worker"] = worker;
     projectContent[@"previous"] = previous;
-    projectContent[@"seq"] = [NSNumber numberWithInt:self->seq];
-    projectContent[@"state"] = [NSNumber numberWithBool:false];
+    projectContent[@"state"] = [NSNumber numberWithBool:NO];
     projectContent[@"location_x"] = [NSNumber numberWithDouble:theNode.frame.origin.x];
     projectContent[@"location_y"] = [NSNumber numberWithDouble:theNode.frame.origin.y];
     [tempWorkNodes addObject:projectContent];
     
-    self.workNodes = tempWorkNodes;
-    self->seq++;
+    self.project.workNodes = tempWorkNodes;
     
     [self.myScrollView addSubview:theNode];
     [self drawAllLines];
@@ -211,14 +200,14 @@
     CGSize size = self.myScrollView.frame.size;
     self.drawLine = [[MCDrawLine alloc] initWithFrame:CGRectMake(0, 0, size.width , size.height)];
     [self.drawLine setBackgroundColor:[UIColor whiteColor]];
-    [self.drawLine addPoints:(NSMutableArray *)self.workNodes];
+    [self.drawLine addPoints:self.project.workNodes];
     self.drawLine.tag = -1;
     [self.myScrollView insertSubview:self.drawLine atIndex:0];
     
 }
 
 - (void)moveWorkNodes {
-    for (PFObject *node in self.workNodes) {
+    for (PFObject *node in self.project.workNodes) {
         for (UIView *subview in self.myScrollView.subviews) {
             if([subview isKindOfClass:[MCWorkNode class]]){
                 if ([[node objectForKey:@"seq"] integerValue] == subview.tag ) {
@@ -241,7 +230,7 @@
                 NSSet *parents = [NSSet setWithArray:finder.previousNodes];
                 //NSLog(@"%@",parents);
                 
-                for (PFObject *parentNode in self.workNodes) {
+                for (PFObject *parentNode in self.project.workNodes) {
                     
                     if ([parents containsObject:[parentNode objectForKey:@"task"]])  {
                         //NSLog(@"%@",parentNode);
@@ -255,7 +244,7 @@
                 
                 //NSLog(@"%d",flag);
                 if (flag) {
-                    [MCWorkNode WorkNodeChange:finder];
+//                    [MCWorkNode workNodeChange:finder];
                     [self syncStatusWithServer:tag];
                 }
             }
@@ -280,7 +269,7 @@
                 NSSet *parents = [NSSet setWithArray:finder.previousNodes];
                 //NSLog(@"%@",parents);
                 
-                for (PFObject *parentNode in self.workNodes) {
+                for (PFObject *parentNode in self.project.workNodes) {
                     
                     if ([parents containsObject:[parentNode objectForKey:@"task"]])  {
 //                        NSLog(@"%@",parentNode);
@@ -294,7 +283,7 @@
                 
                 //NSLog(@"%d",flag);
                 if (flag) {
-                    [MCWorkNode WorkNodeChange:finder];
+//                    [MCWorkNode workNodeChange:finder];
                     [self syncStatusWithServer:[[dict valueForKey:@"tag"] integerValue]];
                 }
             }
@@ -310,9 +299,9 @@
             MCWorkNode *finder = (MCWorkNode *)subview;
             //NSLog(@"%d",finder.tag);
             if (finder.tag == tag) {
-            [self pushToServerTask:finder.task Worker:finder.worker Prev:finder.previousNodes Tag:finder.tag Status:finder.status Location:finder.frame.origin];
-                [self.syncWithServer invalidate];
-                self.syncWithServer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(refreshFromServer) userInfo:nil repeats:YES];
+            [self pushToServerTask:finder.task Worker:finder.worker Prev:finder.previousNodes Tag:finder.tag Status:finder.completion Location:finder.frame.origin];
+                [self.syncWithServerTimer invalidate];
+                self.syncWithServerTimer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(reloadFromServer) userInfo:nil repeats:YES];
             }
         }
     }
@@ -325,7 +314,7 @@
         if([subview isKindOfClass:[MCWorkNode class]]){
             MCWorkNode *finder = (MCWorkNode *)subview;
             //NSLog(@"%d", finder.status);
-            if (!finder.status) {
+            if (!finder.completion) {
                 flag = false;
                 break;
             }

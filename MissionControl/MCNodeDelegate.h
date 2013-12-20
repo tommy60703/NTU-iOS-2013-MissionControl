@@ -9,7 +9,12 @@
 #import <Foundation/Foundation.h>
 
 @protocol MCNodeDelegate <NSObject>
+
+@required
 - (void)disableScroll;
 - (void)enableScroll;
 - (BOOL)isEditingContent;
+
+@optional
+- (void)addNodeTask:(NSString *)task Worker:(NSString*)worker Previous:(NSMutableArray*)previous;
 @end

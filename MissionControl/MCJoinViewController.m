@@ -11,15 +11,12 @@
 #import <Parse/Parse.h>
 
 @interface MCJoinViewController ()
-
 @property (strong, nonatomic) NSArray *allProjects;
-
 @end
 
 @implementation MCJoinViewController
 
-
-- (void) viewDidAppear:(BOOL)animated{
+- (void) viewDidAppear:(BOOL)animated {
     PFQuery *query = [PFQuery queryWithClassName:@"project"];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         self.allProjects = [query findObjects];
