@@ -11,7 +11,7 @@
 @interface MCBrain : NSObject
 
 @property (strong, nonatomic) NSString *deviceUDID;
-@property (strong, nonatomic) NSArray *projects;
+@property (strong, nonatomic) NSMutableArray *projects;
 @property (strong, nonatomic) NSArray *workers;
 
 + (MCBrain *)shareInstance;

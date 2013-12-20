@@ -9,15 +9,24 @@
 #import <UIKit/UIKit.h>
 #import "MCProjectContentViewController.h"
 
+@protocol MCPreviousInputDelegate <NSObject>
 
-@interface MCNodeInputViewController : UIViewController
+@required
+- (NSArray *)getPreviousList;
+
+@end
+
+
+@interface MCNodeInputViewController : UIViewController <MCPreviousInputDelegate>
 
 @property id<MCAddNodeDelegate> delegate;
 @property (strong, nonatomic) IBOutlet UITextField *taskInput;
 @property (strong, nonatomic) IBOutlet UITextField *workerInput;
 @property (strong, nonatomic) IBOutlet UITextField *previousInput;
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
+
 @property NSArray *workerList;
+@property NSArray *previousList;
 
 - (IBAction)cancelButtonClick:(id)sender;
 - (IBAction)doneButtonClick:(id)sender;

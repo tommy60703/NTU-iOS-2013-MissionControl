@@ -36,6 +36,7 @@
 @property NSDictionary *project;
 @property NSArray *workNodes;
 @property NSArray *workerList;
+@property NSMutableArray *previousList;
 @property BOOL isEditingProjectContent;
 
 #pragma mark - IBAction

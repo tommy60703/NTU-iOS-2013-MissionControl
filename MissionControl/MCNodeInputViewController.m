@@ -17,6 +17,7 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     NSLog(@"%@", self.workerList);
+    NSLog(@"%@", self.previousList);
 }
 
 - (IBAction)cancelButtonClick:(id)sender {
@@ -50,6 +51,11 @@
 
 - (void)pickerView:(UIPickerView *)thePickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     
-    self.workerInput.text = [self.workerList objectAtIndex:row];
+    self.previousInput.text = [self.workerList objectAtIndex:row];
 }
+
+- (NSArray *)getPreviousList {
+    return self.previousList;
+}
+
 @end

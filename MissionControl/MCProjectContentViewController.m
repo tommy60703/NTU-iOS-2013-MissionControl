@@ -61,6 +61,7 @@
         UINavigationController *destinationViewController = segue.destinationViewController;
         MCNodeInputViewController *destination = [destinationViewController viewControllers][0];
         destination.workerList = self.workerList;
+        destination.previousList = self.previousList;
         destination.delegate = self;
         
     }
@@ -159,6 +160,7 @@
 
         NSLog(@"pull frome Server");
     int maxSeq = -1;
+    self.previousList = [NSMutableArray new];
     PFQuery *query = [PFQuery queryWithClassName:[@"A" stringByAppendingString:[self.project[@"projectPasscode"] stringValue]]];
     [query orderByAscending:@"seq"];
 
@@ -179,7 +181,7 @@
         bool status = [node[@"state"] boolValue];
         MCWorkNode *theNode = [[MCWorkNode alloc] initWithPoint:position Seq:theSeq Task:task Worker:worker Prev:previous Status:status];
         theNode.delegate = self;
-
+        [self.previousList addObject:node[@"task"]];
         [self.myScrollView addSubview:theNode];
  
     }
@@ -202,9 +204,10 @@
     theNode.delegate = self;
     
     NSMutableArray *tempWorkNodes = [[NSMutableArray alloc] init];
-    
+    self.previousList = [NSMutableArray new];
     for (PFObject *node in self.workNodes) {
         [tempWorkNodes addObject:node];
+        [self.previousList addObject:node[@"task"]];
     }
     
     PFObject *projectContent = [PFObject objectWithClassName:[@"A" stringByAppendingString:[self.project[@"projectPasscode"] stringValue]]];
@@ -216,8 +219,9 @@
     projectContent[@"location_x"] = [NSNumber numberWithDouble:theNode.frame.origin.x];
     projectContent[@"location_y"] = [NSNumber numberWithDouble:theNode.frame.origin.y];
     [tempWorkNodes addObject:projectContent];
-    
+    [self.previousList addObject:projectContent[@"task"]];
     self.workNodes = tempWorkNodes;
+    
     self->seq++;
     
     [self.myScrollView addSubview:theNode];

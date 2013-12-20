@@ -23,7 +23,7 @@
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Project" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xOF-Rh-OEH">
                                             <rect key="frame" x="15" y="10" width="190" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -119,7 +119,7 @@
         <!--Node Input View Controller-->
         <scene sceneID="KbD-bd-9em">
             <objects>
-                <viewController id="Q3L-Vh-xdd" customClass="MCNodeInputViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NodeInputController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Q3L-Vh-xdd" customClass="MCNodeInputViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cWN-DO-0cP"/>
                         <viewControllerLayoutGuide type="bottom" id="xIm-4C-blC"/>
@@ -147,12 +147,20 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MzV-Ay-ip7">
-                                <rect key="frame" x="0.0" y="287" width="320" height="162"/>
+                                <rect key="frame" x="0.0" y="196" width="320" height="162"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <outlet property="delegate" destination="Q3L-Vh-xdd" id="3VW-fV-S7k"/>
+                                    <outlet property="delegate" destination="Q3L-Vh-xdd" id="tYe-nW-fPt"/>
                                 </connections>
                             </pickerView>
+                            <containerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lp7-hV-DwM">
+                                <rect key="frame" x="0.0" y="371" width="320" height="197"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <connections>
+                                    <segue destination="3U8-5a-eM4" kind="embed" id="hVc-uZ-o13"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -169,7 +177,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="pickerView" destination="MzV-Ay-ip7" id="OX4-c2-k2s"/>
+                        <outlet property="pickerView" destination="MzV-Ay-ip7" id="ohr-Vq-A1S"/>
                         <outlet property="previousInput" destination="N0K-ri-g8W" id="lXn-hY-FSZ"/>
                         <outlet property="taskInput" destination="Qss-sU-fl2" id="ZjA-PY-Lrx"/>
                         <outlet property="workerInput" destination="HP8-jt-guV" id="XKc-la-W3C"/>
@@ -177,7 +185,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y9a-ad-fdk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1444" y="387"/>
+            <point key="canvasLocation" x="1500" y="387"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="KQT-IB-VBI">
@@ -381,6 +389,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="shd-wR-5iK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="979" y="387"/>
+        </scene>
+        <!--Cprevious Table View Controller-->
+        <scene sceneID="9WX-Ug-enj">
+            <objects>
+                <tableViewController id="3U8-5a-eM4" customClass="MCpreviousTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="uqg-0B-PdN">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="197"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Js7-Yf-j1H">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Js7-Yf-j1H" id="aD4-de-rvh">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="3U8-5a-eM4" id="l2a-ng-iPG"/>
+                            <outlet property="delegate" destination="3U8-5a-eM4" id="4fJ-Xe-Xdt"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XaX-Og-fVc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1938" y="572"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
