@@ -13,7 +13,6 @@
 
 @interface MCNodeInputViewController : UIViewController
 
-@property id<MCNodeDelegate> delegate;
 @property (strong, nonatomic) IBOutlet UITextField *taskInput;
 @property (strong, nonatomic) IBOutlet UITextField *workerInput;
 @property (strong, nonatomic) IBOutlet UITextField *previousInput;

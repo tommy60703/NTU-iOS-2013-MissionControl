@@ -7,8 +7,6 @@
 //
 
 #import "MCJoinViewController.h"
-#import "MCBrain.h"
-#import <Parse/Parse.h>
 
 @interface MCJoinViewController ()
 @property (strong, nonatomic) NSArray *allProjects;
@@ -33,37 +31,12 @@
     if ([self.passcodeField.text isEqualToString:@""]) {
         NSLog(@"Funny. Haha...");
     } else {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            NSLog(@"Try to join project with passcode %@", self.passcodeField.text);
-            PFQuery *query = [PFQuery queryWithClassName:@"project"];
-            NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-            [f setNumberStyle:NSNumberFormatterDecimalStyle];
-            [query whereKey:@"projectPasscode" equalTo:[f numberFromString:self.passcodeField.text]];
-        
-            PFObject *aProject = [query getFirstObject];
-            if (![self.passwordField.text isEqualToString:[aProject objectForKey:@"projectPassword"]]) {
-                NSLog(@"wrong password!");
-            } else {
-                NSString *udid = [UIDevice currentDevice].identifierForVendor.UUIDString;
-                PFObject *projectParticipate = [PFObject objectWithClassName:@"projectParticipate"];
-                projectParticipate[@"user"] = udid;
-                projectParticipate[@"job"] = self.userJob.text;
-                projectParticipate[@"owner"] = [aProject objectForKey:@"projectOwner"];
-                projectParticipate[@"projectName"] = [aProject objectForKey:@"projectName"];
-                projectParticipate[@"projectPasscode"] = [aProject objectForKey:@"projectPasscode"];
-                [projectParticipate saveInBackground];
-                NSLog(@"Joined project \"%@\"!", [aProject objectForKey:@"projectName"]);
-            }
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"doUpdateProjects" object:self];
-            });
-        });
+        [self joinProject];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
 
-- (IBAction)textChanged:(UITextField*)sender {
+- (IBAction)textChanged:(UITextField *)sender {
     if ([sender.text isEqualToString:@""]) {
         self.projectName.text = @"";
     } else {
@@ -73,6 +46,35 @@
             }
         }
     }
+}
+
+- (void)joinProject {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        NSLog(@"Try to join project with passcode %@", self.passcodeField.text);
+        PFQuery *query = [PFQuery queryWithClassName:@"project"];
+        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+        [f setNumberStyle:NSNumberFormatterDecimalStyle];
+        [query whereKey:@"projectPasscode" equalTo:[f numberFromString:self.passcodeField.text]];
+        
+        PFObject *aProject = [query getFirstObject];
+        if (![self.passwordField.text isEqualToString:[aProject objectForKey:@"projectPassword"]]) {
+            NSLog(@"wrong password!");
+        } else {
+            NSString *udid = [UIDevice currentDevice].identifierForVendor.UUIDString;
+            PFObject *projectParticipate = [PFObject objectWithClassName:@"projectParticipate"];
+            projectParticipate[@"user"] = udid;
+            projectParticipate[@"job"] = self.userJob.text;
+            projectParticipate[@"owner"] = [aProject objectForKey:@"projectOwner"];
+            projectParticipate[@"projectName"] = [aProject objectForKey:@"projectName"];
+            projectParticipate[@"projectPasscode"] = [aProject objectForKey:@"projectPasscode"];
+            [projectParticipate saveInBackground];
+            NSLog(@"Joined project \"%@\"!", [aProject objectForKey:@"projectName"]);
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"doUpdateProjects" object:self];
+        });
+    });
 }
 
 @end

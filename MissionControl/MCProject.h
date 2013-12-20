@@ -8,13 +8,20 @@
 
 #import <Foundation/Foundation.h>
 #import "MCWorkNode.h"
-#import "MCNodeEditDelegate.h"
 
-@interface MCProject : PFObject <MCNodeEditDelegate>
+@interface MCProject : NSObject
+
+@property (strong, nonatomic) NSDictionary *projectMeta;
 @property (strong, nonatomic) NSMutableArray *workNodes;
+
++ (instancetype)shareInstance;
 
 - (void)addWorkNode:(MCWorkNode *)node;
 - (MCWorkNode *)findNodeByTask:(NSString *)task;
 - (void)addAPreviousNode:(MCWorkNode *)previousNode ToNode:(MCWorkNode *)node;
+
+- (void)clean;
+- (void)pushToDatabase;
+- (void)pullFromDatabase;
 
 @end

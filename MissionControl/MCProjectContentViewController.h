@@ -7,8 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Parse/Parse.h>
-#import "MCProject.h"
 #import "MCDrawLine.h"
 #import "MCNodeDelegate.h"
 
@@ -24,7 +22,6 @@
 #pragma mark - Properties
 
 @property (strong, nonatomic) NSString *passcode;
-@property (strong, nonatomic) MCProject *project;
 @property (strong, nonatomic) MCDrawLine *drawLine;
 @property BOOL isEditingProjectContent;
 @property NSInteger nodeNumber;
@@ -35,10 +32,5 @@
 - (IBAction)switcherToggled:(UISwitch *)sender;
 
 #pragma mark - Instance Method
-
-- (void)pushToServerTask:(NSString *)task Worker:(NSString *)worker Prev:(NSMutableArray *)previous Tag:(int)tag Status:(bool)status Location:(CGPoint) point;
-- (void)reloadFromServer;
-- (void)refreshWorkNodes:(int)tag;
-- (bool)checkFinished;
 
 @end

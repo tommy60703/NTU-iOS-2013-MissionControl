@@ -7,30 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MCProject.h"
 #import "MCNodeDelegate.h"
 #import "MCNodeEditDelegate.h"
 
-@interface MCWorkNode : UIView <UIAlertViewDelegate>
+@interface MCWorkNode : NSObject
 
 #pragma mark - Properties
 
-@property (strong) UIImageView *nodeImageView;
 @property (strong) NSString *task;
 @property (strong) NSString *worker;
-@property (strong) NSMutableArray *previousNodes;   // array of MCWorkNode
-@property (strong) id<MCNodeDelegate> viewControllerDelegate;     // should be the MCProjectContentViewController
-@property (strong) id<MCNodeEditDelegate> editDelegate;
+@property (strong) NSMutableArray *previousNodes;
 
-@property CGPoint location;
-@property NSInteger previousNodesCompletionCountdown;
-@property BOOL completion;
-@property BOOL isMakingFather;
-@property BOOL editing;
+@property BOOL complete;
+@property NSInteger previousCompleteCountDown;
 
 #pragma mark - Instance Methods
 
-- (instancetype)initWithTask:(NSString *)task Worker:(NSString *)worker PreviousNodes:(NSArray*)previousNodes Completion:(BOOL)completion;
+- (instancetype)initWithTask:(NSString *)task Worker:(NSString *)worker PreviousNodes:(NSArray *)previousNodes Completion:(BOOL)completion;
+- (NSInteger)getCountdown;
 - (void)changeState;
 
 @end

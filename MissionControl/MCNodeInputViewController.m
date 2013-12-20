@@ -7,6 +7,7 @@
 //
 
 #import "MCNodeInputViewController.h"
+#import "MCWorkNode.h"
 
 @interface MCNodeInputViewController ()
 
@@ -16,14 +17,22 @@
 
 - (IBAction)cancelButtonClick:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
-    
 }
 
 - (IBAction)doneButtonClick:(id)sender {
     NSMutableArray *foo = [NSMutableArray new];
     [foo addObject:self.previousInput.text];
-    [self.delegate addNodeTask:self.taskInput.text Worker:self.workerInput.text Previous:foo];
+    NSString *task = self.taskInput.text;
+    NSString *worker = self.workerInput.text;
+    MCWorkNode *previousNode = [[MCProject shareInstance] findNodeByTask:self.previousInput.text];
+    NSMutableArray *previous = [NSMutableArray new];
+    if (previousNode) {
+        [previous addObject:previousNode];
+    }
+    MCWorkNode *newNode = [[MCWorkNode alloc] initWithTask:task Worker:worker PreviousNodes:previous Completion:NO];
+    [[MCProject shareInstance] addWorkNode:newNode];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"newNodeAdded" object:self];
+    NSLog(@"New node added");
     [self dismissViewControllerAnimated:YES completion:nil];
-    
 }
 @end
