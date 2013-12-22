@@ -42,6 +42,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moveWorkNodes) name:@"moveWorkNodes" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishWorkNodes:) name:@"finishWorkNodes" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(editWorkNode:) name:@"editWorkNode" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteWorkNode:) name:@"deleteWorkNode" object:nil];
+
     
     
     CGSize size = self.view.frame.size;
@@ -408,6 +410,25 @@
     NodeInput.prevWorker = [dict valueForKey:@"worker"];
     NodeInput.delegate = self;
     [self presentViewController:naviToNodeInput animated:YES completion:nil];
+    
+}
+
+- (void)deleteWorkNode:(NSNotification *)notification{
+    NSDictionary *dict = [notification userInfo];
+    for (UIView *subview in self.myScrollView.subviews) {
+        if ([subview isKindOfClass:[MCWorkNode class]]) {
+            MCWorkNode *finder = (MCWorkNode *)subview;
+            if(finder.tag == [[dict valueForKey:@"tag"] integerValue]){
+                [finder removeFromSuperview];
+            }
+        }
+    }
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        PFQuery *query = [PFQuery queryWithClassName:[@"A" stringByAppendingString:[self.project[@"projectPasscode"] stringValue]]];
+        [query whereKey:@"seq" equalTo:[dict valueForKey:@"tag"]];
+        PFObject *deleted = [query getFirstObject];
+        [deleted deleteInBackground];
+    });
     
 }
 

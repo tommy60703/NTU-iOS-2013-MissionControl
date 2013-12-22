@@ -110,6 +110,10 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet
 clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 0) {
+        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObject: [NSNumber numberWithInteger:self.tag] forKey:@"tag"];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"deleteWorkNode" object:self userInfo:dict];
+
     
     }else if (buttonIndex ==1){
         NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObject: [NSNumber numberWithInteger:self.tag] forKey:@"tag"];
