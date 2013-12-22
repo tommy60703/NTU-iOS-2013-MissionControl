@@ -208,8 +208,22 @@
 - (void)addNodeTask:(NSString *)task Worker:(NSString*)worker Previous:(NSMutableArray*)previous {
     MCWorkNode *theNode = [[MCWorkNode alloc] initWithPoint:self.view.center Seq:seq Task:task Worker:worker Prev:previous Status:false];
     theNode.delegate = self;
+    bool is_editing = false;
+    for (UIView *subview in self.myScrollView.subviews) {
+        if ([subview isKindOfClass:[MCWorkNode class]]) {
+            MCWorkNode *finder = (MCWorkNode *)subview;
+            if (finder.tag == seq) {
+                is_editing = true;
+                [MCWorkNode WorkNodeEdit:finder Task:(NSString *)task Worker:(NSString*)worker Previous:(NSMutableArray*)previous];
+                [self moveWorkNodes];
+                break;
+            }
+            
+        }
+    }
     
-    
+    if(!is_editing)
+    {
     NSMutableArray *tempWorkNodes = [[NSMutableArray alloc] init];
     self.previousList = [NSMutableArray new];
     for (PFObject *node in self.workNodes) {
@@ -234,6 +248,7 @@
     [self.myScrollView addSubview:theNode];
     
     [self drawAllLines];
+    }
 }
 
 - (void)drawAllLines {
@@ -375,7 +390,9 @@
         UIStoryboard *mainStoryboard =[UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
         //实例化Identifier为"myConfig"的视图控制器
-        MCNodeInputViewController *NodeInput = [mainStoryboard instantiateViewControllerWithIdentifier:@"NodeInputController"];
+        UINavigationController *naviToNodeInput = [mainStoryboard instantiateViewControllerWithIdentifier:@"navigationToNodeInput"];
+    
+        MCNodeInputViewController *NodeInput = [naviToNodeInput viewControllers][0];
     
         //为视图控制器设置过渡类型
         NodeInput.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
@@ -385,7 +402,7 @@
         NodeInput.workerList = self.workerList;
         NodeInput.previousList = self.previousList;
         NodeInput.delegate = self;
-        [self presentViewController:NodeInput animated:YES completion:nil];
+        [self presentViewController:naviToNodeInput animated:YES completion:nil];
     
 }
 

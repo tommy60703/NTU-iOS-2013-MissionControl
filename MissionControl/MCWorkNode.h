@@ -26,5 +26,6 @@
 
 - (MCWorkNode *)initWithPoint:(CGPoint)point Seq:(int)seq Task:(NSString*)task Worker:(NSString*)worker Prev:(NSMutableArray*)previous Status:(bool)status;
 + (void)WorkNodeChange:(MCWorkNode *) finder;
-+ (void)WorkNodeEdit:(MCWorkNode *) finder;
++ (void)WorkNodeEdit:(MCWorkNode *) finder Task:(NSString *)task Worker:(NSString*)worker Previous:(NSMutableArray*)previous;
+
 @end

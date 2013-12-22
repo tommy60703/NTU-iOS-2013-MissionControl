@@ -184,15 +184,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="alK-AP-pkv">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="OIn-iM-UKg">
+                    <navigationItem key="navigationItem" id="bsM-gF-LKe">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="i8X-Ub-NZc">
                             <connections>
-                                <action selector="cancelButtonClick:" destination="Q3L-Vh-xdd" id="CNs-WZ-88L"/>
+                                <action selector="cancelButtonClick:" destination="Q3L-Vh-xdd" id="2Io-0w-g1v"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="Zuj-B3-5Jq">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="WE0-lO-rts">
                             <connections>
-                                <action selector="doneButtonClick:" destination="Q3L-Vh-xdd" id="n30-yW-L9H"/>
+                                <action selector="doneButtonClick:" destination="Q3L-Vh-xdd" id="8Y9-OW-M28"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -393,7 +393,7 @@
         <!--Navigation Controller-->
         <scene sceneID="Cvk-bx-A4C">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="30F-Jb-oAt" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="navigationToNodeInput" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="30F-Jb-oAt" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="VRO-Y5-nW2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
