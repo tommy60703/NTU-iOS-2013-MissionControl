@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MCNodeDelegate.h"
 
-@interface MCWorkNode : UIView <UIAlertViewDelegate> {
+@interface MCWorkNode : UIView <UIActionSheetDelegate> {
     CGPoint location;
 }
 

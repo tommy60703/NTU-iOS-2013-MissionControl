@@ -28,6 +28,20 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //获取"MyMain.storyboard"故事板的引用
+//    UIStoryboard *mainStoryboard =[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    
+//    //实例化Identifier为"myConfig"的视图控制器
+//    MCNodeInputViewController *NodeInput = [mainStoryboard instantiateViewControllerWithIdentifier:@"NodeInputController"];
+//    
+//    //为视图控制器设置过渡类型
+//    NodeInput.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+//    
+//    //为视图控制器设置显示样式
+//    NodeInput.modalPresentationStyle = UIModalPresentationFullScreen;
+//
+//    [self presentViewController:NodeInput animated:YES completion:nil];
+    
     self.navigationItem.title = self.project[@"projectName"];
     self.isEditingProjectContent = NO;
     self.shown = NO;

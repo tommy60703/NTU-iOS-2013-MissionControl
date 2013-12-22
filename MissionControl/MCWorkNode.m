@@ -7,7 +7,7 @@
 //
 
 #import "MCWorkNode.h"
-
+#import "MCNodeInputViewController.h"
 @implementation MCWorkNode
 
 @synthesize xLabel, yLabel;
@@ -95,21 +95,37 @@
     if ([self.delegate isEditingContent]) {
         if (!self.isMakingFather) {
             self.isMakingFather = YES;
-            UIAlertView *newFatherAlert = [[UIAlertView alloc] initWithTitle:@"輸入上一個工作" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"確定", nil];
-            [newFatherAlert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-            [newFatherAlert show];
+            UIActionSheet *action  =
+            [[UIActionSheet alloc] initWithTitle:self.task
+                                        delegate:self
+                               cancelButtonTitle:@"Cancel"
+                          destructiveButtonTitle:@"Delete"
+                               otherButtonTitles:@"Edit", nil];
+
+            [action showInView:self];   //顯示actionsheet
+//            UIAlertView *newFatherAlert = [[UIAlertView alloc] initWithTitle:@"輸入上一個工作" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"確定", nil];
+//            [newFatherAlert setAlertViewStyle:UIAlertViewStylePlainTextInput];
+//            [newFatherAlert show];
         }
         self.isMakingFather = NO;
     }
 }
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 1) {
-        NSLog(@"%@", [alertView textFieldAtIndex:0].text);
-        [self.previousNodes addObject:[alertView textFieldAtIndex:0].text];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"moveWorkNodes" object:nil userInfo:nil];
+- (void)actionSheet:(UIActionSheet *)actionSheet
+clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 0) {
+        
+        NSLog(@"Delete message pressed.");
+    }else if (buttonIndex ==1){
+                
+        //显示视图
+        //[super presentViewController:NodeInput animated:YES completion:nil];
+        NSLog(@"Option1 pressed.");
+    }else{
+        NSLog(@"Nothing happened.");
     }
 }
+
+
 + (void)WorkNodeEdit:(MCWorkNode *) finder{
     
 }

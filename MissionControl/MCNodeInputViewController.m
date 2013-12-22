@@ -22,7 +22,8 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadPreviousList" object:self userInfo:dict];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getPreviousList:) name:@"getPreviousList" object:nil];
-    self.worker = self.workerList[0];
+    self.worker = self.workerList[self.workerList.count/2];
+    [self.pickerView selectRow:self.workerList.count/2 inComponent:0 animated:YES];
 }
 
 - (IBAction)cancelButtonClick:(id)sender {
