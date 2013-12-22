@@ -21,6 +21,8 @@
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableViewData) name:@"didUpdateProjects" object:nil];
     [[MCBrain shareInstance] updateProjects];
+    
+    [self performSegueWithIdentifier:@"tips" sender:self];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
