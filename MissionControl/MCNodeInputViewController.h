@@ -22,9 +22,12 @@
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
 
 @property NSArray *workerList;
-@property NSArray *previousList;
+@property NSMutableArray *previousList;
 @property NSMutableArray *previousSelectionList;
 @property NSString *worker;
+@property int tag;
+@property NSString *prevTask;
+@property NSString *prevWorker;
 
 - (IBAction)cancelButtonClick:(id)sender;
 - (IBAction)doneButtonClick:(id)sender;

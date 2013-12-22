@@ -41,7 +41,7 @@
     }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moveWorkNodes) name:@"moveWorkNodes" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishWorkNodes:) name:@"finishWorkNodes" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(editWorkNode) name:@"editWorkNode" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(editWorkNode:) name:@"editWorkNode" object:nil];
     
     
     CGSize size = self.view.frame.size;
@@ -67,6 +67,7 @@
         destination.workerList = self.workerList;
         destination.previousList = self.previousList;
         destination.delegate = self;
+        destination.tag = -1;
         
     }
 //    MCProjectContentViewController *source = (MCProjectContentViewController *)segue.sourceViewController;
@@ -195,7 +196,7 @@
         
     if (self->seq == -1) {
         self->seq = 0;
-        [self addNodeTask:@"Start" Worker:self.project[@"job"] Previous:[NSMutableArray new]];
+        [self addNodeTask:@"Start" Worker:self.project[@"job"] Previous:[NSMutableArray new] Tag:-1];
     } else {
             self->seq++;
     }
@@ -205,24 +206,11 @@
 
 #pragma mark - Private Method
 
-- (void)addNodeTask:(NSString *)task Worker:(NSString*)worker Previous:(NSMutableArray*)previous {
+- (void)addNodeTask:(NSString *)task Worker:(NSString*)worker Previous:(NSMutableArray*)previous Tag:(int)tag{
     MCWorkNode *theNode = [[MCWorkNode alloc] initWithPoint:self.view.center Seq:seq Task:task Worker:worker Prev:previous Status:false];
     theNode.delegate = self;
-    bool is_editing = false;
-    for (UIView *subview in self.myScrollView.subviews) {
-        if ([subview isKindOfClass:[MCWorkNode class]]) {
-            MCWorkNode *finder = (MCWorkNode *)subview;
-            if (finder.tag == seq) {
-                is_editing = true;
-                [MCWorkNode WorkNodeEdit:finder Task:(NSString *)task Worker:(NSString*)worker Previous:(NSMutableArray*)previous];
-                [self moveWorkNodes];
-                break;
-            }
-            
-        }
-    }
     
-    if(!is_editing)
+    if(tag==-1)
     {
     NSMutableArray *tempWorkNodes = [[NSMutableArray alloc] init];
     self.previousList = [NSMutableArray new];
@@ -248,6 +236,20 @@
     [self.myScrollView addSubview:theNode];
     
     [self drawAllLines];
+    }
+    else{
+        
+        for (UIView *subview in self.myScrollView.subviews) {
+            if ([subview isKindOfClass:[MCWorkNode class]]) {
+                MCWorkNode *finder = (MCWorkNode *)subview;
+                if (finder.tag == tag) {
+                    [MCWorkNode WorkNodeEdit:finder Task:(NSString *)task Worker:(NSString*)worker Previous:(NSMutableArray*)previous];
+                    [self moveWorkNodes];
+                    break;
+                }
+                
+            }
+        }
     }
 }
 
@@ -384,25 +386,28 @@
     }
     return flag;
 }
--(void)editWorkNode{
-    
-        //获取"MyMain.storyboard"故事板的引用
-        UIStoryboard *mainStoryboard =[UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    
-        //实例化Identifier为"myConfig"的视图控制器
-        UINavigationController *naviToNodeInput = [mainStoryboard instantiateViewControllerWithIdentifier:@"navigationToNodeInput"];
-    
-        MCNodeInputViewController *NodeInput = [naviToNodeInput viewControllers][0];
-    
-        //为视图控制器设置过渡类型
-        NodeInput.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    
-        //为视图控制器设置显示样式
-        NodeInput.modalPresentationStyle = UIModalPresentationFullScreen;
-        NodeInput.workerList = self.workerList;
-        NodeInput.previousList = self.previousList;
-        NodeInput.delegate = self;
-        [self presentViewController:naviToNodeInput animated:YES completion:nil];
+-(void)editWorkNode:(NSNotification *)notification{
+    NSDictionary *dict = [notification userInfo];
+    //获取"MyMain.storyboard"故事板的引用
+    UIStoryboard *mainStoryboard =[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+
+    //实例化Identifier为"myConfig"的视图控制器
+    UINavigationController *naviToNodeInput = [mainStoryboard instantiateViewControllerWithIdentifier:@"navigationToNodeInput"];
+
+    MCNodeInputViewController *NodeInput = [naviToNodeInput viewControllers][0];
+
+    //为视图控制器设置过渡类型
+    NodeInput.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+
+    //为视图控制器设置显示样式
+    NodeInput.modalPresentationStyle = UIModalPresentationFullScreen;
+    NodeInput.workerList = self.workerList;
+    NodeInput.previousList = self.previousList;
+    NodeInput.tag = [[dict valueForKey:@"tag"] integerValue];
+    NodeInput.prevTask = [dict valueForKey:@"task"];
+    NodeInput.prevWorker = [dict valueForKey:@"worker"];
+    NodeInput.delegate = self;
+    [self presentViewController:naviToNodeInput animated:YES completion:nil];
     
 }
 

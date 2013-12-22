@@ -103,9 +103,6 @@
                                otherButtonTitles:@"Edit", nil];
 
             [action showInView:self];   //顯示actionsheet
-//            UIAlertView *newFatherAlert = [[UIAlertView alloc] initWithTitle:@"輸入上一個工作" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"確定", nil];
-//            [newFatherAlert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-//            [newFatherAlert show];
         }
         self.isMakingFather = NO;
     }
@@ -113,12 +110,15 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet
 clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 0) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"editWorkNode" object:self];
-        NSLog(@"Delete message pressed.");
+    
     }else if (buttonIndex ==1){
-                
-        //显示视图
-        //[super presentViewController:NodeInput animated:YES completion:nil];
+        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObject: [NSNumber numberWithInteger:self.tag] forKey:@"tag"];
+        [dict setValue:self.task forKey:@"task"];
+        [dict setValue:self.worker forKey:@"worker"];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"editWorkNode" object:self userInfo:dict];
+        NSLog(@"Delete message pressed.");
+
         NSLog(@"Option1 pressed.");
     }else{
         NSLog(@"Nothing happened.");

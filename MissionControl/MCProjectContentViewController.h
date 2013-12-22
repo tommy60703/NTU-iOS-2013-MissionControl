@@ -14,7 +14,7 @@
 @protocol MCAddNodeDelegate <NSObject>
 
 @optional
-- (void)addNodeTask:(NSString *)task Worker:(NSString*)worker Previous:(NSMutableArray*)previous;
+- (void)addNodeTask:(NSString *)task Worker:(NSString*)worker Previous:(NSMutableArray*)previous Tag:(int)tag;
 
 @end
 
