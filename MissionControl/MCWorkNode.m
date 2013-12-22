@@ -83,6 +83,8 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     if ([self.delegate isEditingContent]) {
         [self.delegate enableScroll];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"saveWorkNode" object:nil];
+        
     }
     else{
         //self.status = (!self.status);
@@ -119,7 +121,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
         NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObject: [NSNumber numberWithInteger:self.tag] forKey:@"tag"];
         [dict setValue:self.task forKey:@"task"];
         [dict setValue:self.worker forKey:@"worker"];
-        
+        [dict setValue:self.previousNodes forKey:@"previous"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"editWorkNode" object:self userInfo:dict];
         NSLog(@"Delete message pressed.");
 

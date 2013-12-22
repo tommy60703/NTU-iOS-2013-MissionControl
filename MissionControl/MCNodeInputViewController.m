@@ -19,8 +19,12 @@
     
     self.worker = self.workerList[self.workerList.count/2];
     int defaultRow = self.workerList.count/2;
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObject:self.previousList forKey:@"previousList"];
+    [dict setValue:[NSNumber numberWithInt:self.tag] forKey:@"tag"];
+    
     
     if(self.tag != -1){
+        [dict setValue:self.prevPrevious forKey:@"previous"];
         self.taskInput.text = self.prevTask;
         [self.previousList removeObject:self.prevTask];
         self.worker = self.prevWorker;
@@ -32,7 +36,7 @@
         }
         
     }
-    NSDictionary *dict = [NSDictionary dictionaryWithObject:self.previousList forKey:@"previousList"];
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadPreviousList" object:self userInfo:dict];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getPreviousList:) name:@"getPreviousList" object:nil];
@@ -87,5 +91,9 @@
     NSLog(@"%@", self.previousSelectionList);
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self.taskInput resignFirstResponder];
+    return NO;
+}
 
 @end

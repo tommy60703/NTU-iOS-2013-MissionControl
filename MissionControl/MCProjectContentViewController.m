@@ -40,6 +40,7 @@
         self.editSwitcher.hidden = NO;
     }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moveWorkNodes) name:@"moveWorkNodes" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveWorkFlow) name:@"saveWorkNode" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishWorkNodes:) name:@"finishWorkNodes" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(editWorkNode:) name:@"editWorkNode" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteWorkNode:) name:@"deleteWorkNode" object:nil];
@@ -290,7 +291,7 @@
     [self.drawLine addPoints:(NSMutableArray *)self.workNodes];
     self.drawLine.tag = -1;
     [self.myScrollView insertSubview:self.drawLine atIndex:0];
-    [self saveWorkFlow];
+    //[self saveWorkFlow];
     
 }
 
@@ -431,6 +432,7 @@
     NodeInput.tag = [[dict valueForKey:@"tag"] integerValue];
     NodeInput.prevTask = [dict valueForKey:@"task"];
     NodeInput.prevWorker = [dict valueForKey:@"worker"];
+    NodeInput.prevPrevious = [dict valueForKey:@"previous"];
     NodeInput.delegate = self;
     [self presentViewController:naviToNodeInput animated:YES completion:nil];
     
