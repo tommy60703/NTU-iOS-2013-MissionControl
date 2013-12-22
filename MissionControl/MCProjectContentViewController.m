@@ -28,6 +28,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.title = self.project[@"projectName"];
     self.isEditingProjectContent = NO;
     self.shown = NO;
     self.addNodeButton.hidden = YES;
