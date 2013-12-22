@@ -420,9 +420,21 @@
             MCWorkNode *finder = (MCWorkNode *)subview;
             if(finder.tag == [[dict valueForKey:@"tag"] integerValue]){
                 [finder removeFromSuperview];
+                break;
             }
         }
     }
+    NSMutableArray *newWorkNodes = [NSMutableArray new];
+    [newWorkNodes addObjectsFromArray:self.workNodes];
+    for (PFObject *theWorkNode in newWorkNodes) {
+        if ([theWorkNode[@"seq"] isEqualToNumber:[dict valueForKey:@"tag"]]) {
+            [newWorkNodes removeObject:theWorkNode];
+            break;
+        }
+    }
+    self.workNodes = newWorkNodes;
+    [self drawAllLines];
+
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         PFQuery *query = [PFQuery queryWithClassName:[@"A" stringByAppendingString:[self.project[@"projectPasscode"] stringValue]]];
         [query whereKey:@"seq" equalTo:[dict valueForKey:@"tag"]];
