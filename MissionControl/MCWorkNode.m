@@ -110,7 +110,9 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"moveWorkNodes" object:nil userInfo:nil];
     }
 }
-
++ (void)WorkNodeEdit:(MCWorkNode *) finder{
+    
+}
 + (void)WorkNodeChange:(MCWorkNode *) finder{
     finder.status = !finder.status;
     for (UIImageView *oldimage in finder.subviews) {

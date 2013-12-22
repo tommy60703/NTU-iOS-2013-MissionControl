@@ -22,6 +22,7 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadPreviousList" object:self userInfo:dict];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getPreviousList:) name:@"getPreviousList" object:nil];
+    self.worker = self.workerList[0];
 }
 
 - (IBAction)cancelButtonClick:(id)sender {
@@ -33,7 +34,7 @@
 - (IBAction)doneButtonClick:(id)sender {
     //NSMutableArray *foo = [NSMutableArray new];
     //[foo addObject:self.previousInput.text];
-    [self.delegate addNodeTask:self.taskInput.text Worker:self.workerInput.text Previous:self.previousSelectionList];
+    [self.delegate addNodeTask:self.taskInput.text Worker:self.worker Previous:self.previousSelectionList];
     //NSLog(@"%@", self.previousSelectionList);
     [self dismissViewControllerAnimated:YES completion:nil];
     
@@ -56,7 +57,7 @@
 
 - (void)pickerView:(UIPickerView *)thePickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     
-    self.workerInput.text = [self.workerList objectAtIndex:row];
+    self.worker = [self.workerList objectAtIndex:row];
 }
 
 - (void)getPreviousList:(NSNotification *)notification{
