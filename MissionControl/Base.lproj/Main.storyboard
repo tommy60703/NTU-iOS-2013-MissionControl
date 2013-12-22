@@ -79,11 +79,11 @@
                         <viewControllerLayoutGuide type="bottom" id="2Km-Pw-QkY"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="WbS-3p-p2i">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wBg-xL-hRg">
-                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="460" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem style="plain" id="EXU-s6-lIZ">
@@ -111,7 +111,7 @@
                                 </items>
                             </toolbar>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tos-c3-CcN">
-                                <rect key="frame" x="0.0" y="-20" width="320" height="544"/>
+                                <rect key="frame" x="0.0" y="-20" width="320" height="480"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </scrollView>
                         </subviews>
@@ -232,7 +232,6 @@
                                 </state>
                                 <connections>
                                     <action selector="done:" destination="Mb1-Df-PdN" eventType="touchUpInside" id="uso-aX-BmR"/>
-                                    <segue destination="IFK-eF-3FG" kind="modal" identifier="done" id="uQb-sO-fNs"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -244,7 +243,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vuq-fc-4Pw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-76" y="-998"/>
+            <point key="canvasLocation" x="-43" y="-991"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="KQT-IB-VBI">
@@ -492,7 +491,4 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
-    <inferredMetricsTieBreakers>
-        <segue reference="uQb-sO-fNs"/>
-    </inferredMetricsTieBreakers>
 </document>

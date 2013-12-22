@@ -33,6 +33,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    NSString *destPath = [NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask,YES) lastObject];
+    destPath = [destPath stringByAppendingString:@"first.plist"];
+    
+    NSLog(@"ha");
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if (![fileManager fileExistsAtPath: destPath]) {
+        NSLog(@"hahaha");
+        NSString *soucePath = [[NSBundle mainBundle] pathForResource:@"first" ofType:@"plist"];
+        [fileManager copyItemAtPath:soucePath toPath:destPath error:nil];
+    }
+    
     NSArray *images = [[NSArray alloc] initWithObjects:[UIImage imageNamed:@"tip1.png"], [UIImage imageNamed:@"tip2.png"], nil];
     
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width*images.count, self.scrollView.frame.size.height);
@@ -79,6 +91,17 @@
 }
 
 - (IBAction)done:(id)sender {
+    NSString *plistPath = [NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES) lastObject];
+    plistPath = [plistPath stringByAppendingString:@"first.plist"];
+    
+    NSDictionary *plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile: plistPath];
+    NSLog(@"%@", plistDict);
+    [plistDict setValue:@"0" forKey:@"first"];
+//    [plistDict writeToFile:plistPath atomically: YES];
+    //存檔
+    if ([plistDict writeToFile:plistPath atomically: YES]) NSLog(@"writePlist success");
+    else NSLog(@"writePlist fail");
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
