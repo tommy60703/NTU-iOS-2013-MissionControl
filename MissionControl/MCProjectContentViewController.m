@@ -209,11 +209,34 @@
 #pragma mark - Private Method
 
 - (void)addNodeTask:(NSString *)task Worker:(NSString*)worker Previous:(NSMutableArray*)previous Tag:(int)tag{
-    MCWorkNode *theNode = [[MCWorkNode alloc] initWithPoint:self.view.center Seq:seq Task:task Worker:worker Prev:previous Status:false];
-    theNode.delegate = self;
-    
     if(tag==-1)
     {
+    NSMutableArray *prevPositions = [NSMutableArray new];
+    for (NSString *prevNode in previous) {
+        for (UIView *subview in self.myScrollView.subviews) {
+            if ([subview isKindOfClass:[MCWorkNode class]]) {
+                MCWorkNode *finder = (MCWorkNode *)subview;
+                if ([finder.task isEqualToString:prevNode]) {
+                    NSMutableDictionary *position = [NSMutableDictionary new];
+                    [position setObject:[NSNumber numberWithFloat:finder.frame.origin.x] forKey:@"location_x"] ;
+                    [position setObject:[NSNumber numberWithFloat:finder.frame.origin.y] forKey:@"location_y"] ;
+                    [prevPositions addObject:position];
+                }
+            }
+        }
+    }
+    CGPoint position = CGPointMake(0, 0);
+    for (NSDictionary *pos in prevPositions) {
+        position.x += [pos[@"location_x"] floatValue];
+        position.y += [pos[@"location_y"] floatValue];
+    }
+        position.x /= prevPositions.count;
+        position.y /= prevPositions.count;
+        position.y += 100;
+    MCWorkNode *theNode = [[MCWorkNode alloc] initWithPoint:position Seq:seq Task:task Worker:worker Prev:previous Status:false];
+    theNode.delegate = self;
+    
+    
     NSMutableArray *tempWorkNodes = [[NSMutableArray alloc] init];
     self.previousList = [NSMutableArray new];
     for (PFObject *node in self.workNodes) {
@@ -429,10 +452,12 @@
     for (PFObject *theWorkNode in newWorkNodes) {
         if ([theWorkNode[@"seq"] isEqualToNumber:[dict valueForKey:@"tag"]]) {
             [newWorkNodes removeObject:theWorkNode];
+            [self.previousList removeObject:theWorkNode[@"task"]];
             break;
         }
     }
     self.workNodes = newWorkNodes;
+    
     [self drawAllLines];
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
