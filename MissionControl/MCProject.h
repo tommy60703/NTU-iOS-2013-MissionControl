@@ -18,12 +18,11 @@
 
 + (instancetype)shareInstance;
 
-- (void)addWorkNode:(MCWorkNode *)node;
+- (void)addWorkNode:(MCWorkNode *)node New:(BOOL)newObject;
 - (MCWorkNode *)findNodeByTask:(NSString *)task;
 - (void)addAPreviousNode:(MCWorkNode *)previousNode ToNode:(MCWorkNode *)node;
 
 - (void)clean;
-- (void)pushToDatabase;
 - (void)pullFromDatabase;
 - (void)updateWorkNode:(MCWorkNode *)updateNode;
 

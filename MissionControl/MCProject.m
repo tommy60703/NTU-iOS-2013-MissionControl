@@ -32,8 +32,27 @@
     return result;
 }
 
-- (void)addWorkNode:(MCWorkNode *)node {
+- (void)addWorkNode:(MCWorkNode *)node New:(BOOL)newObject {
     [self.workNodes addObject:node];
+    if (newObject) {
+        PFObject *newNode = [PFObject objectWithClassName:self.projectClassName];
+        newNode[@"task"] = node.task;
+        newNode[@"worker"] = node.worker;
+        newNode[@"state"] = @(node.complete);
+        newNode[@"previous"] = [node.previousNodes valueForKey:@"task"];
+        [newNode saveInBackground];
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            PFQuery *query = [PFQuery queryWithClassName:@"project"];
+            PFObject *object = [query getObjectWithId:self.projectMeta[@"idOfProjectClass"]];
+            object[@"lastModifyTime"] = [NSDate date];
+            [object save];
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"newNodeAdded" object:self];
+                NSLog(@"New node added");
+            });
+        });
+    }
 }
 
 - (void)addAPreviousNode:(MCWorkNode *)previousNode ToNode:(MCWorkNode *)node {
@@ -54,6 +73,8 @@
         
         PFQuery *query = [PFQuery queryWithClassName:projectClassName];
         NSArray *newWorkNodes = [query findObjects];
+        
+        [self clean];
         for (PFObject *newNode in newWorkNodes) {
             NSString *nodeId = newNode.objectId;
             NSString *task = newNode[@"task"];
@@ -68,13 +89,13 @@
             
             MCWorkNode *workNode = [[MCWorkNode alloc] initWithTask:task Worker:worker PreviousNodes:previousNodes Completion:completion];
             workNode.objectId = nodeId;
-            [self addWorkNode:workNode];
+            [self addWorkNode:workNode New:NO];
         }
-        
+
         query = [PFQuery queryWithClassName:@"project"];
         PFObject *object = [query getObjectWithId:self.projectMeta[@"idOfProjectClass"]];
         self.lastModifyTime = object[@"lastModifyTime"];
-        NSLog(@"%@", self.lastModifyTime);
+        NSLog(@"last update: %@", self.lastModifyTime);
 
         dispatch_async(dispatch_get_main_queue(), ^{
             [[NSNotificationCenter defaultCenter] postNotificationName:@"projectContentLoaded" object:self];

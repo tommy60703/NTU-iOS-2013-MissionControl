@@ -20,8 +20,6 @@
 }
 
 - (IBAction)doneButtonClick:(id)sender {
-    NSMutableArray *foo = [NSMutableArray new];
-    [foo addObject:self.previousInput.text];
     NSString *task = self.taskInput.text;
     NSString *worker = self.workerInput.text;
     MCWorkNode *previousNode = [[MCProject shareInstance] findNodeByTask:self.previousInput.text];
@@ -30,9 +28,8 @@
         [previous addObject:previousNode];
     }
     MCWorkNode *newNode = [[MCWorkNode alloc] initWithTask:task Worker:worker PreviousNodes:previous Completion:NO];
-    [[MCProject shareInstance] addWorkNode:newNode];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"newNodeAdded" object:self];
-    NSLog(@"New node added");
+    [[MCProject shareInstance] addWorkNode:newNode New:YES];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"newNodeAdded" object:self];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 @end
