@@ -113,7 +113,7 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet
 clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 0) {
-        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"editWorkNode" object:self];
         NSLog(@"Delete message pressed.");
     }else if (buttonIndex ==1){
                 

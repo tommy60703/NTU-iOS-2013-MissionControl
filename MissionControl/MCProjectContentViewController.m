@@ -28,19 +28,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //获取"MyMain.storyboard"故事板的引用
-//    UIStoryboard *mainStoryboard =[UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    
-//    //实例化Identifier为"myConfig"的视图控制器
-//    MCNodeInputViewController *NodeInput = [mainStoryboard instantiateViewControllerWithIdentifier:@"NodeInputController"];
-//    
-//    //为视图控制器设置过渡类型
-//    NodeInput.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-//    
-//    //为视图控制器设置显示样式
-//    NodeInput.modalPresentationStyle = UIModalPresentationFullScreen;
-//
-//    [self presentViewController:NodeInput animated:YES completion:nil];
+
     
     self.navigationItem.title = self.project[@"projectName"];
     self.isEditingProjectContent = NO;
@@ -53,6 +41,7 @@
     }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moveWorkNodes) name:@"moveWorkNodes" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishWorkNodes:) name:@"finishWorkNodes" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(editWorkNode) name:@"editWorkNode" object:nil];
     
     
     CGSize size = self.view.frame.size;
@@ -80,6 +69,8 @@
         destination.delegate = self;
         
     }
+//    MCProjectContentViewController *source = (MCProjectContentViewController *)segue.sourceViewController;
+//    MCNodeInputViewController *destination = (MCNodeInputViewController *)segue.destinationViewController;
 }
 
 #pragma mark - IBAction
@@ -217,6 +208,7 @@
 - (void)addNodeTask:(NSString *)task Worker:(NSString*)worker Previous:(NSMutableArray*)previous {
     MCWorkNode *theNode = [[MCWorkNode alloc] initWithPoint:self.view.center Seq:seq Task:task Worker:worker Prev:previous Status:false];
     theNode.delegate = self;
+    
     
     NSMutableArray *tempWorkNodes = [[NSMutableArray alloc] init];
     self.previousList = [NSMutableArray new];
@@ -377,6 +369,26 @@
     }
     return flag;
 }
+-(void)editWorkNode{
+    
+        //获取"MyMain.storyboard"故事板的引用
+        UIStoryboard *mainStoryboard =[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+        //实例化Identifier为"myConfig"的视图控制器
+        MCNodeInputViewController *NodeInput = [mainStoryboard instantiateViewControllerWithIdentifier:@"NodeInputController"];
+    
+        //为视图控制器设置过渡类型
+        NodeInput.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    
+        //为视图控制器设置显示样式
+        NodeInput.modalPresentationStyle = UIModalPresentationFullScreen;
+        NodeInput.workerList = self.workerList;
+        NodeInput.previousList = self.previousList;
+        NodeInput.delegate = self;
+        [self presentViewController:NodeInput animated:YES completion:nil];
+    
+}
+
 #pragma mark - MCNodeDelegate
 
 - (void)disableScroll {
