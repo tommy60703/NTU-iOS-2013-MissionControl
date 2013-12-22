@@ -28,8 +28,12 @@
 
 - (MCWorkNode *)findNodeByTask:(NSString *)task {
     NSPredicate *p = [NSPredicate predicateWithFormat:@"task == %@", task];
-    MCWorkNode *result = [self.workNodes filteredArrayUsingPredicate:p][0];
-    return result;
+    NSArray *result = [self.workNodes filteredArrayUsingPredicate:p];
+    if (result.count != 0) {
+        return result[0];
+    }
+    return nil;
+
 }
 
 - (void)addWorkNode:(MCWorkNode *)node New:(BOOL)newObject {
