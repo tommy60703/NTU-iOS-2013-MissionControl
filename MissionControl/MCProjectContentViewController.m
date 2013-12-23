@@ -146,6 +146,9 @@
                     if (newNode[@"state"] != oldNode[@"state"]) {
                         oldNode[@"state"] = newNode[@"state"];
                         [self refreshWorkNodes:[oldNode[@"seq"] integerValue]];
+                        if ([self checkMyJob]) {
+                            //here
+                        }
                         
                         
                     }
