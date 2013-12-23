@@ -475,21 +475,38 @@
     
 }
 
-//-(BOOL)checkMyJob{
-//    BOOL flag = NO;
-//    return flag;
-//}
-//-(BOOL)checkWorkNodePreviousStatus:(MCWorkNode *)theWorkNode{
-//    BOOL flag = NO;
-//    for (NSString *previous in theWorkNode.previousNodes) {
-//        for (UIView *subview in self.myScrollView.subviews) {
-//            if ([subview isKindOfClass:[ class]]) {
-//                <#statements#>
-//            }
-//        }
-//    }
-//    return flag;
-//}
+-(BOOL)checkMyJob{
+    BOOL flag = NO;
+    for (UIView *subview in self.myScrollView.subviews) {
+        if ([subview isKindOfClass:[MCWorkNode class]] ) {
+            MCWorkNode *finder = (MCWorkNode *)subview;
+            if ([finder.worker isEqualToString:self.project[@"job"]]&&[self checkWorkNodePreviousStatus:finder]) {
+                flag = YES;
+                break;
+            }
+        }
+    }
+
+    return flag;
+}
+-(BOOL)checkWorkNodePreviousStatus:(MCWorkNode *)theWorkNode{
+    BOOL flag = YES;
+    for (NSString *previous in theWorkNode.previousNodes) {
+        for (UIView *subview in self.myScrollView.subviews) {
+            if ([subview isKindOfClass:[MCWorkNode class]] ) {
+                MCWorkNode *finder = (MCWorkNode *)subview;
+                if (finder.status == false) {
+                    flag = false;
+                    break;
+                }
+            }
+        }
+        if (flag == false) {
+            break;
+        }
+    }
+    return flag;
+}
 #pragma mark - MCNodeDelegate
 
 - (void)disableScroll {
