@@ -21,6 +21,13 @@
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableViewData) name:@"didUpdateProjects" object:nil];
     [[MCBrain shareInstance] updateProjects];
+    
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"first" ofType:@"plist"]; //指定路徑、檔名
+    NSDictionary *data = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
+    
+    NSLog(@"8888888888 %@", [data objectForKey:@"first"]);
+    
+    if([[data objectForKey:@"first"] isEqualToString:@"1"]) [self performSegueWithIdentifier:@"tips" sender:self];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
