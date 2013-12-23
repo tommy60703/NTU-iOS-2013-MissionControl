@@ -311,7 +311,7 @@
             [subview removeFromSuperview];
         }
     }
-    CGSize size = self.myScrollView.frame.size;
+    CGSize size = self.myScrollView.contentSize;
     self.drawLine = [[MCDrawLine alloc] initWithFrame:CGRectMake(0, 0, size.width , size.height)];
     [self.drawLine setBackgroundColor:[UIColor clearColor]];
     [self.drawLine addPoints:(NSMutableArray *)self.workNodes];
