@@ -83,6 +83,8 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     if ([self.delegate isEditingContent]) {
         [self.delegate enableScroll];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"saveWorkNode" object:nil];
+        
     }
     else{
         //self.status = (!self.status);
@@ -103,9 +105,6 @@
                                otherButtonTitles:@"Edit", nil];
 
             [action showInView:self];   //顯示actionsheet
-//            UIAlertView *newFatherAlert = [[UIAlertView alloc] initWithTitle:@"輸入上一個工作" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"確定", nil];
-//            [newFatherAlert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-//            [newFatherAlert show];
         }
         self.isMakingFather = NO;
     }
@@ -113,12 +112,19 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet
 clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 0) {
+        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObject: [NSNumber numberWithInteger:self.tag] forKey:@"tag"];
         
-        NSLog(@"Delete message pressed.");
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"deleteWorkNode" object:self userInfo:dict];
+
+    
     }else if (buttonIndex ==1){
-                
-        //显示视图
-        //[super presentViewController:NodeInput animated:YES completion:nil];
+        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObject: [NSNumber numberWithInteger:self.tag] forKey:@"tag"];
+        [dict setValue:self.task forKey:@"task"];
+        [dict setValue:self.worker forKey:@"worker"];
+        [dict setValue:self.previousNodes forKey:@"previous"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"editWorkNode" object:self userInfo:dict];
+        NSLog(@"Delete message pressed.");
+
         NSLog(@"Option1 pressed.");
     }else{
         NSLog(@"Nothing happened.");
@@ -126,9 +132,41 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
 }
 
 
-+ (void)WorkNodeEdit:(MCWorkNode *) finder{
++ (void)WorkNodeEdit:(MCWorkNode *) finder Task:(NSString *)task Worker:(NSString*)worker Previous:(NSMutableArray*)previous{
+
+        finder.task = task;
+        finder.worker = worker;
+        finder.previousNodes = previous;
+        for (UIImageView *oldimage in finder.subviews) {
+            [oldimage removeFromSuperview];
+        }
+        UIImageView *dotImageView;
+        if (finder.status == false) {
+            dotImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"undo.png"]];
+        }
+        else{
+            dotImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"done.png"]];
+        }
+        CGSize imageSize = dotImageView.frame.size;
+        finder.frame = CGRectMake(finder.frame.origin.x, finder.frame.origin.y, imageSize.width, imageSize.height);
+        [finder addSubview:dotImageView];
+        
+        // set node's label
+        UILabel *AxLabel = [[UILabel alloc] initWithFrame:CGRectMake(imageSize.width + 1, 5.0, 50.0, 15.0)];
+        UILabel *AyLabel = [[UILabel alloc] initWithFrame:CGRectMake(imageSize.width + 1, 21.0, 50.0, 15.0)];
+        
+        UIFont *font = [UIFont fontWithName:@"helvetica" size:15.0];
+        AxLabel.font = font;
+        AyLabel.font = font;
+        AxLabel.text = finder.task;
+        AyLabel.text = finder.worker;
+        [AxLabel setBackgroundColor:[UIColor clearColor]];
+        [AyLabel setBackgroundColor:[UIColor clearColor]];
+        [finder addSubview:AxLabel];
+        [finder addSubview:AyLabel];
     
-}
+    
+    }
 + (void)WorkNodeChange:(MCWorkNode *) finder{
     finder.status = !finder.status;
     for (UIImageView *oldimage in finder.subviews) {

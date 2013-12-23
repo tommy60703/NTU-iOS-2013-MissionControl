@@ -15,16 +15,20 @@
 @end
 
 
-@interface MCNodeInputViewController : UIViewController <MCPreviousInputDelegate>
+@interface MCNodeInputViewController : UIViewController <MCPreviousInputDelegate, UITextFieldDelegate>
 
 @property id<MCAddNodeDelegate> delegate;
 @property (strong, nonatomic) IBOutlet UITextField *taskInput;
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
 
 @property NSArray *workerList;
-@property NSArray *previousList;
+@property NSMutableArray *previousList;
 @property NSMutableArray *previousSelectionList;
 @property NSString *worker;
+@property int tag;
+@property NSString *prevTask;
+@property NSString *prevWorker;
+@property NSArray *prevPrevious;
 
 - (IBAction)cancelButtonClick:(id)sender;
 - (IBAction)doneButtonClick:(id)sender;

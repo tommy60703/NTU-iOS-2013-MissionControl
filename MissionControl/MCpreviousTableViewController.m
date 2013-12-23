@@ -110,6 +110,12 @@
     NSDictionary *dict = [notification userInfo];
     
     self.previousList = [dict valueForKey:@"previousList"];
+    if ([[dict valueForKey:@"tag"]integerValue] != -1) {
+        NSArray *prevSelect = [dict valueForKey:@"previous"];
+        NSLog(@"%@", prevSelect);
+        //NSIndexPath *indexPath = ;
+        
+    }
     //NSLog(@"%@",self.previousList);
 }
 
