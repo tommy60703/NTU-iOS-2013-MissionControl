@@ -392,7 +392,7 @@
                 
                 //NSLog(@"%d",flag);
                 if (flag) {
-                    [MCWorkNode WorkNodeChange:finder Me:(NSString *)self.project[@"jog"]];
+                    [MCWorkNode WorkNodeChange:finder Me:(NSString *)self.project[@"job"]];
                     [self syncStatusWithServer:[[dict valueForKey:@"tag"] integerValue]];
                 }
             }
