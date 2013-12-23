@@ -45,7 +45,7 @@
         [fileManager copyItemAtPath:soucePath toPath:destPath error:nil];
     }
     
-    NSArray *images = [[NSArray alloc] initWithObjects:[UIImage imageNamed:@"tip1.png"], [UIImage imageNamed:@"tip2.png"], nil];
+    NSArray *images = [[NSArray alloc] initWithObjects:[UIImage imageNamed:@"tip3.png"], [UIImage imageNamed:@"tip4.png"], [UIImage imageNamed:@"tip1.png"], [UIImage imageNamed:@"tip2.png"], nil];
     
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width*images.count, self.scrollView.frame.size.height);
     [scrollView setShowsHorizontalScrollIndicator: NO];
