@@ -90,6 +90,7 @@
         //self.status = (!self.status);
         NSDictionary *dict = [NSDictionary dictionaryWithObject: [NSNumber numberWithInteger:self.tag] forKey:@"tag"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"finishWorkNodes" object:self userInfo:dict];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"stopAlert" object:self];
     }
 }
 

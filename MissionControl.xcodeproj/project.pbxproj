@@ -44,6 +44,8 @@
 		658B3501183AF007009C09EB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 658B34FF183AF007009C09EB /* InfoPlist.strings */; };
 		658B3503183AF007009C09EB /* MissionControlTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 658B3502183AF007009C09EB /* MissionControlTests.m */; };
 		658BCD41186291C200A1ECEF /* Appicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 658BCD40186291C200A1ECEF /* Appicon@2x.png */; };
+		65B0C7131868521300740056 /* xperiaz_VDLVxZSw.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 65B0C7121868521300740056 /* xperiaz_VDLVxZSw.mp3 */; };
+		65B0C71F1868523600740056 /* MCAlertSound.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B0C71E1868523600740056 /* MCAlertSound.m */; };
 		65C024FA1848546D000CC42B /* projectContent.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65C024F91848546D000CC42B /* projectContent.plist */; };
 /* End PBXBuildFile section */
 
@@ -392,6 +394,9 @@
 		658B3500183AF007009C09EB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		658B3502183AF007009C09EB /* MissionControlTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MissionControlTests.m; sourceTree = "<group>"; };
 		658BCD40186291C200A1ECEF /* Appicon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Appicon@2x.png"; sourceTree = "<group>"; };
+		65B0C7121868521300740056 /* xperiaz_VDLVxZSw.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = xperiaz_VDLVxZSw.mp3; sourceTree = "<group>"; };
+		65B0C71D1868523600740056 /* MCAlertSound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCAlertSound.h; sourceTree = "<group>"; };
+		65B0C71E1868523600740056 /* MCAlertSound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCAlertSound.m; sourceTree = "<group>"; };
 		65C024F91848546D000CC42B /* projectContent.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = projectContent.plist; path = ../projectContent.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -991,6 +996,9 @@
 				5EAC457F1864597E00ACE9D1 /* MCpreviousTableViewController.h */,
 				5EAC45801864597E00ACE9D1 /* MCpreviousTableViewController.m */,
 				658BCD40186291C200A1ECEF /* Appicon@2x.png */,
+				65B0C71D1868523600740056 /* MCAlertSound.h */,
+				65B0C71E1868523600740056 /* MCAlertSound.m */,
+				65B0C7121868521300740056 /* xperiaz_VDLVxZSw.mp3 */,
 			);
 			name = ProjectContent;
 			sourceTree = "<group>";
@@ -1209,6 +1217,7 @@
 				6514E2C81840FAAA00468A8A /* test-projects.json in Resources */,
 				658B34DF183AF007009C09EB /* InfoPlist.strings in Resources */,
 				5E067055185DEFEE00FC8445 /* done@2x.png in Resources */,
+				65B0C7131868521300740056 /* xperiaz_VDLVxZSw.mp3 in Resources */,
 				658B34E8183AF007009C09EB /* Main.storyboard in Resources */,
 				658BCD41186291C200A1ECEF /* Appicon@2x.png in Resources */,
 				5E067056185DEFEE00FC8445 /* undo@2x.png in Resources */,
@@ -1240,6 +1249,7 @@
 				658B34E5183AF007009C09EB /* AppDelegate.m in Sources */,
 				6514E2BA1840E6DC00468A8A /* NSArray+JSON.m in Sources */,
 				658B34E1183AF007009C09EB /* main.m in Sources */,
+				65B0C71F1868523600740056 /* MCAlertSound.m in Sources */,
 				5EAC45811864597E00ACE9D1 /* MCpreviousTableViewController.m in Sources */,
 				5E80819F18596782004D9343 /* MCNodeInputViewController.m in Sources */,
 			);

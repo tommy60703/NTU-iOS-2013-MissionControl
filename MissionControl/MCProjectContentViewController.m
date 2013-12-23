@@ -9,10 +9,13 @@
 #import "MCProjectContentViewController.h"
 #import "MCWorkNode.h"
 #import "MCNodeInputViewController.h"
+#import "MCAlertSound.h"
 
 @interface MCProjectContentViewController ()
 @property (strong, nonatomic) NSTimer *syncWithServer;
+@property (strong, nonatomic) MCAlertSound *alertSound;
 @property BOOL shown;
+
 @end
 
 @implementation MCProjectContentViewController
@@ -28,7 +31,6 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     
     self.navigationItem.title = self.project[@"projectName"];
     self.isEditingProjectContent = NO;
@@ -148,9 +150,9 @@
                         [self refreshWorkNodes:[oldNode[@"seq"] integerValue]];
                         if ([self checkMyJob]) {
                             //here
+                            self.alertSound = [[MCAlertSound alloc] init];
+                            [self.alertSound fire];
                         }
-                        
-                        
                     }
                 }
             }
