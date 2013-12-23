@@ -105,9 +105,9 @@
             UIActionSheet *action  =
             [[UIActionSheet alloc] initWithTitle:self.task
                                         delegate:self
-                               cancelButtonTitle:@"Cancel"
-                          destructiveButtonTitle:@"Delete"
-                               otherButtonTitles:@"Edit", nil];
+                               cancelButtonTitle:@"取消"
+                          destructiveButtonTitle:@"刪除"
+                               otherButtonTitles:@"編輯", nil];
 
             [action showInView:self];   //顯示actionsheet
         }

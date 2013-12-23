@@ -92,7 +92,7 @@
 }
 
 - (IBAction)done:(id)sender {
-    self.pageIndicator.text = [[NSString stringWithFormat:@"%d", self.page+2] stringByAppendingString:@"/5"];
+    self.pageIndicator.text = [[NSString stringWithFormat:@"%d", self.page+2] stringByAppendingString:@"/4"];
     
     if(self.page==2) [self.done2 setTitle:@"完成" forState:UIControlStateNormal];
     
