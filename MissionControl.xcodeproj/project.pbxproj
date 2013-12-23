@@ -14,6 +14,7 @@
 		448A939C1867237F00FCFCFE /* first.plist in Resources */ = {isa = PBXBuildFile; fileRef = 448A939B1867237F00FCFCFE /* first.plist */; };
 		44A991C218685C7200A45ED0 /* tip3.png in Resources */ = {isa = PBXBuildFile; fileRef = 44A991C018685C7200A45ED0 /* tip3.png */; };
 		44A991C318685C7200A45ED0 /* tip4.png in Resources */ = {isa = PBXBuildFile; fileRef = 44A991C118685C7200A45ED0 /* tip4.png */; };
+		44A991E9186867DD00A45ED0 /* myundo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44A991E8186867DD00A45ED0 /* myundo@2x.png */; };
 		5E067055185DEFEE00FC8445 /* done@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E067053185DEFEE00FC8445 /* done@2x.png */; };
 		5E067056185DEFEE00FC8445 /* undo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E067054185DEFEE00FC8445 /* undo@2x.png */; };
 		5E1224971846EC01009072EA /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E1224961846EC01009072EA /* AudioToolbox.framework */; };
@@ -134,6 +135,7 @@
 		448A939B1867237F00FCFCFE /* first.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = first.plist; sourceTree = "<group>"; };
 		44A991C018685C7200A45ED0 /* tip3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tip3.png; sourceTree = "<group>"; };
 		44A991C118685C7200A45ED0 /* tip4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tip4.png; sourceTree = "<group>"; };
+		44A991E8186867DD00A45ED0 /* myundo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "myundo@2x.png"; sourceTree = "<group>"; };
 		5E067040185DBC9300FC8445 /* MCNodeDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCNodeDelegate.h; sourceTree = "<group>"; };
 		5E067053185DEFEE00FC8445 /* done@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "done@2x.png"; sourceTree = "<group>"; };
 		5E067054185DEFEE00FC8445 /* undo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "undo@2x.png"; sourceTree = "<group>"; };
@@ -991,6 +993,7 @@
 		65C0253718485E1E000CC42B /* ProjectContent */ = {
 			isa = PBXGroup;
 			children = (
+				44A991E8186867DD00A45ED0 /* myundo@2x.png */,
 				5E067053185DEFEE00FC8445 /* done@2x.png */,
 				5E067054185DEFEE00FC8445 /* undo@2x.png */,
 				5E80818A1858E38E004D9343 /* MCWorkNode.h */,
@@ -1228,6 +1231,7 @@
 				44A991C318685C7200A45ED0 /* tip4.png in Resources */,
 				65C024FA1848546D000CC42B /* projectContent.plist in Resources */,
 				443E0C24186716770063719A /* tip1.png in Resources */,
+				44A991E9186867DD00A45ED0 /* myundo@2x.png in Resources */,
 				448A939C1867237F00FCFCFE /* first.plist in Resources */,
 				6514E2C81840FAAA00468A8A /* test-projects.json in Resources */,
 				658B34DF183AF007009C09EB /* InfoPlist.strings in Resources */,
