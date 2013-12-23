@@ -126,10 +126,13 @@
                 if([self.previousList[i] isEqualToString:prev]){
                     [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]].accessoryType = UITableViewCellAccessoryCheckmark;
                     [self.previousSelectionList addObject:self.previousList[i]];
+                    NSDictionary *dict1 = [NSDictionary dictionaryWithObject:self.previousSelectionList forKey:@"previousSelectionList"];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"getPreviousList" object:self userInfo:dict1];
                 }
 //            [cells addObject:[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]]];
             }
         }
     }
+    
 }
 @end

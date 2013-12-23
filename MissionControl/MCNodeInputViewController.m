@@ -42,8 +42,14 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getPreviousList:) name:@"getPreviousList" object:nil];
     
     [self.pickerView selectRow:defaultRow inComponent:0 animated:YES];
+//    if(self.previousSelectionList == NULL)
+   
     self.previousSelectionList = [NSMutableArray new];
-}
+    if (self.prevPrevious.count != 0) {
+        [self.previousSelectionList addObjectsFromArray:self.prevPrevious];
+    }
+    
+    }
 
 - (IBAction)cancelButtonClick:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];

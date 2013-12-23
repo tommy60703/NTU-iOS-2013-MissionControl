@@ -300,6 +300,7 @@
                 
             }
         }
+        [self drawAllLines];
     }
     [self saveWorkFlow];
 }
