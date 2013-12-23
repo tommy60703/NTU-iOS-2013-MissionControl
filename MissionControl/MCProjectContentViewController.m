@@ -269,6 +269,7 @@
     [self.myScrollView addSubview:theNode];
     
     [self drawAllLines];
+    
     }
     else{
         
@@ -278,12 +279,23 @@
                 if (finder.tag == tag) {
                     [MCWorkNode WorkNodeEdit:finder Task:(NSString *)task Worker:(NSString*)worker Previous:(NSMutableArray*)previous];
                     [self moveWorkNodes];
+                    self.previousList = [NSMutableArray new];
+                    for (PFObject *theWorkNode in self.workNodes) {
+                        if ([theWorkNode[@"seq"] integerValue] == tag) {
+                            theWorkNode[@"task"] = task;
+                            theWorkNode[@"worker"] = worker;
+                            theWorkNode[@"previous"] = previous;
+                        }
+                        [self.previousList addObject:theWorkNode[@"task"]];
+                    }
+                    
                     break;
                 }
                 
             }
         }
     }
+    [self saveWorkFlow];
 }
 
 - (void)drawAllLines {

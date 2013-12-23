@@ -110,13 +110,26 @@
     NSDictionary *dict = [notification userInfo];
     
     self.previousList = [dict valueForKey:@"previousList"];
+    NSArray *prevSelect;
     if ([[dict valueForKey:@"tag"]integerValue] != -1) {
-        NSArray *prevSelect = [dict valueForKey:@"previous"];
+        prevSelect = [dict valueForKey:@"previous"];
         NSLog(@"%@", prevSelect);
         //NSIndexPath *indexPath = ;
         
     }
-    //NSLog(@"%@",self.previousList);
+//    NSMutableArray *cells = [[NSMutableArray alloc] init];
+    for (NSInteger j = 0; j < [self.tableView numberOfSections]; ++j)
+    {
+        for (NSInteger i = 0; i < [self.tableView numberOfRowsInSection:j]; ++i)
+        {
+            for (NSString *prev in prevSelect) {
+                if([self.previousList[i] isEqualToString:prev]){
+                    [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]].accessoryType = UITableViewCellAccessoryCheckmark;
+                    [self.previousSelectionList addObject:self.previousList[i]];
+                }
+//            [cells addObject:[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]]];
+            }
+        }
+    }
 }
-
 @end
