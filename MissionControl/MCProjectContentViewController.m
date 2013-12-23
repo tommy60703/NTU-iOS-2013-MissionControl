@@ -192,7 +192,7 @@
         NSString *worker = node[@"worker"];
         NSMutableArray *previous = node[@"previous"];
         bool status = [node[@"state"] boolValue];
-        MCWorkNode *theNode = [[MCWorkNode alloc] initWithPoint:position Seq:theSeq Task:task Worker:worker Prev:previous Status:status];
+        MCWorkNode *theNode = [[MCWorkNode alloc] initWithPoint:position Seq:theSeq Task:task Worker:worker Prev:previous Status:status Me:self.project[@"job"]];
         theNode.delegate = self;
         [self.previousList addObject:node[@"task"]];
         [self.myScrollView addSubview:theNode];
@@ -241,7 +241,7 @@
         }
         position.y += 100;
         
-    MCWorkNode *theNode = [[MCWorkNode alloc] initWithPoint:position Seq:seq Task:task Worker:worker Prev:previous Status:false];
+        MCWorkNode *theNode = [[MCWorkNode alloc] initWithPoint:position Seq:seq Task:task Worker:worker Prev:previous Status:false Me:self.project[@"job"]];
     theNode.delegate = self;
     
     
@@ -277,7 +277,7 @@
             if ([subview isKindOfClass:[MCWorkNode class]]) {
                 MCWorkNode *finder = (MCWorkNode *)subview;
                 if (finder.tag == tag) {
-                    [MCWorkNode WorkNodeEdit:finder Task:(NSString *)task Worker:(NSString*)worker Previous:(NSMutableArray*)previous];
+                    [MCWorkNode WorkNodeEdit:finder Task:(NSString *)task Worker:(NSString*)worker Previous:(NSMutableArray*)previous Me:(NSString *)self.project[@"job"]];
                     [self moveWorkNodes];
                     self.previousList = [NSMutableArray new];
                     for (PFObject *theWorkNode in self.workNodes) {
@@ -353,7 +353,7 @@
                 
                 //NSLog(@"%d",flag);
                 if (flag) {
-                    [MCWorkNode WorkNodeChange:finder];
+                    [MCWorkNode WorkNodeChange:finder Me:(NSString *)self.project[@"job"]];
                     [self syncStatusWithServer:tag];
                 }
             }
@@ -392,7 +392,7 @@
                 
                 //NSLog(@"%d",flag);
                 if (flag) {
-                    [MCWorkNode WorkNodeChange:finder];
+                    [MCWorkNode WorkNodeChange:finder Me:(NSString *)self.project[@"jog"]];
                     [self syncStatusWithServer:[[dict valueForKey:@"tag"] integerValue]];
                 }
             }

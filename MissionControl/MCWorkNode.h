@@ -24,8 +24,8 @@
 @property BOOL isMakingFather;
 @property BOOL editing;
 
-- (MCWorkNode *)initWithPoint:(CGPoint)point Seq:(int)seq Task:(NSString*)task Worker:(NSString*)worker Prev:(NSMutableArray*)previous Status:(bool)status;
-+ (void)WorkNodeChange:(MCWorkNode *) finder;
-+ (void)WorkNodeEdit:(MCWorkNode *) finder Task:(NSString *)task Worker:(NSString*)worker Previous:(NSMutableArray*)previous;
+- (MCWorkNode *)initWithPoint:(CGPoint)point Seq:(int)seq Task:(NSString*)task Worker:(NSString*)worker Prev:(NSMutableArray*)previous Status:(bool)status Me:(NSString *)job;
++ (void)WorkNodeChange:(MCWorkNode *) finder Me:(NSString *)job;
++ (void)WorkNodeEdit:(MCWorkNode *) finder Task:(NSString *)task Worker:(NSString*)worker Previous:(NSMutableArray*)previous Me:(NSString *)job;
 
 @end

@@ -56,7 +56,7 @@
                 projectParticipate[@"projectPasscode"] = [aProject objectForKey:@"projectPasscode"];
                 [projectParticipate saveInBackground];
                 PFQuery *addWorker = [PFQuery queryWithClassName:@"project"];
-                [addWorker whereKey:@"projectName" equalTo:[aProject objectForKey:@"projectName"]];
+                [addWorker whereKey:@"projectPasscode" equalTo:[aProject objectForKey:@"projectPasscode"]];
                 PFObject *theProject = [addWorker getFirstObject];
                 [theProject addUniqueObject:self.userJob.text forKey:@"projectWorkers"];
                 [theProject saveInBackground];

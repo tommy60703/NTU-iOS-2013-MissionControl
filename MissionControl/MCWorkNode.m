@@ -12,7 +12,7 @@
 
 @synthesize xLabel, yLabel;
 
-- (MCWorkNode *)initWithPoint:(CGPoint)point Seq:(int)seq Task:(NSString *)task Worker:(NSString *)worker Prev:(NSMutableArray *)previous Status:(bool)status {
+- (MCWorkNode *)initWithPoint:(CGPoint)point Seq:(int)seq Task:(NSString *)task Worker:(NSString *)worker Prev:(NSMutableArray *)previous Status:(bool)status Me:(NSString *)job{
     self = [super init];
     if (self) {
         UILongPressGestureRecognizer *longPressGestureRecognizer =
@@ -22,7 +22,10 @@
         // Load undo circle image
         // set the view size of MCWorkNode as same as undo circle image
         UIImageView *dotImageView;
-        if (status == false) {
+        if (status == false && [worker isEqualToString:job]) {
+        dotImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"myundo.png"]];
+        }
+        else if(status == false && ![worker isEqualToString:job]){
         dotImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"undo.png"]];
         }
         else{
@@ -132,7 +135,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
 }
 
 
-+ (void)WorkNodeEdit:(MCWorkNode *) finder Task:(NSString *)task Worker:(NSString*)worker Previous:(NSMutableArray*)previous{
++ (void)WorkNodeEdit:(MCWorkNode *) finder Task:(NSString *)task Worker:(NSString*)worker Previous:(NSMutableArray*)previous Me:(NSString *)job{
 
         finder.task = task;
         finder.worker = worker;
@@ -141,7 +144,10 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
             [oldimage removeFromSuperview];
         }
         UIImageView *dotImageView;
-        if (finder.status == false) {
+        if (finder.status == false && [worker isEqualToString:job]) {
+            dotImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"myundo.png"]];
+        }
+        else if(finder.status == false && ![worker isEqualToString:job]){
             dotImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"undo.png"]];
         }
         else{
@@ -167,13 +173,16 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
     
     
     }
-+ (void)WorkNodeChange:(MCWorkNode *) finder{
++ (void)WorkNodeChange:(MCWorkNode *) finder Me:(NSString *)job{
     finder.status = !finder.status;
     for (UIImageView *oldimage in finder.subviews) {
         [oldimage removeFromSuperview];
     }
     UIImageView *dotImageView;
-    if (finder.status == false) {
+    if (finder.status == false && [finder.worker isEqualToString:job]) {
+        dotImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"myundo.png"]];
+    }
+    else if(finder.status == false && ![finder.worker isEqualToString:job]){
         dotImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"undo.png"]];
     }
     else{
