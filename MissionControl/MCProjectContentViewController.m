@@ -35,8 +35,8 @@
     self.addNodeButton.enabled = NO;
     //self.saveButton.hidden = YES;
     
-//    UIImage *backgroundImage = [UIImage imageNamed:@"background"];
-//    self.myScrollView.backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
+    UIImage *backgroundImage = [UIImage imageNamed:@"background"];
+    self.myScrollView.backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
     
     if (![self.project[@"user"] isEqualToString:self.project[@"owner"]]) {
         self.editButton.title = @"";
@@ -101,13 +101,15 @@
     if (self.isEditingProjectContent) {
         self.editButton.title = @"完成";
         [self.syncWithServer invalidate];
-        UIImage *backgroundImage = [UIImage imageNamed:@"background"];
+        
+        UIImage *backgroundImage = [UIImage imageNamed:@"background2"];
         self.myScrollView.backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
         //NSLog(@"%d",self.isEditingProjectContent);
     }
     else{
         self.editButton.title = @"編輯";
-        self.myScrollView.backgroundColor = [UIColor whiteColor];
+        UIImage *backgroundImage = [UIImage imageNamed:@"background"];
+        self.myScrollView.backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
         self.syncWithServer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(refreshFromServer) userInfo:nil repeats:YES];
         //NSLog(@"%d",self.isEditingProjectContent);
     }

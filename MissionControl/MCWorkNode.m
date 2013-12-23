@@ -36,16 +36,18 @@
         [self addSubview:dotImageView];
         
         // set node's label
-        xLabel = [[UILabel alloc] initWithFrame:CGRectMake(imageSize.width+1, 5.0, 50.0, 15.0)];
-        yLabel = [[UILabel alloc] initWithFrame:CGRectMake(imageSize.width+1, 21.0, 50.0, 15.0)];
+        xLabel = [[UILabel alloc] initWithFrame:CGRectMake(imageSize.width+1, 5.0, 50.0, 20.0)];
+        yLabel = [[UILabel alloc] initWithFrame:CGRectMake(imageSize.width+1, 25.0, 50.0, 15.0)];
         
-        UIFont *font = [UIFont fontWithName:@"helvetica" size:15.0];
+        UIFont *font = [UIFont fontWithName:@"helvetica" size:18.0];
         xLabel.font = font;
+        font = [UIFont fontWithName:@"helvetica" size:15.0];
         yLabel.font = font;
         xLabel.text = task;
         yLabel.text = worker;
         [xLabel setBackgroundColor:[UIColor clearColor]];
         [yLabel setBackgroundColor:[UIColor clearColor]];
+        yLabel.textColor = [UIColor lightGrayColor];
         [self addSubview:xLabel];
         [self addSubview:yLabel];
         
@@ -158,16 +160,18 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
         [finder addSubview:dotImageView];
         
         // set node's label
-        UILabel *AxLabel = [[UILabel alloc] initWithFrame:CGRectMake(imageSize.width + 1, 5.0, 50.0, 15.0)];
-        UILabel *AyLabel = [[UILabel alloc] initWithFrame:CGRectMake(imageSize.width + 1, 21.0, 50.0, 15.0)];
+        UILabel *AxLabel = [[UILabel alloc] initWithFrame:CGRectMake(imageSize.width + 1, 5.0, 50.0, 20.0)];
+        UILabel *AyLabel = [[UILabel alloc] initWithFrame:CGRectMake(imageSize.width + 1, 25.0, 50.0, 15.0)];
         
-        UIFont *font = [UIFont fontWithName:@"helvetica" size:15.0];
+        UIFont *font = [UIFont fontWithName:@"helvetica" size:18.0];
         AxLabel.font = font;
+        font = [UIFont fontWithName:@"helvetica" size:15.0];
         AyLabel.font = font;
         AxLabel.text = finder.task;
         AyLabel.text = finder.worker;
         [AxLabel setBackgroundColor:[UIColor clearColor]];
         [AyLabel setBackgroundColor:[UIColor clearColor]];
+        AyLabel.textColor = [UIColor lightGrayColor];
         [finder addSubview:AxLabel];
         [finder addSubview:AyLabel];
     
@@ -193,16 +197,18 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
     [finder addSubview:dotImageView];
     
     // set node's label
-    UILabel *AxLabel = [[UILabel alloc] initWithFrame:CGRectMake(imageSize.width + 1, 5.0, 50.0, 15.0)];
-    UILabel *AyLabel = [[UILabel alloc] initWithFrame:CGRectMake(imageSize.width + 1, 21.0, 50.0, 15.0)];
+    UILabel *AxLabel = [[UILabel alloc] initWithFrame:CGRectMake(imageSize.width + 1, 5.0, 50.0, 20.0)];
+    UILabel *AyLabel = [[UILabel alloc] initWithFrame:CGRectMake(imageSize.width + 1, 25.0, 50.0, 15.0)];
     
-    UIFont *font = [UIFont fontWithName:@"helvetica" size:15.0];
+    UIFont *font = [UIFont fontWithName:@"helvetica" size:18.0];
     AxLabel.font = font;
+    font = [UIFont fontWithName:@"helvetica" size:15.0];
     AyLabel.font = font;
     AxLabel.text = finder.task;
     AyLabel.text = finder.worker;
     [AxLabel setBackgroundColor:[UIColor clearColor]];
     [AyLabel setBackgroundColor:[UIColor clearColor]];
+    AyLabel.textColor = [UIColor lightGrayColor];
     [finder addSubview:AxLabel];
     [finder addSubview:AyLabel];
     
