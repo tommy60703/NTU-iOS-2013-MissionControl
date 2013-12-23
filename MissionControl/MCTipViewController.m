@@ -45,7 +45,7 @@
         [fileManager copyItemAtPath:soucePath toPath:destPath error:nil];
     }
     
-    NSArray *images = [[NSArray alloc] initWithObjects:[UIImage imageNamed:@"tip0.png"], [UIImage imageNamed:@"tip3.png"], [UIImage imageNamed:@"tip4.png"], [UIImage imageNamed:@"tip1.png"], [UIImage imageNamed:@"tip2.png"], nil];
+    NSArray *images = [[NSArray alloc] initWithObjects:[UIImage imageNamed:@"tip0.png"], [UIImage imageNamed:@"tip4.png"], [UIImage imageNamed:@"tip1.png"], [UIImage imageNamed:@"tip2.png"], nil];
     
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width*images.count, self.scrollView.frame.size.height);
     [scrollView setShowsHorizontalScrollIndicator: NO];
@@ -92,9 +92,11 @@
 }
 
 - (IBAction)done:(id)sender {
-    if(self.page==3) [self.done2 setTitle:@"Done" forState:UIControlStateNormal];
+    self.pageIndicator.text = [[NSString stringWithFormat:@"%d", self.page+2] stringByAppendingString:@"/5"];
     
-    if(self.page<4) {
+    if(self.page==2) [self.done2 setTitle:@"Done" forState:UIControlStateNormal];
+    
+    if(self.page<3) {
         CGRect frame = scrollView.frame;
         frame.origin.x = frame.size.width*(++self.page);
         frame.origin.y = 0;

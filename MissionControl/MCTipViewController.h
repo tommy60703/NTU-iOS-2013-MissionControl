@@ -23,5 +23,6 @@
 - (IBAction)changePage;
 - (IBAction)done:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *done2;
+@property (weak, nonatomic) IBOutlet UILabel *pageIndicator;
 
 @end
