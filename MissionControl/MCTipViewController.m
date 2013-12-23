@@ -45,7 +45,7 @@
         [fileManager copyItemAtPath:soucePath toPath:destPath error:nil];
     }
     
-    NSArray *images = [[NSArray alloc] initWithObjects:[UIImage imageNamed:@"tip3.png"], [UIImage imageNamed:@"tip4.png"], [UIImage imageNamed:@"tip1.png"], [UIImage imageNamed:@"tip2.png"], nil];
+    NSArray *images = [[NSArray alloc] initWithObjects:[UIImage imageNamed:@"tip0.png"], [UIImage imageNamed:@"tip3.png"], [UIImage imageNamed:@"tip4.png"], [UIImage imageNamed:@"tip1.png"], [UIImage imageNamed:@"tip2.png"], nil];
     
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width*images.count, self.scrollView.frame.size.height);
     [scrollView setShowsHorizontalScrollIndicator: NO];
@@ -63,6 +63,7 @@
         [scrollView addSubview:imgView];
     }
     
+    self.page = 0;
     self.pageControl.currentPage = 0;
     self.pageControl.numberOfPages = images.count;
     [self.view insertSubview:pageControl atIndex:0];
@@ -91,18 +92,16 @@
 }
 
 - (IBAction)done:(id)sender {
-    NSString *plistPath = [NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES) lastObject];
-    plistPath = [plistPath stringByAppendingString:@"first.plist"];
+    if(self.page==3) [self.done2 setTitle:@"Done" forState:UIControlStateNormal];
     
-    NSDictionary *plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile: plistPath];
-    NSLog(@"%@", plistDict);
-    [plistDict setValue:@"0" forKey:@"first"];
-//    [plistDict writeToFile:plistPath atomically: YES];
-    //存檔
-    if ([plistDict writeToFile:plistPath atomically: YES]) NSLog(@"writePlist success");
-    else NSLog(@"writePlist fail");
+    if(self.page<4) {
+        CGRect frame = scrollView.frame;
+        frame.origin.x = frame.size.width*(++self.page);
+        frame.origin.y = 0;
+        [scrollView scrollRectToVisible:frame animated:YES];
+    }
     
-    [self dismissViewControllerAnimated:YES completion:nil];
+    else [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
