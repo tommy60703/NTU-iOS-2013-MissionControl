@@ -94,7 +94,7 @@
 - (IBAction)done:(id)sender {
     self.pageIndicator.text = [[NSString stringWithFormat:@"%d", self.page+2] stringByAppendingString:@"/5"];
     
-    if(self.page==2) [self.done2 setTitle:@"Done" forState:UIControlStateNormal];
+    if(self.page==2) [self.done2 setTitle:@"完成" forState:UIControlStateNormal];
     
     if(self.page<3) {
         CGRect frame = scrollView.frame;
