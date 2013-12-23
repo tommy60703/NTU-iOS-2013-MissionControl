@@ -231,9 +231,13 @@
         position.x += [pos[@"location_x"] floatValue];
         position.y += [pos[@"location_y"] floatValue];
     }
-        position.x /= prevPositions.count;
-        position.y /= prevPositions.count;
+        if (prevPositions.count != 0) {
+            position.x /= prevPositions.count;
+            position.y /= prevPositions.count;
+            
+        }
         position.y += 100;
+        
     MCWorkNode *theNode = [[MCWorkNode alloc] initWithPoint:position Seq:seq Task:task Worker:worker Prev:previous Status:false];
     theNode.delegate = self;
     
@@ -471,6 +475,21 @@
     
 }
 
+//-(BOOL)checkMyJob{
+//    BOOL flag = NO;
+//    return flag;
+//}
+//-(BOOL)checkWorkNodePreviousStatus:(MCWorkNode *)theWorkNode{
+//    BOOL flag = NO;
+//    for (NSString *previous in theWorkNode.previousNodes) {
+//        for (UIView *subview in self.myScrollView.subviews) {
+//            if ([subview isKindOfClass:[ class]]) {
+//                <#statements#>
+//            }
+//        }
+//    }
+//    return flag;
+//}
 #pragma mark - MCNodeDelegate
 
 - (void)disableScroll {
