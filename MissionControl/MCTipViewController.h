@@ -15,10 +15,14 @@
     BOOL pageControlBeingUsed;
 }
 
+@property NSInteger page;
+
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, retain) IBOutlet UIPageControl *pageControl;
 
 - (IBAction)changePage;
 - (IBAction)done:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *done2;
+@property (weak, nonatomic) IBOutlet UILabel *pageIndicator;
 
 @end
