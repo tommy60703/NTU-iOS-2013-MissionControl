@@ -36,6 +36,9 @@
     self.addNodeButton.hidden = YES;
     //self.saveButton.hidden = YES;
     
+//    UIImage *backgroundImage = [UIImage imageNamed:@"background"];
+//    self.myScrollView.backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
+    
     if ([self.project[@"user"] isEqualToString:self.project[@"owner"]]) {
         self.editSwitcher.hidden = NO;
     }
@@ -95,9 +98,12 @@
     self.isEditingProjectContent = !self.isEditingProjectContent;
     if (self.isEditingProjectContent) {
         [self.syncWithServer invalidate];
+        UIImage *backgroundImage = [UIImage imageNamed:@"background"];
+        self.myScrollView.backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
         //NSLog(@"%d",self.isEditingProjectContent);
     }
     else{
+        self.myScrollView.backgroundColor = [UIColor whiteColor];
         self.syncWithServer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(refreshFromServer) userInfo:nil repeats:YES];
         //NSLog(@"%d",self.isEditingProjectContent);
     }
@@ -306,7 +312,7 @@
     }
     CGSize size = self.myScrollView.frame.size;
     self.drawLine = [[MCDrawLine alloc] initWithFrame:CGRectMake(0, 0, size.width , size.height)];
-    [self.drawLine setBackgroundColor:[UIColor whiteColor]];
+    [self.drawLine setBackgroundColor:[UIColor clearColor]];
     [self.drawLine addPoints:(NSMutableArray *)self.workNodes];
     self.drawLine.tag = -1;
     [self.myScrollView insertSubview:self.drawLine atIndex:0];
