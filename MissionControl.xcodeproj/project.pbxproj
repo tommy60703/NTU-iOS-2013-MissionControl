@@ -51,6 +51,7 @@
 		658B3501183AF007009C09EB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 658B34FF183AF007009C09EB /* InfoPlist.strings */; };
 		658B3503183AF007009C09EB /* MissionControlTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 658B3502183AF007009C09EB /* MissionControlTests.m */; };
 		658BCD41186291C200A1ECEF /* Appicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 658BCD40186291C200A1ECEF /* Appicon@2x.png */; };
+		65B0C77E1868685B00740056 /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65B0C77D1868685B00740056 /* background@2x.png */; };
 		65C024FA1848546D000CC42B /* projectContent.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65C024F91848546D000CC42B /* projectContent.plist */; };
 /* End PBXBuildFile section */
 
@@ -407,6 +408,7 @@
 		658B3500183AF007009C09EB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		658B3502183AF007009C09EB /* MissionControlTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MissionControlTests.m; sourceTree = "<group>"; };
 		658BCD40186291C200A1ECEF /* Appicon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Appicon@2x.png"; sourceTree = "<group>"; };
+		65B0C77D1868685B00740056 /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
 		65C024F91848546D000CC42B /* projectContent.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = projectContent.plist; path = ../projectContent.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -946,6 +948,7 @@
 		658B34DA183AF007009C09EB /* MissionControl */ = {
 			isa = PBXGroup;
 			children = (
+				65B0C77D1868685B00740056 /* background@2x.png */,
 				448A939B1867237F00FCFCFE /* first.plist */,
 				658B34E3183AF007009C09EB /* AppDelegate.h */,
 				658B34E4183AF007009C09EB /* AppDelegate.m */,
@@ -1241,6 +1244,7 @@
 				658BCD41186291C200A1ECEF /* Appicon@2x.png in Resources */,
 				5E067056185DEFEE00FC8445 /* undo@2x.png in Resources */,
 				44A991C218685C7200A45ED0 /* tip3.png in Resources */,
+				65B0C77E1868685B00740056 /* background@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
