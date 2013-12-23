@@ -29,18 +29,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    
     self.navigationItem.title = self.project[@"projectName"];
     self.isEditingProjectContent = NO;
     self.shown = NO;
-    self.addNodeButton.hidden = YES;
+    self.addNodeButton.enabled = NO;
     //self.saveButton.hidden = YES;
     
 //    UIImage *backgroundImage = [UIImage imageNamed:@"background"];
 //    self.myScrollView.backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
     
-    if ([self.project[@"user"] isEqualToString:self.project[@"owner"]]) {
-        self.editSwitcher.hidden = NO;
+    if (![self.project[@"user"] isEqualToString:self.project[@"owner"]]) {
+        self.editButton.title = @"";
+        self.editButton.enabled = NO;
+        self.addNodeButton.title = @"";
+        self.addNodeButton.enabled = NO;
     }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moveWorkNodes) name:@"moveWorkNodes" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveWorkFlow) name:@"saveWorkNode" object:nil];
@@ -94,20 +96,22 @@
 
 }
 
-- (IBAction)switcherToggled:(UISwitch *)sender {
+- (IBAction)editPressed:(UIBarButtonItem *)sender {
     self.isEditingProjectContent = !self.isEditingProjectContent;
     if (self.isEditingProjectContent) {
+        self.editButton.title = @"完成";
         [self.syncWithServer invalidate];
         UIImage *backgroundImage = [UIImage imageNamed:@"background"];
         self.myScrollView.backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
         //NSLog(@"%d",self.isEditingProjectContent);
     }
     else{
+        self.editButton.title = @"編輯";
         self.myScrollView.backgroundColor = [UIColor whiteColor];
         self.syncWithServer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(refreshFromServer) userInfo:nil repeats:YES];
         //NSLog(@"%d",self.isEditingProjectContent);
     }
-    self.addNodeButton.hidden = !self.addNodeButton.hidden;
+    self.addNodeButton.enabled = !self.addNodeButton.enabled;
     //self.saveButton.hidden = !self.saveButton.hidden;
 }
 

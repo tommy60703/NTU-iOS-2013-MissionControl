@@ -25,8 +25,8 @@
 #pragma mark - IBOutlet
 
 @property (strong, nonatomic) IBOutlet UIScrollView *myScrollView;
-@property (strong, nonatomic) IBOutlet UISwitch *editSwitcher;
-@property (strong, nonatomic) IBOutlet UIButton *addNodeButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *editButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *addNodeButton;
 @property (strong, nonatomic) IBOutlet UIButton *saveButton;
 
 
@@ -42,7 +42,7 @@
 #pragma mark - IBAction
 
 - (void)saveWorkFlow;
-- (IBAction)switcherToggled:(UISwitch *)sender;
+- (IBAction)editPressed:(UIBarButtonItem *)sender;
 
 #pragma mark - Instance Method
 
