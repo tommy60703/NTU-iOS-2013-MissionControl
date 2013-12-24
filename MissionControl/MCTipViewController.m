@@ -9,65 +9,37 @@
 #import "MCTipViewController.h"
 
 @interface MCTipViewController ()
-
+@property (strong, nonatomic) NSArray *images;
 @end
 
 @implementation MCTipViewController
-@synthesize scrollView,pageControl;
 
-- (void)scrollViewDidScroll:(UIScrollView *)sender {
-    if (!pageControlBeingUsed) {
-        // Switch the indicator when more than 50% of the previous/next page is visible
-        CGFloat pageWidth = self.scrollView.frame.size.width;
-        int page = floor((self.scrollView.contentOffset.x - pageWidth/2) / pageWidth) + 1;
-        self.pageControl.currentPage = page;
-    }
-}
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    pageControlBeingUsed = NO;
-}
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    pageControlBeingUsed = NO;
-}
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSString *destPath = [NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask,YES) lastObject];
-    destPath = [destPath stringByAppendingString:@"first.plist"];
+    UIImageView *tip0 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tip0.png"]];
+    UIImageView *tip4 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tip4.png"]];
+    UIImageView *tip1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tip1.png"]];
+    UIImageView *tip2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tip2.png"]];
+    tip0.contentMode = tip4.contentMode = tip1.contentMode = tip2.contentMode = UIViewContentModeScaleAspectFit;
+    self.images = @[tip0, tip4, tip1, tip2];
     
-    NSLog(@"ha");
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    if (![fileManager fileExistsAtPath: destPath]) {
-        NSLog(@"hahaha");
-        NSString *soucePath = [[NSBundle mainBundle] pathForResource:@"first" ofType:@"plist"];
-        [fileManager copyItemAtPath:soucePath toPath:destPath error:nil];
+    CGRect rect = self.scrollView.frame;
+    tip0.frame = rect;
+    tip4.frame = CGRectOffset(tip0.frame, tip0.frame.size.width, 0);
+    tip1.frame = CGRectOffset(tip4.frame, tip4.frame.size.width, 0);
+    tip2.frame = CGRectOffset(tip1.frame, tip1.frame.size.width, 0);
+    
+    CGSize size = CGSizeMake(tip0.frame.size.width * 4, rect.origin.y);
+    self.scrollView.contentSize = size;
+    
+    for (UIImageView *tip in self.images) {
+        [self.scrollView addSubview:tip];
     }
     
-    NSArray *images = [[NSArray alloc] initWithObjects:[UIImage imageNamed:@"tip0.png"], [UIImage imageNamed:@"tip4.png"], [UIImage imageNamed:@"tip1.png"], [UIImage imageNamed:@"tip2.png"], nil];
-    
-    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width*images.count, self.scrollView.frame.size.height);
-    [scrollView setShowsHorizontalScrollIndicator: NO];
-    
-    [scrollView setShowsVerticalScrollIndicator: NO];
-    
-    for (int i = 0; i < images.count; i++) {
-        CGRect frame;
-        frame.origin.x = self.scrollView.frame.size.width*i;
-        frame.origin.y = 0;
-        frame.size = self.scrollView.frame.size;
-        UIImageView* imgView = [[UIImageView alloc] init];
-        imgView.image = [images objectAtIndex:i];
-        imgView.frame = frame;
-        [scrollView addSubview:imgView];
-    }
-    
-    self.page = 0;
-    self.pageControl.currentPage = 0;
-    self.pageControl.numberOfPages = images.count;
-    [self.view insertSubview:pageControl atIndex:0];
+    self.pageControl.numberOfPages = self.images.count;
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -81,29 +53,19 @@
     self.pageControl = nil;
 }
 
-- (IBAction)changePage{
-    // update the scroll view to the appropriate page
-    CGRect frame;
-    frame.origin.x = self.scrollView.frame.size.width * self.pageControl.currentPage;
-    frame.origin.y = 0;
-    frame.size = self.scrollView.frame.size;
-    [self.scrollView scrollRectToVisible:frame animated: YES];
-    pageControlBeingUsed = YES;
+- (IBAction)changePage {
+
 }
 
 - (IBAction)done:(id)sender {
-    self.pageIndicator.text = [[NSString stringWithFormat:@"%d", self.page+2] stringByAppendingString:@"/4"];
-    
-    if(self.page==2) [self.done2 setTitle:@"完成" forState:UIControlStateNormal];
-    
-    if(self.page<3) {
-        CGRect frame = scrollView.frame;
-        frame.origin.x = frame.size.width*(++self.page);
-        frame.origin.y = 0;
-        [scrollView scrollRectToVisible:frame animated:YES];
-    }
-    
-    else [self dismissViewControllerAnimated:YES completion:nil];
+
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGFloat width = scrollView.frame.size.width;
+    NSInteger currentPage = ((scrollView.contentOffset.x - width / 2) / width) + 1;
+    self.pageControl.currentPage = currentPage;
+    self.pageIndicator.text = [NSString stringWithFormat:@"%d/%d", currentPage+1, self.images.count];
 }
 
 @end

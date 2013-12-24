@@ -8,10 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MCTipViewController : UIViewController <UIScrollViewDelegate> {
-    UIScrollView *scrollView;
-    UIPageControl *pageControl;
-    
+@interface MCTipViewController : UIViewController <UIScrollViewDelegate> {    
     BOOL pageControlBeingUsed;
 }
 
@@ -20,8 +17,8 @@
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, retain) IBOutlet UIPageControl *pageControl;
 
-- (IBAction)changePage;
 - (IBAction)done:(id)sender;
+
 @property (weak, nonatomic) IBOutlet UIButton *done2;
 @property (weak, nonatomic) IBOutlet UILabel *pageIndicator;
 
