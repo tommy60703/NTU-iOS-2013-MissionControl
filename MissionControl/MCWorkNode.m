@@ -12,7 +12,7 @@
 
 @synthesize xLabel, yLabel;
 
-- (MCWorkNode *)initWithPoint:(CGPoint)point Seq:(int)seq Task:(NSString *)task Worker:(NSString *)worker Prev:(NSMutableArray *)previous Status:(bool)status Me:(NSString *)job{
+- (MCWorkNode *)initWithPoint:(CGPoint)point Seq:(int)seq Task:(NSString *)task Worker:(NSString *)worker Prev:(NSMutableArray *)previous Status:(BOOL)status Me:(NSString *)job{
     self = [super init];
     if (self) {
         UILongPressGestureRecognizer *longPressGestureRecognizer =
@@ -22,10 +22,10 @@
         // Load undo circle image
         // set the view size of MCWorkNode as same as undo circle image
         UIImageView *dotImageView;
-        if (status == false && [worker isEqualToString:job]) {
+        if (status == NO && [worker isEqualToString:job]) {
         dotImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"myundo.png"]];
         }
-        else if(status == false && ![worker isEqualToString:job]){
+        else if(status == NO && ![worker isEqualToString:job]){
         dotImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"undo.png"]];
         }
         else{
@@ -93,6 +93,7 @@
     }
     else{
         //self.status = (!self.status);
+        [self.delegate stopAlertSound];
         NSDictionary *dict = [NSDictionary dictionaryWithObject: [NSNumber numberWithInteger:self.tag] forKey:@"tag"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"finishWorkNodes" object:self userInfo:dict];
     }
@@ -146,10 +147,10 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
             [oldimage removeFromSuperview];
         }
         UIImageView *dotImageView;
-        if (finder.status == false && [worker isEqualToString:job]) {
+        if (finder.status == NO && [worker isEqualToString:job]) {
             dotImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"myundo.png"]];
         }
-        else if(finder.status == false && ![worker isEqualToString:job]){
+        else if(finder.status == NO && ![worker isEqualToString:job]){
             dotImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"undo.png"]];
         }
         else{
@@ -183,10 +184,10 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
         [oldimage removeFromSuperview];
     }
     UIImageView *dotImageView;
-    if (finder.status == false && [finder.worker isEqualToString:job]) {
+    if (finder.status == NO && [finder.worker isEqualToString:job]) {
         dotImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"myundo.png"]];
     }
-    else if(finder.status == false && ![finder.worker isEqualToString:job]){
+    else if(finder.status == NO && ![finder.worker isEqualToString:job]){
         dotImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"undo.png"]];
     }
     else{

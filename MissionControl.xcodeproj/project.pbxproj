@@ -37,6 +37,7 @@
 		6514E2BA1840E6DC00468A8A /* NSArray+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 6514E2B91840E6DC00468A8A /* NSArray+JSON.m */; };
 		6514E2BD1840E78800468A8A /* MCBrain.m in Sources */ = {isa = PBXBuildFile; fileRef = 6514E2BC1840E78800468A8A /* MCBrain.m */; };
 		6514E2C81840FAAA00468A8A /* test-projects.json in Resources */ = {isa = PBXBuildFile; fileRef = 6514E2C71840FAAA00468A8A /* test-projects.json */; };
+		656580101869A0430066F227 /* xperiaz_VDLVxZSw.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6565800F1869A0430066F227 /* xperiaz_VDLVxZSw.mp3 */; };
 		658B34D5183AF007009C09EB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658B34D4183AF007009C09EB /* Foundation.framework */; };
 		658B34D7183AF007009C09EB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658B34D6183AF007009C09EB /* CoreGraphics.framework */; };
 		658B34D9183AF007009C09EB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658B34D8183AF007009C09EB /* UIKit.framework */; };
@@ -172,6 +173,7 @@
 		6514E2BB1840E78800468A8A /* MCBrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCBrain.h; sourceTree = "<group>"; };
 		6514E2BC1840E78800468A8A /* MCBrain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCBrain.m; sourceTree = "<group>"; };
 		6514E2C71840FAAA00468A8A /* test-projects.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "test-projects.json"; sourceTree = "<group>"; };
+		6565800F1869A0430066F227 /* xperiaz_VDLVxZSw.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = xperiaz_VDLVxZSw.mp3; sourceTree = "<group>"; };
 		65778B89183CD49900C4F02B /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		65778B8A183CD49900C4F02B /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		65778B8B183CD49900C4F02B /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
@@ -1014,6 +1016,7 @@
 				5EAC457F1864597E00ACE9D1 /* MCpreviousTableViewController.h */,
 				5EAC45801864597E00ACE9D1 /* MCpreviousTableViewController.m */,
 				658BCD40186291C200A1ECEF /* Appicon@2x.png */,
+				6565800F1869A0430066F227 /* xperiaz_VDLVxZSw.mp3 */,
 			);
 			name = ProjectContent;
 			sourceTree = "<group>";
@@ -1239,6 +1242,7 @@
 				443E0C24186716770063719A /* tip1.png in Resources */,
 				44A991E9186867DD00A45ED0 /* myundo@2x.png in Resources */,
 				448A939C1867237F00FCFCFE /* first.plist in Resources */,
+				656580101869A0430066F227 /* xperiaz_VDLVxZSw.mp3 in Resources */,
 				6514E2C81840FAAA00468A8A /* test-projects.json in Resources */,
 				658B34DF183AF007009C09EB /* InfoPlist.strings in Resources */,
 				5E067055185DEFEE00FC8445 /* done@2x.png in Resources */,
@@ -1248,7 +1252,6 @@
 				44A991EB186870C100A45ED0 /* tip0.png in Resources */,
 				658BCD41186291C200A1ECEF /* Appicon@2x.png in Resources */,
 				5E067056185DEFEE00FC8445 /* undo@2x.png in Resources */,
-				44A991C218685C7200A45ED0 /* tip3.png in Resources */,
 				65B0C77E1868685B00740056 /* background@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

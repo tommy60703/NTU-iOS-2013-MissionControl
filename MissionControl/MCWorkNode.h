@@ -17,14 +17,14 @@
 @property (strong) UILabel *yLabel;
 @property (strong) NSString *task;
 @property (strong) NSString *worker;
-@property  bool status;
+@property  BOOL status;
 @property (strong) NSMutableArray *previousNodes;
 @property (strong) id<MCNodeDelegate> delegate;
 
 @property BOOL isMakingFather;
 @property BOOL editing;
 
-- (MCWorkNode *)initWithPoint:(CGPoint)point Seq:(int)seq Task:(NSString*)task Worker:(NSString*)worker Prev:(NSMutableArray*)previous Status:(bool)status Me:(NSString *)job;
+- (MCWorkNode *)initWithPoint:(CGPoint)point Seq:(int)seq Task:(NSString*)task Worker:(NSString*)worker Prev:(NSMutableArray*)previous Status:(BOOL)status Me:(NSString *)job;
 + (void)WorkNodeChange:(MCWorkNode *) finder Me:(NSString *)job;
 + (void)WorkNodeEdit:(MCWorkNode *) finder Task:(NSString *)task Worker:(NSString*)worker Previous:(NSMutableArray*)previous Me:(NSString *)job;
 

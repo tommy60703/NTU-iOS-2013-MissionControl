@@ -46,9 +46,9 @@
 
 #pragma mark - Instance Method
 
-- (void) pushToServerTask:(NSString *)task Worker:(NSString *)worker Prev:(NSMutableArray *)previous Tag:(int)tag Status:(bool)status Location:(CGPoint) point;
+- (void) pushToServerTask:(NSString *)task Worker:(NSString *)worker Prev:(NSMutableArray *)previous Tag:(int)tag Status:(BOOL)status Location:(CGPoint) point;
 - (void) pullFromServerProject;
 - (void) refreshWorkNodes:(int)tag;
-- (bool)checkFinished;
+- (BOOL)checkFinished;
 
 @end

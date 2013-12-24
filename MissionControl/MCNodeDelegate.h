@@ -12,4 +12,5 @@
 - (void)disableScroll;
 - (void)enableScroll;
 - (BOOL)isEditingContent;
+- (void)stopAlertSound;
 @end

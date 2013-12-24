@@ -9,9 +9,13 @@
 #import "MCProjectContentViewController.h"
 #import "MCWorkNode.h"
 #import "MCNodeInputViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface MCProjectContentViewController ()
 @property (strong, nonatomic) NSTimer *syncWithServer;
+@property (strong, nonatomic) AVAudioPlayer *alertSound;
+@property (strong, nonatomic) NSTimer *alertTimer;
+@property BOOL alertSoundPlayed;
 @property BOOL shown;
 @end
 
@@ -29,6 +33,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.alertSoundPlayed = NO;
+    
     self.navigationItem.title = self.project[@"projectName"];
     self.isEditingProjectContent = NO;
     self.shown = NO;
@@ -89,7 +95,7 @@
         if([subview isKindOfClass:[MCWorkNode class]]){
             MCWorkNode *finder = (MCWorkNode *)subview;
             //NSLog(@"%d",finder.tag);
-            [self pushToServerTask:finder.task Worker:finder.worker Prev:finder.previousNodes Tag:finder.tag Status:finder.status Location:finder.frame.origin];
+            [self pushToServerTask:finder.task Worker:finder.worker Prev:finder.previousNodes Tag:(int)finder.tag Status:finder.status Location:finder.frame.origin];
         }
     }
     //[self.navigationController popViewControllerAnimated:YES];
@@ -119,7 +125,7 @@
 
 #pragma mark - Instance Method
 
-- (void)pushToServerTask:(NSString *)task Worker:(NSString *)worker Prev:(NSMutableArray *)previous Tag:(int)tag Status:(bool)status Location:(CGPoint)point {
+- (void)pushToServerTask:(NSString *)task Worker:(NSString *)worker Prev:(NSMutableArray *)previous Tag:(int)tag Status:(BOOL)status Location:(CGPoint)point {
     bool flag = true;
     for (PFObject *node in self.workNodes) {
         //NSLog(@"%d",[[node objectForKey:@"seq"] integerValue] == tag);
@@ -148,31 +154,31 @@
     }
 }
 - (void)refreshFromServer{
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
     PFQuery *fresh = [PFQuery queryWithClassName:[@"A" stringByAppendingString:[self.project[@"projectPasscode"] stringValue]]];
-        NSArray *newWorkNodes = [fresh findObjects];
-//    dispatch_sync(dispatch_get_main_queue(), ^{
-        for (PFObject *newNode in newWorkNodes) {
-            for (PFObject *oldNode in self.workNodes) {
-                if ([newNode[@"task"] isEqualToString:oldNode[@"task"]]) {
-                    if (newNode[@"state"] != oldNode[@"state"]) {
-                        oldNode[@"state"] = newNode[@"state"];
-                        [self refreshWorkNodes:[oldNode[@"seq"] integerValue]];
-                        if ([self checkMyJob]) {
-                            //here
-                        }
-                        
-                        
-                    }
+    NSArray *newWorkNodes = [fresh findObjects];
+    for (PFObject *newNode in newWorkNodes) {
+        for (PFObject *oldNode in self.workNodes) {
+            if ([newNode[@"task"] isEqualToString:oldNode[@"task"]]) {
+                if (newNode[@"state"] != oldNode[@"state"]) {
+                    oldNode[@"state"] = newNode[@"state"];
+                    [self refreshWorkNodes:(int)[oldNode[@"seq"] integerValue]];
                 }
             }
         }
+    }
 
-//        });
-//    });
+    if ([self checkMyJob]) {
+        if (!self.alertSoundPlayed) {
+            self.alertSoundPlayed = YES;
+            NSLog(@"Something to do");
+            NSURL *soundURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:@"xperiaz_VDLVxZSw" ofType:@"mp3"]];
+            self.alertSound = [[AVAudioPlayer alloc] initWithContentsOfURL:soundURL error:nil];
+            [self.alertSound play];
+            self.alertTimer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(playAlertSound) userInfo:nil repeats:NO];
+        }
+    }
     
-            if ([self checkFinished]) {
-        //NSLog(@"yoooooooo");
+    if ([self checkFinished]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Finished!" message:@"Congratz" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         if (!self.shown) {
             [alert show];
@@ -181,6 +187,21 @@
         }
     }
 }
+
+- (void)playAlertSound {
+    NSLog(@"DO IT NOW!");
+    self.alertSound.numberOfLoops = -1;
+    [self.alertSound play];
+}
+
+- (void)stopAlertSound {
+    NSLog(@"GJ");
+    [self.alertSound stop];
+    self.alertSound.numberOfLoops = 0;
+    self.alertSoundPlayed = NO;
+    [self.alertTimer invalidate];
+}
+
 - (void)pullFromServerProject {
 
         NSLog(@"pull frome Server");
@@ -195,7 +216,7 @@
         CGPoint position;
         position.x = [[node objectForKey:@"location_x"] floatValue];
         position.y = [[node objectForKey:@"location_y"] floatValue];
-        int theSeq = [[node objectForKey:@"seq"] integerValue];
+        int theSeq = (int)[[node objectForKey:@"seq"] integerValue];
         if(theSeq > maxSeq){
             maxSeq = theSeq;
         }
@@ -203,7 +224,7 @@
         NSString *task = node[@"task"];
         NSString *worker = node[@"worker"];
         NSMutableArray *previous = node[@"previous"];
-        bool status = [node[@"state"] boolValue];
+        BOOL status = [node[@"state"] boolValue];
         MCWorkNode *theNode = [[MCWorkNode alloc] initWithPoint:position Seq:theSeq Task:task Worker:worker Prev:previous Status:status Me:self.project[@"job"]];
         theNode.delegate = self;
         [self.previousList addObject:node[@"task"]];
@@ -253,7 +274,7 @@
         }
         position.y += 100;
         
-        MCWorkNode *theNode = [[MCWorkNode alloc] initWithPoint:position Seq:seq Task:task Worker:worker Prev:previous Status:false Me:self.project[@"job"]];
+        MCWorkNode *theNode = [[MCWorkNode alloc] initWithPoint:position Seq:seq Task:task Worker:worker Prev:previous Status:NO Me:self.project[@"job"]];
     theNode.delegate = self;
     
     
@@ -406,7 +427,7 @@
                 //NSLog(@"%d",flag);
                 if (flag) {
                     [MCWorkNode WorkNodeChange:finder Me:(NSString *)self.project[@"job"]];
-                    [self syncStatusWithServer:[[dict valueForKey:@"tag"] integerValue]];
+                    [self syncStatusWithServer:(int)[[dict valueForKey:@"tag"] integerValue]];
                 }
             }
             
@@ -421,7 +442,7 @@
             MCWorkNode *finder = (MCWorkNode *)subview;
             //NSLog(@"%d",finder.tag);
             if (finder.tag == tag) {
-            [self pushToServerTask:finder.task Worker:finder.worker Prev:finder.previousNodes Tag:finder.tag Status:finder.status Location:finder.frame.origin];
+            [self pushToServerTask:finder.task Worker:finder.worker Prev:finder.previousNodes Tag:(int)finder.tag Status:finder.status Location:finder.frame.origin];
                 [self.syncWithServer invalidate];
                 self.syncWithServer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(refreshFromServer) userInfo:nil repeats:YES];
             }
@@ -429,20 +450,17 @@
     }
     
 }
--(bool)checkFinished{
-    //NSLog(@"check");
-    bool flag = true;
+-(BOOL)checkFinished{
     for (UIView *subview in self.myScrollView.subviews) {
         if([subview isKindOfClass:[MCWorkNode class]]){
             MCWorkNode *finder = (MCWorkNode *)subview;
             //NSLog(@"%d", finder.status);
             if (!finder.status) {
-                flag = false;
-                break;
+                return NO;
             }
         }
     }
-    return flag;
+    return YES;
 }
 -(void)editWorkNode:(NSNotification *)notification{
     NSDictionary *dict = [notification userInfo];
@@ -504,36 +522,29 @@
 }
 
 -(BOOL)checkMyJob{
-    BOOL flag = NO;
     for (UIView *subview in self.myScrollView.subviews) {
         if ([subview isKindOfClass:[MCWorkNode class]] ) {
             MCWorkNode *finder = (MCWorkNode *)subview;
             if ([finder.worker isEqualToString:self.project[@"job"]]&&[self checkWorkNodePreviousStatus:finder]) {
-                flag = YES;
-                break;
+                return YES;
             }
         }
     }
 
-    return flag;
+    return NO;
 }
 -(BOOL)checkWorkNodePreviousStatus:(MCWorkNode *)theWorkNode{
-    BOOL flag = YES;
     for (NSString *previous in theWorkNode.previousNodes) {
         for (UIView *subview in self.myScrollView.subviews) {
             if ([subview isKindOfClass:[MCWorkNode class]] ) {
                 MCWorkNode *finder = (MCWorkNode *)subview;
-                if (finder.status == false) {
-                    flag = false;
-                    break;
+                if (finder.status == NO) {
+                    return NO;
                 }
             }
         }
-        if (flag == false) {
-            break;
-        }
     }
-    return flag;
+    return YES;
 }
 #pragma mark - MCNodeDelegate
 
