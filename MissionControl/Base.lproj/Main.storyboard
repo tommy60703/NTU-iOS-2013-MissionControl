@@ -226,14 +226,8 @@
                                     <outlet property="delegate" destination="Mb1-Df-PdN" id="t9S-XY-9U9"/>
                                 </connections>
                             </scrollView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1/4" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gte-t5-5fe">
-                                <rect key="frame" x="139" y="46" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="olE-NE-Kej">
-                                <rect key="frame" x="266" y="40" width="34" height="33"/>
+                                <rect key="frame" x="266" y="25" width="34" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="完成">
@@ -249,7 +243,6 @@
                     <connections>
                         <outlet property="done2" destination="olE-NE-Kej" id="lc1-oc-1d5"/>
                         <outlet property="pageControl" destination="Thw-7o-Jmh" id="FTu-7v-19w"/>
-                        <outlet property="pageIndicator" destination="gte-t5-5fe" id="Bl1-qJ-h1h"/>
                         <outlet property="scrollView" destination="hip-Pe-Aw0" id="pw7-XA-dLf"/>
                     </connections>
                 </viewController>

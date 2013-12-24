@@ -58,7 +58,7 @@
 }
 
 - (IBAction)done:(id)sender {
-
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
