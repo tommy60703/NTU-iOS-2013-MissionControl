@@ -29,6 +29,8 @@
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [self.syncWithServer invalidate];
+    [self.alertTimer invalidate];
+    [self stopAlertSound];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
