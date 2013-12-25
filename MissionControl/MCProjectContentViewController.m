@@ -168,6 +168,7 @@
     }
 
     if ([self checkMyJob]) {
+        NSLog(@"there's your job to do");
         if (!self.alertSoundPlayed) {
             self.alertSoundPlayed = YES;
             NSLog(@"Something to do");
@@ -521,30 +522,48 @@
     
 }
 
--(BOOL)checkMyJob{
+-(bool)checkMyJob{
+    bool flag = false;
     for (UIView *subview in self.myScrollView.subviews) {
         if ([subview isKindOfClass:[MCWorkNode class]] ) {
             MCWorkNode *finder = (MCWorkNode *)subview;
-            if ([finder.worker isEqualToString:self.project[@"job"]]&&[self checkWorkNodePreviousStatus:finder]) {
-                return YES;
+            if ([finder.worker isEqualToString:self.project[@"job"]]&&[self checkWorkNodePreviousStatus:finder]&&(finder.status==false)) {
+                flag = true;
+                break;
             }
         }
     }
 
-    return NO;
+    return flag;
 }
--(BOOL)checkWorkNodePreviousStatus:(MCWorkNode *)theWorkNode{
+-(bool)checkWorkNodePreviousStatus:(MCWorkNode *)theWorkNode{
+    bool flag = true;
+    bool count;
     for (NSString *previous in theWorkNode.previousNodes) {
         for (UIView *subview in self.myScrollView.subviews) {
-            if ([subview isKindOfClass:[MCWorkNode class]] ) {
+            if ([subview isKindOfClass:[MCWorkNode class]]) {
                 MCWorkNode *finder = (MCWorkNode *)subview;
-                if (finder.status == NO) {
-                    return NO;
+                if ([finder.task isEqualToString:previous]) {
+                    if (finder.status == false) {
+                        flag = false;
+                        break;
+                    }
+                    count = true;
                 }
+                
             }
         }
+        if (flag == false) {
+            break;
+        }
     }
-    return YES;
+    if (count) {
+        return flag;
+    }
+    else{
+        return false;
+    }
+    
 }
 #pragma mark - MCNodeDelegate
 
