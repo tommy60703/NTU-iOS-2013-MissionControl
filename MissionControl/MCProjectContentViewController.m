@@ -41,6 +41,7 @@
     self.isEditingProjectContent = NO;
     self.shown = NO;
     self.addNodeButton.enabled = NO;
+    self.resetButton.enabled = NO;
     //self.saveButton.hidden = YES;
     
     UIImage *backgroundImage = [UIImage imageNamed:@"background"];
@@ -51,6 +52,8 @@
         self.editButton.enabled = NO;
         self.addNodeButton.title = @"";
         self.addNodeButton.enabled = NO;
+        self.resetButton.title = @"";
+        self.resetButton.enabled = NO;
     }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moveWorkNodes) name:@"moveWorkNodes" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveWorkFlow) name:@"saveWorkNode" object:nil];
@@ -107,15 +110,18 @@
 - (IBAction)editPressed:(UIBarButtonItem *)sender {
     self.isEditingProjectContent = !self.isEditingProjectContent;
     if (self.isEditingProjectContent) {
+        [self.alertTimer invalidate];
+        [self stopAlertSound];
         self.editButton.title = @"完成";
         [self.syncWithServer invalidate];
-        
+        self.resetButton.enabled = YES;
         UIImage *backgroundImage = [UIImage imageNamed:@"background2"];
         self.myScrollView.backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
         //NSLog(@"%d",self.isEditingProjectContent);
     }
     else{
         self.editButton.title = @"編輯";
+        self.resetButton.enabled = NO;
         UIImage *backgroundImage = [UIImage imageNamed:@"background"];
         self.myScrollView.backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
         self.syncWithServer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(refreshFromServer) userInfo:nil repeats:YES];
@@ -123,6 +129,21 @@
     }
     self.addNodeButton.enabled = !self.addNodeButton.enabled;
     //self.saveButton.hidden = !self.saveButton.hidden;
+}
+
+- (IBAction)resetPressed:(id)sender {
+    [self resetAllWorkNodes];
+}
+
+-(void)resetAllWorkNodes{
+    for (UIView *subview in self.myScrollView.subviews) {
+        if([subview isKindOfClass:[MCWorkNode class]]){
+            MCWorkNode *finder = (MCWorkNode *)subview;
+            [MCWorkNode WorkNodeReset:finder Me:(NSString *)self.project[@"job"]];
+            [self syncStatusWithServer:finder.tag];
+        }
+    }
+    
 }
 
 #pragma mark - Instance Method

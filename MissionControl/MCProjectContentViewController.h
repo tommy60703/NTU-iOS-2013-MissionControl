@@ -28,6 +28,7 @@
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *editButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *addNodeButton;
 @property (strong, nonatomic) IBOutlet UIButton *saveButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *resetButton;
 
 
 #pragma mark - Properties
@@ -43,6 +44,7 @@
 
 - (void)saveWorkFlow;
 - (IBAction)editPressed:(UIBarButtonItem *)sender;
+- (IBAction)resetPressed:(id)sender;
 
 #pragma mark - Instance Method
 

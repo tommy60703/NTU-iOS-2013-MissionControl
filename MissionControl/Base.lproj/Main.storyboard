@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Hys-J2-PjA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Hys-J2-PjA">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
     </dependencies>
     <scenes>
         <!--Root View Controller - 我的任務列表-->
@@ -88,6 +88,12 @@
                                             <action selector="editPressed:" destination="1JJ-IX-JEX" id="Wh2-nA-6iQ"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="YmB-Sk-ESi"/>
+                                    <barButtonItem title="重設" id="nrJ-om-32L">
+                                        <connections>
+                                            <action selector="resetPressed:" destination="1JJ-IX-JEX" id="8Ti-e7-Oyq"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="33M-kU-pq6"/>
                                     <barButtonItem title="指派工作" id="4Rc-3o-VHv">
                                         <connections>
@@ -110,6 +116,7 @@
                         <outlet property="addNodeButton" destination="4Rc-3o-VHv" id="Fzw-Nw-wuV"/>
                         <outlet property="editButton" destination="dJN-Pa-pt6" id="e0V-16-3yg"/>
                         <outlet property="myScrollView" destination="Tos-c3-CcN" id="TqW-8y-7Ta"/>
+                        <outlet property="resetButton" destination="nrJ-om-32L" id="TCO-db-eya"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gfo-vA-zRJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
