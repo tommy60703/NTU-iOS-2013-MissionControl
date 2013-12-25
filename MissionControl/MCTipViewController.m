@@ -46,16 +46,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (void)viewDidUnload {
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-    self.scrollView = nil;
-    self.pageControl = nil;
-}
-
-- (IBAction)changePage {
-
-}
 
 - (IBAction)done:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -65,7 +55,8 @@
     CGFloat width = scrollView.frame.size.width;
     NSInteger currentPage = ((scrollView.contentOffset.x - width / 2) / width) + 1;
     self.pageControl.currentPage = currentPage;
-    self.pageIndicator.text = [NSString stringWithFormat:@"%d/%d", currentPage+1, self.images.count];
+//    NSLog(@"%d",currentPage);
+//    self.pageIndicator.text = [NSString stringWithFormat:@"%d/%d", currentPage+1, self.images.count];
 }
 
 @end

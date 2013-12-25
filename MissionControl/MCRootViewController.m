@@ -9,7 +9,7 @@
 #import "MCRootViewController.h"
 #import "MCBrain.h"
 #import "MCProjectContentViewController.h"
-#import <Parse/Parse.h>
+#import "MCTipViewController.h"
 
 @interface MCRootViewController ()
 
@@ -25,7 +25,10 @@
     if (![@"1" isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"Avalue"]]) {
         [[NSUserDefaults standardUserDefaults] setValue:@"1" forKey:@"Avalue"];
         [[NSUserDefaults standardUserDefaults] synchronize];
-        [self performSegueWithIdentifier:@"tips" sender:self];
+        
+        MCTipViewController *tutorialView = [[MCTipViewController alloc] initWithNibName:@"MCTipViewController" bundle:nil];
+        [self presentViewController:tutorialView animated:YES completion:nil];
+//        [self performSegueWithIdentifier:@"tips" sender:self];
         
     }
 }

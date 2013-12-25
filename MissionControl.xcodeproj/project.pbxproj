@@ -38,6 +38,7 @@
 		6514E2BD1840E78800468A8A /* MCBrain.m in Sources */ = {isa = PBXBuildFile; fileRef = 6514E2BC1840E78800468A8A /* MCBrain.m */; };
 		6514E2C81840FAAA00468A8A /* test-projects.json in Resources */ = {isa = PBXBuildFile; fileRef = 6514E2C71840FAAA00468A8A /* test-projects.json */; };
 		656580101869A0430066F227 /* xperiaz_VDLVxZSw.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6565800F1869A0430066F227 /* xperiaz_VDLVxZSw.mp3 */; };
+		65658034186A0DA10066F227 /* MCTipViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65658032186A0DA10066F227 /* MCTipViewController.xib */; };
 		658B34D5183AF007009C09EB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658B34D4183AF007009C09EB /* Foundation.framework */; };
 		658B34D7183AF007009C09EB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658B34D6183AF007009C09EB /* CoreGraphics.framework */; };
 		658B34D9183AF007009C09EB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658B34D8183AF007009C09EB /* UIKit.framework */; };
@@ -174,6 +175,7 @@
 		6514E2BC1840E78800468A8A /* MCBrain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCBrain.m; sourceTree = "<group>"; };
 		6514E2C71840FAAA00468A8A /* test-projects.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "test-projects.json"; sourceTree = "<group>"; };
 		6565800F1869A0430066F227 /* xperiaz_VDLVxZSw.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = xperiaz_VDLVxZSw.mp3; sourceTree = "<group>"; };
+		65658032186A0DA10066F227 /* MCTipViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MCTipViewController.xib; path = ../MCTipViewController.xib; sourceTree = "<group>"; };
 		65778B89183CD49900C4F02B /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		65778B8A183CD49900C4F02B /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		65778B8B183CD49900C4F02B /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
@@ -1036,6 +1038,7 @@
 				6514E2AB1840CA3D00468A8A /* MCJoinViewController.m */,
 				443E0C1A186713660063719A /* MCTipViewController.h */,
 				443E0C1B186713660063719A /* MCTipViewController.m */,
+				65658032186A0DA10066F227 /* MCTipViewController.xib */,
 			);
 			name = RootViews;
 			sourceTree = "<group>";
@@ -1246,6 +1249,7 @@
 				6514E2C81840FAAA00468A8A /* test-projects.json in Resources */,
 				658B34DF183AF007009C09EB /* InfoPlist.strings in Resources */,
 				5E067055185DEFEE00FC8445 /* done@2x.png in Resources */,
+				65658034186A0DA10066F227 /* MCTipViewController.xib in Resources */,
 				65B0C79218687E1C00740056 /* background2@2x.png in Resources */,
 				443E0C25186716770063719A /* tip2.png in Resources */,
 				658B34E8183AF007009C09EB /* Main.storyboard in Resources */,

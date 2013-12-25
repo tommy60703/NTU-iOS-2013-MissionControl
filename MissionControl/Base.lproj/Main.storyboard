@@ -62,9 +62,6 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <segue destination="Mb1-Df-PdN" kind="modal" identifier="tips" id="A3u-Uj-b74"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XrQ-BJ-P8A" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -199,56 +196,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y9a-ad-fdk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1500" y="387"/>
-        </scene>
-        <!--Tip View Controller-->
-        <scene sceneID="OdL-Is-eA4">
-            <objects>
-                <viewController id="Mb1-Df-PdN" customClass="MCTipViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Ytc-cY-09r"/>
-                        <viewControllerLayoutGuide type="bottom" id="Jrw-GL-9Mz"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="44Y-Ju-vw7">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" translatesAutoresizingMaskIntoConstraints="NO" id="Thw-7o-Jmh">
-                                <rect key="frame" x="140" y="511" width="41" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="currentPageIndicatorTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </pageControl>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hip-Pe-Aw0">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <gestureRecognizers/>
-                                <connections>
-                                    <outlet property="delegate" destination="Mb1-Df-PdN" id="t9S-XY-9U9"/>
-                                </connections>
-                            </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="olE-NE-Kej">
-                                <rect key="frame" x="266" y="25" width="34" height="33"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="完成">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="done:" destination="Mb1-Df-PdN" eventType="touchUpInside" id="uso-aX-BmR"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <connections>
-                        <outlet property="done2" destination="olE-NE-Kej" id="lc1-oc-1d5"/>
-                        <outlet property="pageControl" destination="Thw-7o-Jmh" id="FTu-7v-19w"/>
-                        <outlet property="scrollView" destination="hip-Pe-Aw0" id="pw7-XA-dLf"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vuq-fc-4Pw" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-43" y="-991"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="KQT-IB-VBI">
@@ -530,7 +477,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XaX-Og-fVc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1938" y="572"/>
+            <point key="canvasLocation" x="1938" y="541"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
