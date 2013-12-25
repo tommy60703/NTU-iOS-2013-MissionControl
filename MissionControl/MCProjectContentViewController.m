@@ -120,7 +120,8 @@
         self.startButton.enabled = true;
         self.editButton.title = @"完成";
         [self.syncWithServer invalidate];
-        
+        [self stopAlertSound];
+        [self.alertTimer invalidate];
         UIImage *backgroundImage = [UIImage imageNamed:@"background2"];
         self.myScrollView.backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
         //NSLog(@"%d",self.isEditingProjectContent);
