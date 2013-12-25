@@ -60,7 +60,7 @@
         self.addNodeButton.enabled = NO;
         self.startButton.title = @"";
         self.startButton.enabled = NO;
-        self.checkStart = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(checkStart) userInfo:nil repeats:YES];
+        self.checkStart = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(checkStartFromServer) userInfo:nil repeats:YES];
     }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moveWorkNodes) name:@"moveWorkNodes" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveWorkFlow) name:@"saveWorkNode" object:nil];
@@ -622,9 +622,10 @@
     PFObject *queryStart = [query getFirstObject];
     
     self.isStart = [[queryStart valueForKey:@"projectStart"] boolValue];
-    self.syncWithServer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(refreshFromServer) userInfo:nil repeats:YES];
+    
     if (self.isStart) {
         [self.checkStart invalidate];
+        self.syncWithServer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(refreshFromServer) userInfo:nil repeats:YES];
     }
     
     
