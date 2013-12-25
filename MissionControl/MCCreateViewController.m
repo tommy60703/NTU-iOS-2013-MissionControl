@@ -34,6 +34,7 @@
         project[@"projectPasscode"] = [NSNumber numberWithInt:random];
         project[@"projectPassword"] = self.projectPassword.text;
         project[@"projectOwner"] = udid;
+        project[@"projectStart"] = [NSNumber numberWithBool:true];
         
         NSMutableArray *projectMember = [[NSMutableArray alloc]init];
         [projectMember addObject:self.userJob.text];

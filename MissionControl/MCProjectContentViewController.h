@@ -39,11 +39,12 @@
 @property NSArray *workerList;
 @property NSMutableArray *previousList;
 @property BOOL isEditingProjectContent;
-
+@property BOOL isStart;
 #pragma mark - IBAction
 
 - (void)saveWorkFlow;
 - (IBAction)editPressed:(UIBarButtonItem *)sender;
+- (IBAction)startPressed:(id)sender;
 
 #pragma mark - Instance Method
 

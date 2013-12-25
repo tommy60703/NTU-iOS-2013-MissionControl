@@ -15,6 +15,7 @@
 @property (strong, nonatomic) NSTimer *syncWithServer;
 @property (strong, nonatomic) AVAudioPlayer *alertSound;
 @property (strong, nonatomic) NSTimer *alertTimer;
+@property (strong, nonatomic) NSTimer *checkStart;
 @property BOOL alertSoundPlayed;
 @property BOOL shown;
 @end
@@ -23,18 +24,26 @@
 
 #pragma mark - Lifecycle
 -(void)viewWillAppear:(BOOL)animated{
-    if (!self.isEditingProjectContent) {
+    if (!self.isEditingProjectContent && self.isStart) {
     self.syncWithServer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(refreshFromServer) userInfo:nil repeats:YES];
     }
+    if () {
+        self.checkStart = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(checkStart) userInfo:nil repeats:YES];
+
+    }
+    
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [self.syncWithServer invalidate];
+    [self stopAlertSound];
+    [self.alertTimer invalidate];
+    [self.checkStart invalidate];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
 
     self.alertSoundPlayed = NO;
-    
+    self.isStart = NO;
     self.navigationItem.title = self.project[@"projectName"];
     self.isEditingProjectContent = NO;
     self.shown = NO;
@@ -76,7 +85,7 @@
     [self pullFromServerProject];
     [self drawAllLines];
     
-
+    
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -127,6 +136,34 @@
     }
     self.addNodeButton.enabled = !self.addNodeButton.enabled;
     //self.saveButton.hidden = !self.saveButton.hidden;
+}
+
+- (IBAction)startPressed:(id)sender {
+    if (!self.isEditingProjectContent &&!self.isStart) {
+        self.isStart = true;
+        self.startButton.title = @"重設";
+        PFQuery *query = [PFQuery queryWithClassName:@"project"];
+        [query whereKey:@"projectPasscode" equalTo:self.project[@"projectPasscode"]];
+        PFObject *start = [query getFirstObject];
+        start[@"projectStart"] = [NSNumber numberWithBool:true];
+        [start saveInBackground];
+        self.syncWithServer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(refreshFromServer) userInfo:nil repeats:YES];
+        
+    }
+    else if (!self.isEditingProjectContent &&self.isStart){
+        self.isStart = false;
+        self.startButton.title = @"開始";
+        PFQuery *query = [PFQuery queryWithClassName:@"project"];
+        [query whereKey:@"projectPasscode" equalTo:self.project[@"projectPasscode"]];
+        PFObject *start = [query getFirstObject];
+        start[@"projectStart"] = [NSNumber numberWithBool:false];
+        [start saveInBackground];
+
+        [self.syncWithServer invalidate];
+        [self stopAlertSound];
+        [self.alertTimer invalidate];
+    }
+    
 }
 
 #pragma mark - Instance Method
@@ -405,42 +442,45 @@
 
 }
 - (void)finishWorkNodes:(NSNotification *) notification{
-    NSDictionary *dict = [notification userInfo];
-   //NSLog(@"%d", [[dict valueForKey:@"tag"] integerValue]);
-    for (UIView *subview in self.myScrollView.subviews) {
-        if([subview isKindOfClass:[MCWorkNode class]]){
-            MCWorkNode *finder = (MCWorkNode *)subview;
-            if (finder.tag == [[dict valueForKey:@"tag"] integerValue]) {
-                bool flag = true;
-                if (![finder.worker isEqualToString:self.project[@"job"]]) {
-                    flag=false;
-                    break;
-                }
-                NSSet *parents = [NSSet setWithArray:finder.previousNodes];
-                //NSLog(@"%@",parents);
-                
-                for (PFObject *parentNode in self.workNodes) {
+    if (self.isStart) {
+        NSDictionary *dict = [notification userInfo];
+        //NSLog(@"%d", [[dict valueForKey:@"tag"] integerValue]);
+        for (UIView *subview in self.myScrollView.subviews) {
+            if([subview isKindOfClass:[MCWorkNode class]]){
+                MCWorkNode *finder = (MCWorkNode *)subview;
+                if (finder.tag == [[dict valueForKey:@"tag"] integerValue]) {
+                    bool flag = true;
+                    if (![finder.worker isEqualToString:self.project[@"job"]]) {
+                        flag=false;
+                        break;
+                    }
+                    NSSet *parents = [NSSet setWithArray:finder.previousNodes];
+                    //NSLog(@"%@",parents);
                     
-                    if ([parents containsObject:[parentNode objectForKey:@"task"]])  {
-//                        NSLog(@"%@",parentNode);
-//                        NSLog(@"%d",[[parentNode objectForKey:@"state"] boolValue]);
-                        if ([[parentNode objectForKey:@"state"] boolValue] == false) {
-                            flag = false;
-                            break;
+                    for (PFObject *parentNode in self.workNodes) {
+                        
+                        if ([parents containsObject:[parentNode objectForKey:@"task"]])  {
+                            //                        NSLog(@"%@",parentNode);
+                            //                        NSLog(@"%d",[[parentNode objectForKey:@"state"] boolValue]);
+                            if ([[parentNode objectForKey:@"state"] boolValue] == false) {
+                                flag = false;
+                                break;
+                            }
                         }
+                    }
+                    
+                    //NSLog(@"%d",flag);
+                    if (flag) {
+                        [MCWorkNode WorkNodeChange:finder Me:(NSString *)self.project[@"job"]];
+                        [self syncStatusWithServer:(int)[[dict valueForKey:@"tag"] integerValue]];
                     }
                 }
                 
-                //NSLog(@"%d",flag);
-                if (flag) {
-                    [MCWorkNode WorkNodeChange:finder Me:(NSString *)self.project[@"job"]];
-                    [self syncStatusWithServer:(int)[[dict valueForKey:@"tag"] integerValue]];
-                }
             }
-            
         }
+        
+
     }
-    
 }
 
 -(void)syncStatusWithServer:(int) tag{
@@ -569,6 +609,20 @@
     else{
         return false;
     }
+    
+}
+-(void) checkStartFromServer{
+    PFQuery *query = [PFQuery queryWithClassName:@"project"];
+    [query whereKey:@"projectPasscode" equalTo:self.project[@"projectPasscode"]];
+    PFObject *queryStart = [query getFirstObject];
+    
+    self.isStart = [[queryStart valueForKey:@"projectStart"] boolValue];
+    if (!self.isEditingProjectContent && self.isStart) {
+        self.syncWithServer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(refreshFromServer) userInfo:nil repeats:YES];
+    }
+    [self.checkStart invalidate];
+    //return [[queryStart valueForKey:@"projectStart"] boolValue];
+    
     
 }
 #pragma mark - MCNodeDelegate
