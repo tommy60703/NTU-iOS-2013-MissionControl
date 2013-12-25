@@ -27,10 +27,6 @@
     if (!self.isEditingProjectContent && self.isStart) {
     self.syncWithServer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(refreshFromServer) userInfo:nil repeats:YES];
     }
-    if () {
-        self.checkStart = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(checkStart) userInfo:nil repeats:YES];
-
-    }
     
 }
 -(void)viewWillDisappear:(BOOL)animated{
@@ -64,6 +60,7 @@
         self.addNodeButton.enabled = NO;
         self.startButton.title = @"";
         self.startButton.enabled = NO;
+        self.checkStart = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(checkStart) userInfo:nil repeats:YES];
     }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moveWorkNodes) name:@"moveWorkNodes" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveWorkFlow) name:@"saveWorkNode" object:nil];
@@ -162,6 +159,7 @@
         [self.syncWithServer invalidate];
         [self stopAlertSound];
         [self.alertTimer invalidate];
+        [self resetAllWorkNodes];
     }
     
 }
@@ -197,6 +195,9 @@
     }
 }
 - (void)refreshFromServer{
+    if (self.isStart) {
+
+    
     PFQuery *fresh = [PFQuery queryWithClassName:[@"A" stringByAppendingString:[self.project[@"projectPasscode"] stringValue]]];
     NSArray *newWorkNodes = [fresh findObjects];
     for (PFObject *newNode in newWorkNodes) {
@@ -230,6 +231,7 @@
             [self.syncWithServer invalidate];
         }
     }
+}
 }
 
 - (void)playAlertSound {
@@ -617,13 +619,21 @@
     PFObject *queryStart = [query getFirstObject];
     
     self.isStart = [[queryStart valueForKey:@"projectStart"] boolValue];
-    if (!self.isEditingProjectContent && self.isStart) {
-        self.syncWithServer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(refreshFromServer) userInfo:nil repeats:YES];
-    }
+    self.syncWithServer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(refreshFromServer) userInfo:nil repeats:YES];
     [self.checkStart invalidate];
-    //return [[queryStart valueForKey:@"projectStart"] boolValue];
     
     
+    
+}
+-(void)resetAllWorkNodes{
+    for (UIView *subview in self.myScrollView.subviews) {
+        if([subview isKindOfClass:[MCWorkNode class]]){
+            MCWorkNode *finder = (MCWorkNode *)subview;
+            [MCWorkNode WorkNodeReset:finder Me:(NSString *)self.project[@"job"]];
+            [self syncStatusWithServer:finder.tag];
+        }
+    }
+
 }
 #pragma mark - MCNodeDelegate
 

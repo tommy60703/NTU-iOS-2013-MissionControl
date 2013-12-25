@@ -213,5 +213,41 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
     [finder addSubview:AxLabel];
     [finder addSubview:AyLabel];
     
+}+ (void)WorkNodeReset:(MCWorkNode *) finder Me:(NSString *)job{
+    finder.status = false;
+    for (UIImageView *oldimage in finder.subviews) {
+        [oldimage removeFromSuperview];
+    }
+    UIImageView *dotImageView;
+    if (finder.status == NO && [finder.worker isEqualToString:job]) {
+        dotImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"myundo.png"]];
+    }
+    else if(finder.status == NO && ![finder.worker isEqualToString:job]){
+        dotImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"undo.png"]];
+    }
+    else{
+        dotImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"done.png"]];
+    }
+    CGSize imageSize = dotImageView.frame.size;
+    finder.frame = CGRectMake(finder.frame.origin.x, finder.frame.origin.y, imageSize.width, imageSize.height);
+    [finder addSubview:dotImageView];
+    
+    // set node's label
+    UILabel *AxLabel = [[UILabel alloc] initWithFrame:CGRectMake(imageSize.width + 1, 5.0, 50.0, 20.0)];
+    UILabel *AyLabel = [[UILabel alloc] initWithFrame:CGRectMake(imageSize.width + 1, 25.0, 50.0, 15.0)];
+    
+    UIFont *font = [UIFont fontWithName:@"helvetica" size:18.0];
+    AxLabel.font = font;
+    font = [UIFont fontWithName:@"helvetica" size:15.0];
+    AyLabel.font = font;
+    AxLabel.text = finder.task;
+    AyLabel.text = finder.worker;
+    [AxLabel setBackgroundColor:[UIColor clearColor]];
+    [AyLabel setBackgroundColor:[UIColor clearColor]];
+    AyLabel.textColor = [UIColor lightGrayColor];
+    [finder addSubview:AxLabel];
+    [finder addSubview:AyLabel];
+    
 }
+
 @end
