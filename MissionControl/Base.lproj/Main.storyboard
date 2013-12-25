@@ -79,16 +79,19 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wBg-xL-hRg">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wBg-xL-hRg">
                                 <rect key="frame" x="0.0" y="460" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <items>
                                     <barButtonItem title="編輯" id="dJN-Pa-pt6">
                                         <connections>
                                             <action selector="editPressed:" destination="1JJ-IX-JEX" id="Wh2-nA-6iQ"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="33M-kU-pq6"/>
+                                    <barButtonItem width="85" style="plain" systemItem="fixedSpace" id="3uh-7p-3XG"/>
+                                    <barButtonItem title="開始" id="GRj-Q3-i7r"/>
+                                    <barButtonItem width="50" style="plain" systemItem="fixedSpace" id="4Ij-TL-Leq"/>
                                     <barButtonItem title="指派工作" id="4Rc-3o-VHv">
                                         <connections>
                                             <segue destination="30F-Jb-oAt" kind="modal" identifier="addNode" id="fv7-kG-Ihb"/>
@@ -101,7 +104,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="WOG-Iz-bTu">
                         <nil key="title"/>
@@ -110,16 +113,11 @@
                         <outlet property="addNodeButton" destination="4Rc-3o-VHv" id="Fzw-Nw-wuV"/>
                         <outlet property="editButton" destination="dJN-Pa-pt6" id="e0V-16-3yg"/>
                         <outlet property="myScrollView" destination="Tos-c3-CcN" id="TqW-8y-7Ta"/>
+                        <outlet property="startButton" destination="GRj-Q3-i7r" id="00R-AX-7Qy"/>
+                        <outlet property="toolBar" destination="wBg-xL-hRg" id="cFZ-qV-nKc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gfo-vA-zRJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="9gV-qh-FQ4">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                    <items>
-                        <barButtonItem title="Item" id="VDo-Bs-dj2"/>
-                    </items>
-                </toolbar>
             </objects>
             <point key="canvasLocation" x="524" y="387"/>
         </scene>

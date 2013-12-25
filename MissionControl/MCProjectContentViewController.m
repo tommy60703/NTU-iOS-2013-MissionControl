@@ -39,16 +39,22 @@
     self.isEditingProjectContent = NO;
     self.shown = NO;
     self.addNodeButton.enabled = NO;
-    //self.saveButton.hidden = YES;
     
     UIImage *backgroundImage = [UIImage imageNamed:@"background"];
     self.myScrollView.backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
     
     if (![self.project[@"user"] isEqualToString:self.project[@"owner"]]) {
+//        [self.toolBar removeFromSuperview];
+//        CGRect rect;
+//        rect.origin = self.myScrollView.frame.origin;
+//        rect.size = CGSizeMake(320, self.myScrollView.frame.size.height + self.toolBar.frame.size.height);
+//        self.myScrollView.frame = rect;
         self.editButton.title = @"";
         self.editButton.enabled = NO;
         self.addNodeButton.title = @"";
         self.addNodeButton.enabled = NO;
+        self.startButton.title = @"";
+        self.startButton.enabled = NO;
     }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moveWorkNodes) name:@"moveWorkNodes" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveWorkFlow) name:@"saveWorkNode" object:nil];

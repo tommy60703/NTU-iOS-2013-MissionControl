@@ -26,8 +26,9 @@
 
 @property (strong, nonatomic) IBOutlet UIScrollView *myScrollView;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *editButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *startButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *addNodeButton;
-@property (strong, nonatomic) IBOutlet UIButton *saveButton;
+@property (strong, nonatomic) IBOutlet UIToolbar *toolBar;
 
 
 #pragma mark - Properties
