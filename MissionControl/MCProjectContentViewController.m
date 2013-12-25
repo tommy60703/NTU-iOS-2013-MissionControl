@@ -623,7 +623,10 @@
     
     self.isStart = [[queryStart valueForKey:@"projectStart"] boolValue];
     self.syncWithServer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(refreshFromServer) userInfo:nil repeats:YES];
-    [self.checkStart invalidate];
+    if (self.isStart) {
+        [self.checkStart invalidate];
+    }
+    
     
     
     
