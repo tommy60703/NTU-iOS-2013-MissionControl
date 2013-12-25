@@ -117,6 +117,7 @@
 - (IBAction)editPressed:(UIBarButtonItem *)sender {
     self.isEditingProjectContent = !self.isEditingProjectContent;
     if (self.isEditingProjectContent) {
+        self.startButton.enabled = true;
         self.editButton.title = @"完成";
         [self.syncWithServer invalidate];
         
@@ -139,6 +140,7 @@
     if (!self.isEditingProjectContent &&!self.isStart) {
         self.isStart = true;
         self.startButton.title = @"重設";
+        self.startButton.enabled = false;
         PFQuery *query = [PFQuery queryWithClassName:@"project"];
         [query whereKey:@"projectPasscode" equalTo:self.project[@"projectPasscode"]];
         PFObject *start = [query getFirstObject];
@@ -147,7 +149,7 @@
         self.syncWithServer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(refreshFromServer) userInfo:nil repeats:YES];
         
     }
-    else if (!self.isEditingProjectContent &&self.isStart){
+    else if (self.isEditingProjectContent){
         self.isStart = false;
         self.startButton.title = @"開始";
         PFQuery *query = [PFQuery queryWithClassName:@"project"];
