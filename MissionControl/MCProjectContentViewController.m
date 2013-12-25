@@ -110,6 +110,7 @@
 - (IBAction)editPressed:(UIBarButtonItem *)sender {
     self.isEditingProjectContent = !self.isEditingProjectContent;
     if (self.isEditingProjectContent) {
+        
         [self.alertTimer invalidate];
         [self stopAlertSound];
         self.editButton.title = @"完成";
@@ -198,7 +199,7 @@
             NSURL *soundURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:@"xperiaz_VDLVxZSw" ofType:@"mp3"]];
             self.alertSound = [[AVAudioPlayer alloc] initWithContentsOfURL:soundURL error:nil];
             [self.alertSound play];
-            self.alertTimer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(playAlertSound) userInfo:nil repeats:NO];
+            //self.alertTimer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(playAlertSound) userInfo:nil repeats:NO];
         }
     }
     
